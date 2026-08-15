@@ -4,8 +4,8 @@ backend:
   branch: main
 
 # Uses GitHub OAuth via Decap's hosted auth helper. See README.md for setup.
-site_url: https://rgjanet.github.io/archipielago
-display_url: https://rgjanet.github.io/archipielago
+site_url: https://rgjanet.com/archipielago
+display_url: https://rgjanet.com/archipielago
 base_url: https://visionary-zuccutto-18607c.netlify.app
 
 media_folder: "assets/img/uploads"
