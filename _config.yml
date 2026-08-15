@@ -4,7 +4,7 @@ description: >
   Archipiélago reúne autores, obras y voces de la literatura puertorriqueña
   independiente en un mismo lugar — un mapa vivo de dónde y cómo se escribe
   la isla hoy.
-baseurl: ""
+baseurl: "/archipielago"
 url: ""
 
 markdown: kramdown
