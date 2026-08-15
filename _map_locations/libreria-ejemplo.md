@@ -1,8 +1,9 @@
 ---
-name: "Librería de ejemplo"
+name: The Bookmark
 type: Librería
-lat: 18.4037
-lng: -66.0636
-description: "Descripción breve del lugar."
-url: ""
+lat: 18.445990902153873
+lng: -66.06724706126857
+description: Cadena de librerías y cafés independientes con sede en Puerto Rico.
+url: https://thebookmarkpr.com/
 ---
+
