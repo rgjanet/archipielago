@@ -1,0 +1,22 @@
+---
+layout: default
+---
+<article class="section">
+  <span class="eyebrow">Obra</span>
+  <h1>{{ page.title }}</h1>
+  <p class="meta" style="font-family:var(--font-mono);color:var(--oro-viejo);">
+    {{ page.author }}{% if page.year %} · {{ page.year }}{% endif %}{% if page.genre %} · {{ page.genre }}{% endif %}
+  </p>
+  {% if page.cover %}<img src="{{ page.cover | relative_url }}" alt="{{ page.title }}" style="max-width:220px;border-radius:3px;margin:1.2rem 0;">{% endif %}
+
+  <div class="body">{{ content }}</div>
+
+  {% if page.purchase_url %}
+  <p><a href="{{ page.purchase_url }}" target="_blank" rel="noopener" style="color:var(--coral);font-family:var(--font-mono);">Conseguir el libro →</a></p>
+  {% endif %}
+
+  {% assign author_page = site.authors | where: "title", page.author | first %}
+  {% if author_page %}
+  <p><a href="{{ author_page.url | relative_url }}" style="font-family:var(--font-mono);font-size:0.85rem;">← Volver a {{ page.author }}</a></p>
+  {% endif %}
+</article>
