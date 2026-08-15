@@ -1,0 +1,17 @@
+{% assign toggle_id = include.audio | append: include.video | slugify %}
+{% if include.audio and include.video %}
+<div class="media-toggle" data-toggle="{{ toggle_id }}">
+  <button type="button" class="active" data-mode="audio">Audio</button>
+  <button type="button" data-mode="video">Video</button>
+</div>
+<div class="media-pane active" data-pane="audio" data-toggle-target="{{ toggle_id }}">
+  <audio controls src="{{ include.audio }}"></audio>
+</div>
+<div class="media-pane" data-pane="video" data-toggle-target="{{ toggle_id }}">
+  <video controls src="{{ include.video }}"></video>
+</div>
+{% elsif include.audio %}
+<div class="media-pane active"><audio controls src="{{ include.audio }}"></audio></div>
+{% elsif include.video %}
+<div class="media-pane active"><video controls src="{{ include.video }}"></video></div>
+{% endif %}

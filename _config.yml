@@ -1,0 +1,50 @@
+title: Archipiélago
+tagline: Un mapa de las letras puertorriqueñas
+description: >
+  Archipiélago reúne autores, obras y voces de la literatura puertorriqueña
+  independiente en un mismo lugar — un mapa vivo de dónde y cómo se escribe
+  la isla hoy.
+baseurl: ""
+url: ""
+
+markdown: kramdown
+permalink: /:collection/:slug/
+
+collections:
+  authors:
+    output: true
+    permalink: /autores/:slug/
+  works:
+    output: true
+    permalink: /obras/:slug/
+  media:
+    output: true
+    permalink: /multimedia/:slug/
+  map_locations:
+    output: false
+
+defaults:
+  - scope:
+      path: ""
+      type: authors
+    values:
+      layout: author
+  - scope:
+      path: ""
+      type: works
+    values:
+      layout: work
+  - scope:
+      path: ""
+      type: media
+    values:
+      layout: media
+
+plugins:
+  - jekyll-relative-links
+
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
