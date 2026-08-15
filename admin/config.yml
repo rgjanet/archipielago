@@ -3,7 +3,8 @@ backend:
   repo: rgjanet/archipielago   # e.g. janet/archipielago
   branch: main
   base_url: https://visionary-zuccutto-18607c.netlify.app
-
+  site_domain: "visionary-zuccutto-18607c.netlify.app"
+  
 # Uses GitHub OAuth via Decap's hosted auth helper. See README.md for setup.
 site_url: https://rgjanet.com/archipielago
 display_url: https://rgjanet.com/archipielago
