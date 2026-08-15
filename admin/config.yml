@@ -83,7 +83,7 @@ collections:
         name: "type"
         widget: "select"
         options: ["Librería", "Editorial", "Tertulia", "Evento", "Otro"]
-      - { label: "Latitud", name: "lat", widget: "number", value_type: "float" }
-      - { label: "Longitud", name: "lng", widget: "number", value_type: "float" }
+      - { label: "Latitud", name: "lat", widget: "number", value_type: "float", min: -90, max: 90 }
+      - { label: "Longitud", name: "lng", widget: "number", value_type: "float", min: -180, max: 180 }
       - { label: "Descripción", name: "description", widget: "text", required: false }
       - { label: "Enlace (opcional)", name: "url", widget: "string", required: false }
