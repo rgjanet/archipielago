@@ -186,9 +186,13 @@ title: Inicio
 
 <div class="tls-hero-row">
   <div class="tls-hero">
-    <div class="art-block"><span class="art-label">Autor destacado</span></div>
     {% assign lead = site.authors | where: "title", site.data.homepage.hero_author | first %}
     {% unless lead %}{% assign lead = site.authors | first %}{% endunless %}
+    {% if lead and lead.photo and lead.photo != blank %}
+    <div class="art-block" style="background:none;padding:0;"><img src="{{ lead.photo | relative_url }}" alt="{{ lead.title }}" style="width:100%;height:100%;object-fit:cover;border-radius:3px;"></div>
+    {% else %}
+    <div class="art-block"><span class="art-label">Autor destacado</span></div>
+    {% endif %}
     {% if lead %}
     <span class="kicker-tag">{{ lead.region | default: "Puerto Rico" }}<span class="sep">|</span><span class="type">Perfil</span></span>
     <h1><a href="{{ lead.url | relative_url }}" style="text-decoration:none;color:var(--mar-profundo);">{{ lead.title }}</a></h1>
@@ -267,9 +271,13 @@ title: Inicio
   {% unless place %}{% assign place = site.map_locations | first %}{% endunless %}
   {% if place %}
   <div>
+    {% if place.photo and place.photo != blank %}
+    <div class="art-block small" style="background:none;padding:0;"><img src="{{ place.photo | relative_url }}" alt="{{ place.name }}" style="width:100%;height:100%;object-fit:cover;border-radius:3px;"></div>
+    {% else %}
     <div class="art-block small"><span class="art-label">Lugar</span></div>
+    {% endif %}
     <span class="kicker-tag">Lugares<span class="sep">|</span><span class="type">{{ place.type }}</span></span>
-    <h2><a href="{{ place.url | relative_url }}" style="text-decoration:none;color:inherit;">{{ place.name }}{% if place.sede %} — {{ place.sede }}{% endif %}</a></h2>
+    <h2><a href="{{ place.url | relative_url }}" style="text-decoration:none;color:inherit;">{{ place.name }}{% if place.sede and place.sede != blank %} — {{ place.sede }}{% endif %}</a></h2>
     <p class="dek">{{ place.description | truncate: 100 }}</p>
   </div>
   {% endif %}
@@ -284,10 +292,6 @@ title: Inicio
       <h2>Escucha y mira</h2>
       <p class="dek">Podcast, entrevistas y reseñas en audio y video de todo el archipiélago literario.</p>
       <a class="cta" href="{{ '/multimedia/' | relative_url }}">Ver todo el multimedia →</a>
-      <div class="subscribe-row">
-        <span>Explora por tipo:</span>
-        <span>Podcast</span><span>Entrevista</span><span>Reseña en video</span>
-      </div>
     </div>
     <div class="promo-right">
       <div class="art-block gold" style="margin:0;"></div>
@@ -324,7 +328,11 @@ title: Inicio
           {% assign a = site.authors | where: "title", n | first %}
           {% if a %}
       <a href="{{ a.url | relative_url }}">
+        {% if a.photo and a.photo != blank %}
+        <div class="art-block small" style="background:none;padding:0;margin-bottom:0.6rem;"><img src="{{ a.photo | relative_url }}" alt="{{ a.title }}" style="width:100%;height:100%;object-fit:cover;border-radius:3px;"></div>
+        {% else %}
         <div class="art-block small" style="margin-bottom:0.6rem;"></div>
+        {% endif %}
         <span class="kicker-tag">Perfil</span>
         <h4>{{ a.title }}</h4>
         <p class="dek">{{ a.region }}</p>
@@ -335,10 +343,48 @@ title: Inicio
         {% assign explore_authors = site.authors | limit: 3 %}
         {% for a in explore_authors %}
       <a href="{{ a.url | relative_url }}">
+        {% if a.photo and a.photo != blank %}
+        <div class="art-block small" style="background:none;padding:0;margin-bottom:0.6rem;"><img src="{{ a.photo | relative_url }}" alt="{{ a.title }}" style="width:100%;height:100%;object-fit:cover;border-radius:3px;"></div>
+        {% else %}
         <div class="art-block small" style="margin-bottom:0.6rem;"></div>
+        {% endif %}
         <span class="kicker-tag">Perfil</span>
         <h4>{{ a.title }}</h4>
         <p class="dek">{{ a.region }}</p>
+      </a>
+        {% endfor %}
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="explore-row">
+    <div class="label">
+      <h3>Obras</h3>
+      <p>Libros y publicaciones de autoras y autores puertorriqueños.</p>
+      <a href="{{ '/obras/' | relative_url }}">Ver todas →</a>
+    </div>
+    <div class="explore-cards">
+      {% if site.data.homepage.explore_works and site.data.homepage.explore_works.size > 0 %}
+        {% assign curated_works = site.data.homepage.explore_works | slice: 0, 3 %}
+        {% for n in curated_works %}
+          {% assign w = site.works | where: "title", n | first %}
+          {% if w %}
+      <a href="{{ w.url | relative_url }}">
+        <div class="art-block coral small" style="margin-bottom:0.6rem;"></div>
+        <span class="kicker-tag">{{ w.genre | default: "Obra" }}</span>
+        <h4>{{ w.title }}</h4>
+        <p class="dek">{{ w.author }}</p>
+      </a>
+          {% endif %}
+        {% endfor %}
+      {% else %}
+        {% assign explore_works = site.works | limit: 3 %}
+        {% for w in explore_works %}
+      <a href="{{ w.url | relative_url }}">
+        <div class="art-block coral small" style="margin-bottom:0.6rem;"></div>
+        <span class="kicker-tag">{{ w.genre | default: "Obra" }}</span>
+        <h4>{{ w.title }}</h4>
+        <p class="dek">{{ w.author }}</p>
       </a>
         {% endfor %}
       {% endif %}
@@ -358,9 +404,13 @@ title: Inicio
           {% assign p = site.map_locations | where: "name", n | first %}
           {% if p %}
       <a href="{{ p.url | relative_url }}">
+        {% if p.photo and p.photo != blank %}
+        <div class="art-block coral small" style="background:none;padding:0;margin-bottom:0.6rem;"><img src="{{ p.photo | relative_url }}" alt="{{ p.name }}" style="width:100%;height:100%;object-fit:cover;border-radius:3px;"></div>
+        {% else %}
         <div class="art-block coral small" style="margin-bottom:0.6rem;"></div>
+        {% endif %}
         <span class="kicker-tag">{{ p.type }}</span>
-        <h4>{{ p.name }}{% if p.sede %} — {{ p.sede }}{% endif %}</h4>
+        <h4>{{ p.name }}{% if p.sede and p.sede != blank %} — {{ p.sede }}{% endif %}</h4>
         <p class="dek">{{ p.description | truncate: 60 }}</p>
       </a>
           {% endif %}
@@ -369,9 +419,13 @@ title: Inicio
         {% assign explore_places = site.map_locations | limit: 3 %}
         {% for p in explore_places %}
       <a href="{{ p.url | relative_url }}">
+        {% if p.photo and p.photo != blank %}
+        <div class="art-block coral small" style="background:none;padding:0;margin-bottom:0.6rem;"><img src="{{ p.photo | relative_url }}" alt="{{ p.name }}" style="width:100%;height:100%;object-fit:cover;border-radius:3px;"></div>
+        {% else %}
         <div class="art-block coral small" style="margin-bottom:0.6rem;"></div>
+        {% endif %}
         <span class="kicker-tag">{{ p.type }}</span>
-        <h4>{{ p.name }}{% if p.sede %} — {{ p.sede }}{% endif %}</h4>
+        <h4>{{ p.name }}{% if p.sede and p.sede != blank %} — {{ p.sede }}{% endif %}</h4>
         <p class="dek">{{ p.description | truncate: 60 }}</p>
       </a>
         {% endfor %}

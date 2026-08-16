@@ -13,8 +13,11 @@ title: Lugares
   <div class="card-grid">
     {% for loc in site.map_locations %}
     <a class="card" href="{{ loc.url | relative_url }}">
+      {% if loc.photo and loc.photo != blank %}
+      <img src="{{ loc.photo | relative_url }}" alt="{{ loc.name }}" style="width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:3px;margin-bottom:0.8rem;">
+      {% endif %}
       <span class="meta">{{ loc.type }}</span>
-      <h3>{{ loc.name }}{% if loc.sede %} — {{ loc.sede }}{% endif %}</h3>
+      <h3>{{ loc.name }}{% if loc.sede and loc.sede != blank %} — {{ loc.sede }}{% endif %}</h3>
       <p>{{ loc.description | truncate: 90 }}</p>
     </a>
     {% endfor %}

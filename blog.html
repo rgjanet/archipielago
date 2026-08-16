@@ -13,12 +13,17 @@ title: Blog
   <div style="margin-top:2rem;display:flex;flex-direction:column;gap:1.6rem;max-width:680px;">
     {% assign posts = site.blog | sort: "date" | reverse %}
     {% for post in posts %}
-    <a href="{{ post.url | relative_url }}" style="text-decoration:none;color:inherit;border-bottom:1px solid rgba(28,27,24,0.12);padding-bottom:1.4rem;">
-      <p style="font-family:var(--font-mono);font-size:0.72rem;color:var(--oro-viejo);text-transform:uppercase;letter-spacing:0.05em;margin:0 0 0.3rem;">
-        {{ post.date | date: "%-d de %B, %Y" }}{% if post.author %} · {{ post.author }}{% endif %}
-      </p>
-      <h2 style="font-size:1.3rem;margin:0 0 0.4rem;">{{ post.title }}</h2>
-      <p style="color:var(--tinta-suave);margin:0;">{{ post.excerpt | strip_html | truncate: 140 }}</p>
+    <a href="{{ post.url | relative_url }}" style="text-decoration:none;color:inherit;border-bottom:1px solid rgba(28,27,24,0.12);padding-bottom:1.4rem;display:flex;gap:1.2rem;align-items:flex-start;">
+      {% if post.photo and post.photo != blank %}
+      <img src="{{ post.photo | relative_url }}" alt="{{ post.title }}" style="width:120px;height:80px;object-fit:cover;border-radius:3px;flex-shrink:0;">
+      {% endif %}
+      <div>
+        <p style="font-family:var(--font-mono);font-size:0.72rem;color:var(--oro-viejo);text-transform:uppercase;letter-spacing:0.05em;margin:0 0 0.3rem;">
+          {{ post.date | date: "%-d de %B, %Y" }}{% if post.author %} · {{ post.author }}{% endif %}
+        </p>
+        <h2 style="font-size:1.3rem;margin:0 0 0.4rem;">{{ post.title }}</h2>
+        <p style="color:var(--tinta-suave);margin:0;">{{ post.excerpt | strip_html | truncate: 140 }}</p>
+      </div>
     </a>
     {% endfor %}
     {% if posts.size == 0 %}

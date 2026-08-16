@@ -86,6 +86,7 @@ collections:
       - { label: "Teléfono", name: "phone", widget: "string", required: false }
       - { label: "Horario", name: "hours", widget: "string", required: false, hint: "Ej. Lun–Sáb 10am–6pm" }
       - { label: "Dirección", name: "address", widget: "string", required: false }
+      - { label: "Foto", name: "photo", widget: "image", required: false }
       - label: "Redes sociales"
         name: "redes"
         widget: "list"
@@ -105,6 +106,7 @@ collections:
       - { label: "Fecha", name: "date", widget: "datetime" }
       - { label: "Autor/a", name: "author", widget: "string", required: false }
       - { label: "Extracto", name: "description", widget: "text", required: false, hint: "Se usa en el listado del blog; si se deja vacío se toma del inicio del texto" }
+      - { label: "Imagen destacada", name: "photo", widget: "image", required: false }
       - { label: "URL de audio (mp3)", name: "audio_url", widget: "string", required: false, hint: "Si añades audio Y video, aparece un switch para alternar entre los dos" }
       - { label: "URL de video (mp4)", name: "video_url", widget: "string", required: false }
       - { label: "Código de embed", name: "embed_code", widget: "text", required: false, hint: "Pega aquí el <iframe> de YouTube, Spotify, etc. Aparece después del audio/video." }
@@ -129,6 +131,12 @@ collections:
             required: false
             max: 3
             field: { label: "Autor", name: "item", widget: "relation", collection: "authors", search_fields: ["title"], value_field: "title", display_fields: ["title"] }
+          - label: "Obras en 'Explora' (hasta 3)"
+            name: "explore_works"
+            widget: "list"
+            required: false
+            max: 3
+            field: { label: "Obra", name: "item", widget: "relation", collection: "works", search_fields: ["title"], value_field: "title", display_fields: ["title"] }
           - label: "Lugares en 'Explora' (hasta 3)"
             name: "explore_places"
             widget: "list"
