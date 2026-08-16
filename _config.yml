@@ -23,6 +23,9 @@ collections:
   map_locations:
     output: true
     permalink: /lugares/:slug/
+  blog:
+    output: true
+    permalink: /blog/:slug/
 
 defaults:
   - scope:
@@ -45,6 +48,11 @@ defaults:
       type: map_locations
     values:
       layout: place
+  - scope:
+      path: ""
+      type: blog
+    values:
+      layout: post
 
 plugins:
   - jekyll-relative-links

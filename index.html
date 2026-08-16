@@ -217,53 +217,6 @@ title: Inicio
 
 <hr class="divider">
 
-<div class="tls-fourcol">
-  {% assign authors_rest = site.authors | offset: 1 | limit: 2 %}
-  {% if site.data.homepage.fourcol_authors and site.data.homepage.fourcol_authors.size > 0 %}
-    {% assign fourcol_author_names = site.data.homepage.fourcol_authors %}
-    {% for n in fourcol_author_names %}
-      {% assign a = site.authors | where: "title", n | first %}
-      {% if a %}
-      <div>
-        <span class="kicker-tag">Autores<span class="sep">|</span><span class="type">Perfil</span></span>
-        <h3><a href="{{ a.url | relative_url }}" style="text-decoration:none;color:inherit;">{{ a.title }}</a></h3>
-        <p class="dek">{{ a.excerpt | strip_html | truncate: 70 }}</p>
-      </div>
-      {% endif %}
-    {% endfor %}
-  {% else %}
-    {% for a in authors_rest %}
-    <div>
-      <span class="kicker-tag">Autores<span class="sep">|</span><span class="type">Perfil</span></span>
-      <h3><a href="{{ a.url | relative_url }}" style="text-decoration:none;color:inherit;">{{ a.title }}</a></h3>
-      <p class="dek">{{ a.excerpt | strip_html | truncate: 70 }}</p>
-    </div>
-    {% endfor %}
-  {% endif %}
-  {% if site.data.homepage.fourcol_media and site.data.homepage.fourcol_media.size > 0 %}
-    {% assign fourcol_media_titles = site.data.homepage.fourcol_media %}
-    {% for n in fourcol_media_titles %}
-      {% assign m = site.media | where: "title", n | first %}
-      {% if m %}
-      <div>
-        <span class="kicker-tag">Multimedia<span class="sep">|</span><span class="type">{{ m.media_type }}</span></span>
-        <h3><a href="{{ m.url | relative_url }}" style="text-decoration:none;color:inherit;">{{ m.title }}</a></h3>
-        <p class="dek">{{ m.related_author }}</p>
-      </div>
-      {% endif %}
-    {% endfor %}
-  {% else %}
-    {% assign media_items = site.media | limit: 2 %}
-    {% for m in media_items %}
-    <div>
-      <span class="kicker-tag">Multimedia<span class="sep">|</span><span class="type">{{ m.media_type }}</span></span>
-      <h3><a href="{{ m.url | relative_url }}" style="text-decoration:none;color:inherit;">{{ m.title }}</a></h3>
-      <p class="dek">{{ m.related_author }}</p>
-    </div>
-    {% endfor %}
-  {% endif %}
-</div>
-
 <div class="promo-band">
   <div class="promo-inner">
     <div>
@@ -306,7 +259,8 @@ title: Inicio
     </div>
     <div class="explore-cards">
       {% if site.data.homepage.explore_authors and site.data.homepage.explore_authors.size > 0 %}
-        {% for n in site.data.homepage.explore_authors %}
+        {% assign curated_authors = site.data.homepage.explore_authors | slice: 0, 3 %}
+        {% for n in curated_authors %}
           {% assign a = site.authors | where: "title", n | first %}
           {% if a %}
       <a href="{{ a.url | relative_url }}">
@@ -339,7 +293,8 @@ title: Inicio
     </div>
     <div class="explore-cards">
       {% if site.data.homepage.explore_places and site.data.homepage.explore_places.size > 0 %}
-        {% for n in site.data.homepage.explore_places %}
+        {% assign curated_places = site.data.homepage.explore_places | slice: 0, 3 %}
+        {% for n in curated_places %}
           {% assign p = site.map_locations | where: "name", n | first %}
           {% if p %}
       <a href="{{ p.url | relative_url }}">
