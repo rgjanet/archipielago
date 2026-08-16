@@ -60,7 +60,8 @@ layout: default
       </a>
       {% endif %}
 
-      {% if page.content and page.content != "" %}
+      {% assign body_clean = page.content | strip %}
+      {% if body_clean != blank and body_clean != empty %}
       <h2 style="margin-top:1.6rem;font-size:1.2rem;">Reseña</h2>
       <div class="body">{{ content }}</div>
       {% endif %}
@@ -86,5 +87,8 @@ layout: default
 <style>
   @media (max-width: 640px) {
     .work-layout { grid-template-columns: 1fr !important; }
+  }
+  .work-layout > div:last-child > *:first-child {
+    margin-top: 0 !important;
   }
 </style>
