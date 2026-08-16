@@ -9,7 +9,7 @@ sections:
     twocol_work: ''
     twocol_place: ''
   - type: videocarousel
-    heading: https://archive.org/download/llegamos-a-los-100-rev-2/llegamos%20a%20los%20100%20rev%202.mp4
+    heading: ''
   - type: promoband
     promo_media: ''
   - type: explore
