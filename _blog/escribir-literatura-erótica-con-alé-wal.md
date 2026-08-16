@@ -3,7 +3,7 @@ title: Escribir literatura erótica con Alé Wal
 date: 2026-07-05T01:25:00
 author: Janet Rodríguez
 description: Con el pasar de los años, Alé Wal logró combinar el sexo y la escritura, un libro a la vez.
-photo: ''
+photo: /assets/img/uploads/AleWal.png
 related_author: alé-wal
 related_place: ''
 audio_url: ''
