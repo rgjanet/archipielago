@@ -9,8 +9,31 @@ layout: default
 
   <div class="bio">{{ content }}</div>
 
+  {% if page.phone and page.phone != blank or page.email and page.email != blank %}
+  <div style="margin-top:1.2rem;display:flex;flex-direction:column;gap:0.3rem;color:var(--tinta-suave);font-size:0.92rem;">
+    {% if page.email and page.email != blank %}<p style="margin:0;">✉ <a href="mailto:{{ page.email }}" style="color:inherit;">{{ page.email }}</a></p>{% endif %}
+    {% if page.phone and page.phone != blank %}<p style="margin:0;">☎ {{ page.phone }}</p>{% endif %}
+  </div>
+  {% endif %}
+
+  {% if page.website and page.website != blank %}
+  <p style="margin-top:0.6rem;">
+    <a href="{{ page.website }}" target="_blank" rel="noopener" style="color:var(--coral);font-family:var(--font-mono);">
+      {{ page.website | remove_first: "https://" | remove_first: "http://" | remove_first: "www." }} →
+    </a>
+  </p>
+  {% endif %}
+
+  {% if page.redes and page.redes.size > 0 %}
+  <p style="margin-top:0.6rem;font-family:var(--font-mono);font-size:0.85rem;">
+    {% for r in page.redes %}
+      <a href="{{ r.url }}" target="_blank" rel="noopener" style="margin-right:1rem;">{{ r.label }}</a>
+    {% endfor %}
+  </p>
+  {% endif %}
+
   {% if page.links %}
-  <p>
+  <p style="margin-top:0.6rem;">
     {% for link in page.links %}
       <a href="{{ link.url }}" target="_blank" rel="noopener">{{ link.label }}</a>{% unless forloop.last %} · {% endunless %}
     {% endfor %}
@@ -23,6 +46,9 @@ layout: default
   <div class="card-grid">
     {% for work in works %}
     <a class="card" href="{{ work.url | relative_url }}">
+      {% if work.cover and work.cover != blank %}
+      <img src="{{ work.cover | relative_url }}" alt="{{ work.title }}" style="width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:3px;margin-bottom:0.6rem;" onerror="this.style.display='none'">
+      {% endif %}
       <span class="meta">{{ work.year }}</span>
       <h3>{{ work.title }}</h3>
       <p>{{ work.description }}</p>

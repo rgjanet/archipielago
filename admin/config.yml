@@ -23,10 +23,21 @@ collections:
         required: false
         hint: "Ej. poesía, narrativa, San Juan, emergente"
       - { label: "Foto", name: "photo", widget: "image", required: false }
-      - label: "Enlaces"
+      - { label: "Sitio web", name: "website", widget: "string", required: false }
+      - { label: "Correo electrónico", name: "email", widget: "string", required: false }
+      - { label: "Teléfono", name: "phone", widget: "string", required: false }
+      - label: "Redes sociales"
+        name: "redes"
+        widget: "list"
+        required: false
+        fields:
+          - { label: "Plataforma", name: "label", widget: "string", hint: "Ej. Instagram, Facebook, TikTok" }
+          - { label: "Enlace o @usuario", name: "url", widget: "string" }
+      - label: "Otros enlaces"
         name: "links"
         widget: "list"
         required: false
+        hint: "Para lo que no encaje arriba — Wikipedia, entrevistas, prensa, etc."
         fields:
           - { label: "Texto", name: "label", widget: "string" }
           - { label: "URL", name: "url", widget: "string" }
@@ -42,9 +53,18 @@ collections:
       - { label: "Título", name: "title", widget: "string" }
       - { label: "Autor (nombre exacto como aparece en Autores)", name: "author", widget: "string" }
       - { label: "Año", name: "year", widget: "string", required: false }
-      - { label: "Género", name: "genre", widget: "string", required: false }
+      - { label: "Género", name: "genre", widget: "string", required: false, hint: "Categoría principal, ej. Poesía, Novela — se usa como etiqueta destacada" }
+      - label: "Categorías adicionales"
+        name: "categories"
+        widget: "list"
+        required: false
+        hint: "Ej. realismo mágico, literatura LGBTQ+, ensayo — para búsqueda y filtrado futuro"
+      - { label: "Número de páginas", name: "pages", widget: "number", value_type: "int", min: 1, required: false }
+      - { label: "Editorial", name: "publisher", widget: "string", required: false }
+      - { label: "ISBN", name: "isbn", widget: "string", required: false }
+      - { label: "Idioma", name: "language", widget: "select", options: ["Español", "Inglés", "Bilingüe", "Otro"], required: false }
       - { label: "Portada", name: "cover", widget: "image", required: false }
-      - { label: "Descripción corta", name: "description", widget: "string", required: false }
+      - { label: "Descripción corta", name: "description", widget: "string", required: false, hint: "Se usa en tarjetas y listados — una o dos oraciones" }
       - { label: "Dónde conseguirlo", name: "purchase_url", widget: "string", required: false }
       - { label: "Reseña / contenido", name: "body", widget: "markdown", required: false }
 

@@ -1,0 +1,29 @@
+---
+layout: default
+title: Obras
+---
+<section class="section">
+  <span class="eyebrow">Directorio</span>
+  <h1>Obras</h1>
+  <p style="max-width:52ch;color:var(--tinta-suave);">
+    Libros y publicaciones de autoras y autores puertorriqueños.
+  </p>
+
+  <div class="card-grid">
+    {% for work in site.works %}
+    <a class="card" href="{{ work.url | relative_url }}">
+      {% if work.cover and work.cover != blank %}
+      <img src="{{ work.cover | relative_url }}" alt="{{ work.title }}" style="width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:3px;margin-bottom:0.8rem;" onerror="this.style.display='none'">
+      {% endif %}
+      <span class="meta">{{ work.author }}{% if work.year %} · {{ work.year }}{% endif %}</span>
+      <h3>{{ work.title }}</h3>
+      <p>{{ work.description | truncate: 90 }}</p>
+    </a>
+    {% endfor %}
+    {% if site.works.size == 0 %}
+    <p style="color:var(--tinta-suave);font-family:var(--font-mono);font-size:0.85rem;">
+      Aún no hay obras publicadas — añade la primera desde /admin.
+    </p>
+    {% endif %}
+  </div>
+</section>

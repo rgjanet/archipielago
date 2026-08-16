@@ -5,11 +5,35 @@ layout: default
   <span class="eyebrow">Obra</span>
   <h1>{{ page.title }}</h1>
   <p class="meta" style="font-family:var(--font-mono);color:var(--oro-viejo);">
-    {{ page.author }}{% if page.year %} · {{ page.year }}{% endif %}{% if page.genre %} · {{ page.genre }}{% endif %}
+    {{ page.author }}{% if page.year %} · {{ page.year }}{% endif %}{% if page.genre and page.genre != blank %} · {{ page.genre }}{% endif %}
   </p>
-  {% if page.cover %}<img src="{{ page.cover | relative_url }}" alt="{{ page.title }}" style="max-width:220px;border-radius:3px;margin:1.2rem 0;">{% endif %}
 
-  <div class="body">{{ content }}</div>
+  {% if page.categories and page.categories.size > 0 %}
+  <p style="margin-top:0.4rem;">
+    {% for cat in page.categories %}
+    <span style="display:inline-block;font-family:var(--font-mono);font-size:0.7rem;text-transform:uppercase;letter-spacing:0.04em;color:var(--mar-profundo);border:1px solid var(--mar-profundo);border-radius:999px;padding:0.2rem 0.6rem;margin:0 0.3rem 0.3rem 0;">{{ cat }}</span>
+    {% endfor %}
+  </p>
+  {% endif %}
+
+  {% if page.cover and page.cover != blank %}
+  <img src="{{ page.cover | relative_url }}" alt="{{ page.title }}" style="max-width:220px;border-radius:3px;margin:1.2rem 0;" onerror="this.style.display='none'">
+  {% endif %}
+
+  {% if page.description and page.description != blank %}
+  <p style="font-size:1.02rem;color:var(--tinta-suave);max-width:56ch;">{{ page.description }}</p>
+  {% endif %}
+
+  {% if page.pages or page.publisher and page.publisher != blank or page.isbn and page.isbn != blank or page.language and page.language != blank %}
+  <div style="margin-top:1rem;display:flex;flex-direction:column;gap:0.3rem;color:var(--tinta-suave);font-size:0.88rem;font-family:var(--font-mono);">
+    {% if page.pages %}<p style="margin:0;">{{ page.pages }} páginas</p>{% endif %}
+    {% if page.publisher and page.publisher != blank %}<p style="margin:0;">Editorial: {{ page.publisher }}</p>{% endif %}
+    {% if page.isbn and page.isbn != blank %}<p style="margin:0;">ISBN: {{ page.isbn }}</p>{% endif %}
+    {% if page.language and page.language != blank %}<p style="margin:0;">Idioma: {{ page.language }}</p>{% endif %}
+  </div>
+  {% endif %}
+
+  <div class="body" style="margin-top:1.4rem;">{{ content }}</div>
 
   {% if page.purchase_url %}
   <p><a href="{{ page.purchase_url }}" target="_blank" rel="noopener" style="color:var(--coral);font-family:var(--font-mono);">Conseguir el libro →</a></p>
