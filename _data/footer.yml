@@ -1,21 +1,25 @@
 columns:
-  - heading: "Explorar"
+  - heading: Explorar
     links:
-      - { label: "Autores", url: "/autores/" }
-      - { label: "Obras", url: "/obras/" }
-      - { label: "Editoriales", url: "/editoriales/" }
-      - { label: "Lugares", url: "/lugares/" }
-      - { label: "Librerías en línea", url: "/tiendas-en-linea/" }
-      - { label: "Revista", url: "/revista/" }
-      - { label: "Mapa", url: "/mapa/" }
-      - { label: "Multimedia", url: "/multimedia/" }
-  - heading: "Sobre el proyecto"
+      - label: Autores
+        url: /autores/
+      - label: Obras
+        url: /obras/
+      - label: Editoriales
+        url: /editoriales/
+      - label: Lugares
+        url: /lugares/
+      - label: Librerías en línea
+        url: /tiendas-en-linea/
+      - label: Mapa
+        url: /mapa/
+      - label: Multimedia
+        url: /multimedia/
+  - heading: Sobre el proyecto
     links:
-      - { label: "Qué es Archipiélago", url: "/" }
-  - heading: "Colabora"
+      - label: ¿Qué es Archipiélago?
+        url: /
+  - heading: Síguenos
     links:
-      - { label: "Añadir contenido", url: "/admin/" }
-  - heading: "Síguenos"
-    links:
-      - { label: "Instagram", url: "#" }
-      - { label: "Facebook", url: "#" }
+      - label: Substack
+        url: https://vivirdelcuentopr.substack.com/
