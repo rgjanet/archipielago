@@ -19,7 +19,7 @@ title: Blog
       {% endif %}
       <div>
         <p style="font-family:var(--font-mono);font-size:0.72rem;color:var(--oro-viejo);text-transform:uppercase;letter-spacing:0.05em;margin:0 0 0.3rem;">
-          {% include fecha-es.html date=post.date %}{% if post.author %} · {{ post.author }}{% endif %}
+          {% assign post_mes_i = post.date | date: "%-m" | minus: 1 %}{{ post.date | date: "%-d" }} de {{ site.data.meses[post_mes_i] }} de {{ post.date | date: "%Y" }}{% if post.author %} · {{ post.author }}{% endif %}
         </p>
         <h2 style="font-size:1.3rem;margin:0 0 0.4rem;">{{ post.title }}</h2>
         {% if post.related_author or post.related_place %}

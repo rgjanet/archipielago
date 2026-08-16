@@ -66,7 +66,8 @@ layout: default
       {% if post.photo and post.photo != blank %}
       <img src="{{ post.photo | relative_url }}" alt="{{ post.title }}" style="width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:3px;margin-bottom:0.6rem;" onerror="this.style.display='none'">
       {% endif %}
-      <span class="meta">{% include fecha-es.html date=post.date %}</span>
+      {% assign post_mes_i = post.date | date: "%-m" | minus: 1 %}
+      <span class="meta">{{ post.date | date: "%-d" }} de {{ site.data.meses[post_mes_i] }} de {{ post.date | date: "%Y" }}</span>
       <h3>{{ post.title }}</h3>
       <p>{{ post.description | default: post.excerpt | strip_html | truncate: 80 }}</p>
     </a>
