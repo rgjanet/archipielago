@@ -7,7 +7,7 @@ photo: /assets/img/uploads/AleWal.png
 related_author: alé-wal
 related_place: ''
 audio_url: ''
-video_url: ''
+video_url: https://archive.org/download/entrevista-ale-wal/entrevista%20ale%CC%81%20wal.mp4
 embed_code: ''
 ---
 Alé Wal creció escuchando a su tía abordar el tema del sexo. Ella solía decir que encima de ser un tabú, quería que su sobrina se dedicara a ser sexóloga. Alé Wal, por otro lado, soñaba con ser periodista y escritora de columnas de amor y sexo.
