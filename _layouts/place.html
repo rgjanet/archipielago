@@ -36,6 +36,20 @@ layout: default
   </p>
   {% endif %}
 
+  {% assign linked_editorial = site.editoriales | where: "lugar", page.slug | first %}
+  {% if linked_editorial %}
+  <p style="margin-top:0.8rem;">
+    <a href="{{ linked_editorial.url | relative_url }}" style="font-family:var(--font-mono);font-size:0.85rem;color:var(--coral);">Ver perfil de la editorial: {{ linked_editorial.title }} →</a>
+  </p>
+  {% endif %}
+
+  {% assign linked_tienda = site.tiendas | where: "lugar", page.slug | first %}
+  {% if linked_tienda %}
+  <p style="margin-top:0.8rem;">
+    <a href="{{ linked_tienda.url | relative_url }}" style="font-family:var(--font-mono);font-size:0.85rem;color:var(--coral);">También venden en línea: {{ linked_tienda.title }} →</a>
+  </p>
+  {% endif %}
+
   {% assign related_posts = site.blog | where: "related_place", page.slug | sort: "date" | reverse %}
   {% if related_posts.size > 0 %}
   <h2 style="margin-top:2.4rem;">Del blog</h2>

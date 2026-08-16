@@ -8,6 +8,8 @@ layout: default
     {{ page.author }}{% if page.year %} · {{ page.year }}{% endif %}{% if page.genre and page.genre != blank %} · {{ page.genre }}{% endif %}
   </p>
 
+  {% assign author_page = site.authors | where: "title", page.author | first %}
+
   {% if page.categories and page.categories.size > 0 %}
   <p style="margin-top:0.4rem;">
     {% for cat in page.categories %}
@@ -16,31 +18,66 @@ layout: default
   </p>
   {% endif %}
 
-  {% if page.cover and page.cover != blank %}
-  <img src="{{ page.cover | relative_url }}" alt="{{ page.title }}" style="max-width:220px;border-radius:3px;margin:1.2rem 0;" onerror="this.style.display='none'">
-  {% endif %}
+  <div class="work-layout" style="display:grid;grid-template-columns:220px 1fr;gap:2.2rem;margin-top:1.4rem;">
+    <div>
+      {% if page.cover and page.cover != blank %}
+      <img src="{{ page.cover | relative_url }}" alt="{{ page.title }}" style="width:100%;border-radius:3px;display:block;" onerror="this.parentElement.style.display='none'">
+      {% endif %}
+    </div>
 
-  {% if page.description and page.description != blank %}
-  <p style="font-size:1.02rem;color:var(--tinta-suave);max-width:56ch;">{{ page.description }}</p>
-  {% endif %}
+    <div style="min-width:0;">
+      {% if page.description and page.description != blank %}
+      <p style="font-size:1.02rem;color:var(--tinta-suave);max-width:56ch;margin-top:0;">{{ page.description }}</p>
+      {% endif %}
 
-  {% if page.pages or page.publisher and page.publisher != blank or page.isbn and page.isbn != blank or page.language and page.language != blank %}
-  <div style="margin-top:1rem;display:flex;flex-direction:column;gap:0.3rem;color:var(--tinta-suave);font-size:0.88rem;font-family:var(--font-mono);">
-    {% if page.pages %}<p style="margin:0;">{{ page.pages }} páginas</p>{% endif %}
-    {% if page.publisher and page.publisher != blank %}<p style="margin:0;">Editorial: {{ page.publisher }}</p>{% endif %}
-    {% if page.isbn and page.isbn != blank %}<p style="margin:0;">ISBN: {{ page.isbn }}</p>{% endif %}
-    {% if page.language and page.language != blank %}<p style="margin:0;">Idioma: {{ page.language }}</p>{% endif %}
+      {% if page.synopsis and page.synopsis != blank %}
+      <h2 style="margin-top:1.6rem;font-size:1.2rem;">Sinopsis</h2>
+      <p style="max-width:60ch;line-height:1.7;">{{ page.synopsis }}</p>
+      {% endif %}
+
+      {% if page.pages or page.publisher and page.publisher != blank or page.isbn and page.isbn != blank or page.language and page.language != blank %}
+      <div style="margin-top:1rem;display:flex;flex-direction:column;gap:0.3rem;color:var(--tinta-suave);font-size:0.88rem;font-family:var(--font-mono);">
+        {% if page.pages %}<p style="margin:0;">{{ page.pages }} páginas</p>{% endif %}
+        {% if page.publisher and page.publisher != blank %}
+          {% assign publisher_page = site.editoriales | where: "title", page.publisher | first %}
+          <p style="margin:0;">Editorial: {% if publisher_page %}<a href="{{ publisher_page.url | relative_url }}" style="color:var(--coral);">{{ page.publisher }}</a>{% else %}{{ page.publisher }}{% endif %}</p>
+        {% endif %}
+        {% if page.isbn and page.isbn != blank %}<p style="margin:0;">ISBN: {{ page.isbn }}</p>{% endif %}
+        {% if page.language and page.language != blank %}<p style="margin:0;">Idioma: {{ page.language }}</p>{% endif %}
+      </div>
+      {% endif %}
+
+      {% if author_page %}
+      <a href="{{ author_page.url | relative_url }}" style="display:flex;gap:0.9rem;align-items:center;text-decoration:none;color:inherit;margin-top:1.6rem;padding:0.9rem;border:var(--border);border-radius:3px;background:var(--papel-alto);max-width:60ch;">
+        {% if author_page.photo and author_page.photo != blank %}
+        <img src="{{ author_page.photo | relative_url }}" alt="{{ author_page.title }}" style="width:56px;height:56px;border-radius:50%;object-fit:cover;flex-shrink:0;" onerror="this.style.display='none'">
+        {% endif %}
+        <span>
+          <span style="display:block;font-family:var(--font-mono);font-size:0.68rem;text-transform:uppercase;letter-spacing:0.05em;color:var(--oro-viejo);">Sobre la autora / el autor</span>
+          <span style="display:block;font-family:var(--font-display);font-size:1.05rem;color:var(--mar-profundo);margin:0.15rem 0 0.15rem;">{{ author_page.title }}</span>
+          {% if author_page.excerpt %}<span style="display:block;font-size:0.85rem;color:var(--tinta-suave);">{{ author_page.excerpt | strip_html | truncate: 90 }}</span>{% endif %}
+        </span>
+      </a>
+      {% endif %}
+
+      {% if page.content and page.content != "" %}
+      <h2 style="margin-top:1.6rem;font-size:1.2rem;">Reseña</h2>
+      <div class="body">{{ content }}</div>
+      {% endif %}
+
+      {% if page.purchase_url %}
+      <p style="margin-top:1rem;"><a href="{{ page.purchase_url }}" target="_blank" rel="noopener" style="color:var(--coral);font-family:var(--font-mono);">Conseguir el libro →</a></p>
+      {% endif %}
+    </div>
   </div>
-  {% endif %}
 
-  <div class="body" style="margin-top:1.4rem;">{{ content }}</div>
-
-  {% if page.purchase_url %}
-  <p><a href="{{ page.purchase_url }}" target="_blank" rel="noopener" style="color:var(--coral);font-family:var(--font-mono);">Conseguir el libro →</a></p>
-  {% endif %}
-
-  {% assign author_page = site.authors | where: "title", page.author | first %}
   {% if author_page %}
-  <p><a href="{{ author_page.url | relative_url }}" style="font-family:var(--font-mono);font-size:0.85rem;">← Volver a {{ page.author }}</a></p>
+  <p style="margin-top:2rem;"><a href="{{ author_page.url | relative_url }}" style="font-family:var(--font-mono);font-size:0.85rem;">← Volver a {{ page.author }}</a></p>
   {% endif %}
 </article>
+
+<style>
+  @media (max-width: 640px) {
+    .work-layout { grid-template-columns: 1fr !important; }
+  }
+</style>

@@ -1,0 +1,49 @@
+---
+layout: default
+---
+<article class="section">
+  <span class="eyebrow">Librería en línea</span>
+  <h1>{{ page.title }}</h1>
+
+  {% if page.photo and page.photo != blank %}
+  <img src="{{ page.photo | relative_url }}" alt="{{ page.title }}" style="max-width:280px;border-radius:3px;margin:1.2rem 0;" onerror="this.style.display='none'">
+  {% endif %}
+
+  {% if page.website and page.website != blank %}
+  <p>
+    <a href="{{ page.website }}" target="_blank" rel="noopener" style="color:var(--coral);font-family:var(--font-mono);font-size:0.95rem;">
+      Visitar tienda: {{ page.website | remove_first: "https://" | remove_first: "http://" | remove_first: "www." }} →
+    </a>
+  </p>
+  {% endif %}
+
+  <div class="bio">{{ content }}</div>
+
+  {% if page.shipping and page.shipping != blank %}
+  <p style="margin-top:0.8rem;color:var(--tinta-suave);font-size:0.92rem;">🚚 {{ page.shipping }}</p>
+  {% endif %}
+
+  {% if page.email and page.email != blank or page.phone and page.phone != blank %}
+  <div style="margin-top:0.8rem;display:flex;flex-direction:column;gap:0.3rem;color:var(--tinta-suave);font-size:0.92rem;">
+    {% if page.email and page.email != blank %}<p style="margin:0;">✉ <a href="mailto:{{ page.email }}" style="color:inherit;">{{ page.email }}</a></p>{% endif %}
+    {% if page.phone and page.phone != blank %}<p style="margin:0;">☎ {{ page.phone }}</p>{% endif %}
+  </div>
+  {% endif %}
+
+  {% if page.redes and page.redes.size > 0 %}
+  <p style="margin-top:0.6rem;font-family:var(--font-mono);font-size:0.85rem;">
+    {% for r in page.redes %}
+      <a href="{{ r.url }}" target="_blank" rel="noopener" style="margin-right:1rem;">{{ r.label }}</a>
+    {% endfor %}
+  </p>
+  {% endif %}
+
+  {% if page.lugar and page.lugar != blank %}
+    {% assign lugar_page = site.map_locations | where: "slug", page.lugar | first %}
+    {% if lugar_page %}
+    <p style="margin-top:0.8rem;">
+      <a href="{{ lugar_page.url | relative_url }}" style="font-family:var(--font-mono);font-size:0.85rem;color:var(--coral);">📍 También tienen tienda física: {{ lugar_page.name }} →</a>
+    </p>
+    {% endif %}
+  {% endif %}
+</article>

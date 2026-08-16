@@ -1,0 +1,29 @@
+---
+layout: default
+title: Librerías en línea
+---
+<section class="section">
+  <span class="eyebrow">Directorio</span>
+  <h1>Librerías en línea</h1>
+  <p style="max-width:52ch;color:var(--tinta-suave);">
+    Tiendas de libros puertorriqueñas que venden en línea, con o sin local físico.
+  </p>
+
+  <div class="card-grid">
+    {% for t in site.tiendas %}
+    <a class="card" href="{{ t.url | relative_url }}">
+      {% if t.photo and t.photo != blank %}
+      <img src="{{ t.photo | relative_url }}" alt="{{ t.title }}" style="width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:3px;margin-bottom:0.8rem;" onerror="this.style.display='none'">
+      {% endif %}
+      {% if t.shipping and t.shipping != blank %}<span class="meta">{{ t.shipping }}</span>{% endif %}
+      <h3>{{ t.title }}</h3>
+      <p>{{ t.excerpt | strip_html | truncate: 90 }}</p>
+    </a>
+    {% endfor %}
+    {% if site.tiendas.size == 0 %}
+    <p style="color:var(--tinta-suave);font-family:var(--font-mono);font-size:0.85rem;">
+      Aún no hay librerías en línea publicadas — añade la primera desde /admin.
+    </p>
+    {% endif %}
+  </div>
+</section>

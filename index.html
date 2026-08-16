@@ -261,7 +261,11 @@ title: Inicio
   {% unless work %}{% assign work = site.works | first %}{% endunless %}
   {% if work %}
   <div>
+    {% if work.cover and work.cover != blank %}
+    <div class="art-block coral small" style="background:none;padding:0;"><img src="{{ work.cover | relative_url }}" alt="{{ work.title }}" style="width:100%;height:100%;object-fit:cover;border-radius:3px;" onerror="this.parentElement.outerHTML='&lt;div class=&quot;art-block coral small&quot;&gt;&lt;span class=&quot;art-label&quot;&gt;Obra&lt;/span&gt;&lt;/div&gt;'"></div>
+    {% else %}
     <div class="art-block coral small"><span class="art-label">Obra</span></div>
+    {% endif %}
     <span class="kicker-tag">Obras<span class="sep">|</span><span class="type">Reseña</span></span>
     <h2><a href="{{ work.url | relative_url }}" style="text-decoration:none;color:inherit;">{{ work.title }}</a></h2>
     <p class="dek">{{ work.description | default: work.author }}</p>
@@ -371,7 +375,11 @@ title: Inicio
           {% assign w = site.works | where: "slug", n | first %}
           {% if w %}
       <a href="{{ w.url | relative_url }}">
+        {% if w.cover and w.cover != blank %}
+        <div class="art-block coral small" style="background:none;padding:0;margin-bottom:0.6rem;"><img src="{{ w.cover | relative_url }}" alt="{{ w.title }}" style="width:100%;height:100%;object-fit:cover;border-radius:3px;" onerror="this.parentElement.outerHTML='&lt;div class=&quot;art-block coral small&quot; style=&quot;margin-bottom:0.6rem;&quot;&gt;&lt;/div&gt;'"></div>
+        {% else %}
         <div class="art-block coral small" style="margin-bottom:0.6rem;"></div>
+        {% endif %}
         <span class="kicker-tag">{{ w.genre | default: "Obra" }}</span>
         <h4>{{ w.title }}</h4>
         <p class="dek">{{ w.author }}</p>
@@ -382,7 +390,11 @@ title: Inicio
         {% assign explore_works = site.works | limit: 3 %}
         {% for w in explore_works %}
       <a href="{{ w.url | relative_url }}">
+        {% if w.cover and w.cover != blank %}
+        <div class="art-block coral small" style="background:none;padding:0;margin-bottom:0.6rem;"><img src="{{ w.cover | relative_url }}" alt="{{ w.title }}" style="width:100%;height:100%;object-fit:cover;border-radius:3px;" onerror="this.parentElement.outerHTML='&lt;div class=&quot;art-block coral small&quot; style=&quot;margin-bottom:0.6rem;&quot;&gt;&lt;/div&gt;'"></div>
+        {% else %}
         <div class="art-block coral small" style="margin-bottom:0.6rem;"></div>
+        {% endif %}
         <span class="kicker-tag">{{ w.genre | default: "Obra" }}</span>
         <h4>{{ w.title }}</h4>
         <p class="dek">{{ w.author }}</p>
@@ -445,7 +457,9 @@ title: Inicio
         <h4>Explorar</h4>
         <a href="{{ '/autores/' | relative_url }}">Autores</a>
         <a href="{{ '/obras/' | relative_url }}">Obras</a>
+        <a href="{{ '/editoriales/' | relative_url }}">Editoriales</a>
         <a href="{{ '/lugares/' | relative_url }}">Lugares</a>
+        <a href="{{ '/tiendas-en-linea/' | relative_url }}">Librerías en línea</a>
         <a href="{{ '/mapa/' | relative_url }}">Mapa</a>
         <a href="{{ '/multimedia/' | relative_url }}">Multimedia</a>
       </div>

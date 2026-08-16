@@ -1,12 +1,9 @@
-hero_author: ''
-twocol_work: ''
-sidebar_work: ''
-sidebar_post: ''
-twocol_place: ''
-promo_media: ''
+hero_author:
+twocol_work:
+sidebar_work:
+sidebar_post:
+twocol_place:
+promo_media:
 explore_authors: []
 explore_works: []
-explore_places:
-  - archivo-general-y-biblioteca-nacional-de-puerto-rico
-  - casa-pulpo
-  - leo-leo-libros
+explore_places: []

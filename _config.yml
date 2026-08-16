@@ -26,6 +26,12 @@ collections:
   blog:
     output: true
     permalink: /blog/:slug/
+  editoriales:
+    output: true
+    permalink: /editoriales/:slug/
+  tiendas:
+    output: true
+    permalink: /tiendas-en-linea/:slug/
 
 defaults:
   - scope:
@@ -53,6 +59,16 @@ defaults:
       type: blog
     values:
       layout: post
+  - scope:
+      path: ""
+      type: editoriales
+    values:
+      layout: editorial
+  - scope:
+      path: ""
+      type: tiendas
+    values:
+      layout: tienda
 
 plugins:
   - jekyll-relative-links

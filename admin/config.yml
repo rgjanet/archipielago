@@ -65,8 +65,9 @@ collections:
       - { label: "Idioma", name: "language", widget: "select", options: ["Español", "Inglés", "Bilingüe", "Otro"], required: false }
       - { label: "Portada", name: "cover", widget: "image", required: false }
       - { label: "Descripción corta", name: "description", widget: "string", required: false, hint: "Se usa en tarjetas y listados — una o dos oraciones" }
+      - { label: "Sinopsis", name: "synopsis", widget: "text", required: false, hint: "Descripción completa del libro — de qué trata, para la página de la obra" }
       - { label: "Dónde conseguirlo", name: "purchase_url", widget: "string", required: false }
-      - { label: "Reseña / contenido", name: "body", widget: "markdown", required: false }
+      - { label: "Reseña / contenido", name: "body", widget: "markdown", required: false, hint: "Tu propio comentario o reseña sobre la obra, si aplica" }
 
   - name: "media"
     label: "Multimedia"
@@ -133,6 +134,53 @@ collections:
       - { label: "URL de video (mp4)", name: "video_url", widget: "string", required: false }
       - { label: "Código de embed", name: "embed_code", widget: "text", required: false, hint: "Pega aquí el <iframe> de YouTube, Spotify, etc. Aparece después del audio/video." }
       - { label: "Contenido", name: "body", widget: "markdown" }
+
+  - name: "tiendas"
+    label: "Librerías en línea"
+    folder: "_tiendas"
+    create: true
+    slug: "{{slug}}"
+    identifier_field: title
+    fields:
+      - { label: "Nombre", name: "title", widget: "string" }
+      - { label: "Foto / Logo", name: "photo", widget: "image", required: false }
+      - { label: "Sitio web", name: "website", widget: "string", hint: "Su tienda en línea — este es el dato más importante" }
+      - { label: "Correo electrónico", name: "email", widget: "string", required: false }
+      - { label: "Teléfono", name: "phone", widget: "string", required: false }
+      - label: "Redes sociales"
+        name: "redes"
+        widget: "list"
+        required: false
+        fields:
+          - { label: "Plataforma", name: "label", widget: "string", hint: "Ej. Instagram, Facebook, TikTok" }
+          - { label: "Enlace o @usuario", name: "url", widget: "string" }
+      - { label: "Envíos", name: "shipping", widget: "string", required: false, hint: "Ej. 'Envíos a toda la isla' o 'Solo P.R. y EE.UU.'" }
+      - { label: "Lugar físico (slug exacto, opcional)", name: "lugar", widget: "string", required: false, hint: "Si también tienen tienda física ya en Lugares, escribe su slug — ej. /lugares/the-bookmark/ → the-bookmark" }
+      - { label: "Descripción", name: "body", widget: "markdown" }
+
+  - name: "editoriales"
+    label: "Editoriales"
+    folder: "_editoriales"
+    create: true
+    slug: "{{slug}}"
+    identifier_field: title
+    fields:
+      - { label: "Nombre", name: "title", widget: "string" }
+      - { label: "Año de fundación", name: "founded", widget: "string", required: false }
+      - { label: "Foto / Logo", name: "photo", widget: "image", required: false }
+      - { label: "Sitio web", name: "website", widget: "string", required: false }
+      - { label: "Correo electrónico", name: "email", widget: "string", required: false }
+      - { label: "Teléfono", name: "phone", widget: "string", required: false }
+      - label: "Redes sociales"
+        name: "redes"
+        widget: "list"
+        required: false
+        fields:
+          - { label: "Plataforma", name: "label", widget: "string", hint: "Ej. Instagram, Facebook, TikTok" }
+          - { label: "Enlace o @usuario", name: "url", widget: "string" }
+      - { label: "Lugar físico (slug exacto, opcional)", name: "lugar", widget: "string", required: false, hint: "Si tienen tienda/oficina en el mapa, escribe su slug — ej. /lugares/editorial-upr/ → editorial-upr" }
+      - { label: "Descripción / Bio", name: "body", widget: "markdown" }
+      - { label: "Lineamientos de sometimiento", name: "guidelines", widget: "markdown", required: false, hint: "Si aceptan manuscritos, describe el proceso aquí" }
 
   - name: "settings"
     label: "Portada"

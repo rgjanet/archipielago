@@ -1,0 +1,29 @@
+---
+layout: default
+title: Editoriales
+---
+<section class="section">
+  <span class="eyebrow">Directorio</span>
+  <h1>Editoriales</h1>
+  <p style="max-width:52ch;color:var(--tinta-suave);">
+    Casas editoriales e imprentas independientes de Puerto Rico.
+  </p>
+
+  <div class="card-grid">
+    {% for ed in site.editoriales %}
+    <a class="card" href="{{ ed.url | relative_url }}">
+      {% if ed.photo and ed.photo != blank %}
+      <img src="{{ ed.photo | relative_url }}" alt="{{ ed.title }}" style="width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:3px;margin-bottom:0.8rem;" onerror="this.style.display='none'">
+      {% endif %}
+      {% if ed.founded and ed.founded != blank %}<span class="meta">Desde {{ ed.founded }}</span>{% endif %}
+      <h3>{{ ed.title }}</h3>
+      <p>{{ ed.excerpt | strip_html | truncate: 90 }}</p>
+    </a>
+    {% endfor %}
+    {% if site.editoriales.size == 0 %}
+    <p style="color:var(--tinta-suave);font-family:var(--font-mono);font-size:0.85rem;">
+      Aún no hay editoriales publicadas — añade la primera desde /admin.
+    </p>
+    {% endif %}
+  </div>
+</section>
