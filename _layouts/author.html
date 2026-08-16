@@ -5,7 +5,7 @@ layout: default
   <span class="eyebrow">Autor{% if page.gender == 'f' %}a{% endif %}</span>
   <h1>{{ page.title }}</h1>
   {% if page.region %}<p class="meta" style="font-family:var(--font-mono);color:var(--oro-viejo);">{{ page.region }}</p>{% endif %}
-  {% if page.photo and page.photo != blank %}<img src="{{ page.photo | relative_url }}" alt="{{ page.title }}" style="max-width:280px;border-radius:3px;margin:1.2rem 0;">{% endif %}
+  {% if page.photo and page.photo != blank %}<img src="{{ page.photo | relative_url }}" alt="{{ page.title }}" style="max-width:280px;border-radius:3px;margin:1.2rem 0;" onerror="this.style.display='none'">{% endif %}
 
   <div class="bio">{{ content }}</div>
 

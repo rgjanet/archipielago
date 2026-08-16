@@ -15,7 +15,7 @@ title: Blog
     {% for post in posts %}
     <a href="{{ post.url | relative_url }}" style="text-decoration:none;color:inherit;border-bottom:1px solid rgba(28,27,24,0.12);padding-bottom:1.4rem;display:flex;gap:1.2rem;align-items:flex-start;">
       {% if post.photo and post.photo != blank %}
-      <img src="{{ post.photo | relative_url }}" alt="{{ post.title }}" style="width:120px;height:80px;object-fit:cover;border-radius:3px;flex-shrink:0;">
+      <img src="{{ post.photo | relative_url }}" alt="{{ post.title }}" style="width:120px;height:80px;object-fit:cover;border-radius:3px;flex-shrink:0;" onerror="this.style.display='none'">
       {% endif %}
       <div>
         <p style="font-family:var(--font-mono);font-size:0.72rem;color:var(--oro-viejo);text-transform:uppercase;letter-spacing:0.05em;margin:0 0 0.3rem;">

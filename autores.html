@@ -27,7 +27,7 @@ title: Autores
     {% for author in site.authors %}
     <a class="card" href="{{ author.url | relative_url }}" data-tags="{{ author.tags | join: ',' }}">
       {% if author.photo and author.photo != blank %}
-      <img src="{{ author.photo | relative_url }}" alt="{{ author.title }}" style="width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:3px;margin-bottom:0.8rem;">
+      <img src="{{ author.photo | relative_url }}" alt="{{ author.title }}" style="width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:3px;margin-bottom:0.8rem;" onerror="this.style.display='none'">
       {% endif %}
       {% if author.region %}<span class="meta">{{ author.region }}</span>{% endif %}
       <h3>{{ author.title }}</h3>

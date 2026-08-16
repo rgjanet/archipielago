@@ -189,7 +189,7 @@ title: Inicio
     {% assign lead = site.authors | where: "title", site.data.homepage.hero_author | first %}
     {% unless lead %}{% assign lead = site.authors | first %}{% endunless %}
     {% if lead and lead.photo and lead.photo != blank %}
-    <div class="art-block" style="background:none;padding:0;"><img src="{{ lead.photo | relative_url }}" alt="{{ lead.title }}" style="width:100%;height:100%;object-fit:cover;border-radius:3px;"></div>
+    <div class="art-block" style="background:none;padding:0;"><img src="{{ lead.photo | relative_url }}" alt="{{ lead.title }}" style="width:100%;height:100%;object-fit:cover;border-radius:3px;" onerror="this.parentElement.outerHTML='&lt;div class=&quot;art-block&quot;&gt;&lt;span class=&quot;art-label&quot;&gt;Autor destacado&lt;/span&gt;&lt;/div&gt;'"></div>
     {% else %}
     <div class="art-block"><span class="art-label">Autor destacado</span></div>
     {% endif %}
@@ -272,7 +272,7 @@ title: Inicio
   {% if place %}
   <div>
     {% if place.photo and place.photo != blank %}
-    <div class="art-block small" style="background:none;padding:0;"><img src="{{ place.photo | relative_url }}" alt="{{ place.name }}" style="width:100%;height:100%;object-fit:cover;border-radius:3px;"></div>
+    <div class="art-block small" style="background:none;padding:0;"><img src="{{ place.photo | relative_url }}" alt="{{ place.name }}" style="width:100%;height:100%;object-fit:cover;border-radius:3px;" onerror="this.parentElement.outerHTML='&lt;div class=&quot;art-block small&quot;&gt;&lt;span class=&quot;art-label&quot;&gt;Lugar&lt;/span&gt;&lt;/div&gt;'"></div>
     {% else %}
     <div class="art-block small"><span class="art-label">Lugar</span></div>
     {% endif %}
@@ -329,7 +329,7 @@ title: Inicio
           {% if a %}
       <a href="{{ a.url | relative_url }}">
         {% if a.photo and a.photo != blank %}
-        <div class="art-block small" style="background:none;padding:0;margin-bottom:0.6rem;"><img src="{{ a.photo | relative_url }}" alt="{{ a.title }}" style="width:100%;height:100%;object-fit:cover;border-radius:3px;"></div>
+        <div class="art-block small" style="background:none;padding:0;margin-bottom:0.6rem;"><img src="{{ a.photo | relative_url }}" alt="{{ a.title }}" style="width:100%;height:100%;object-fit:cover;border-radius:3px;" onerror="this.parentElement.outerHTML='&lt;div class=&quot;art-block small&quot; style=&quot;margin-bottom:0.6rem;&quot;&gt;&lt;/div&gt;'"></div>
         {% else %}
         <div class="art-block small" style="margin-bottom:0.6rem;"></div>
         {% endif %}
@@ -344,7 +344,7 @@ title: Inicio
         {% for a in explore_authors %}
       <a href="{{ a.url | relative_url }}">
         {% if a.photo and a.photo != blank %}
-        <div class="art-block small" style="background:none;padding:0;margin-bottom:0.6rem;"><img src="{{ a.photo | relative_url }}" alt="{{ a.title }}" style="width:100%;height:100%;object-fit:cover;border-radius:3px;"></div>
+        <div class="art-block small" style="background:none;padding:0;margin-bottom:0.6rem;"><img src="{{ a.photo | relative_url }}" alt="{{ a.title }}" style="width:100%;height:100%;object-fit:cover;border-radius:3px;" onerror="this.parentElement.outerHTML='&lt;div class=&quot;art-block small&quot; style=&quot;margin-bottom:0.6rem;&quot;&gt;&lt;/div&gt;'"></div>
         {% else %}
         <div class="art-block small" style="margin-bottom:0.6rem;"></div>
         {% endif %}
@@ -405,7 +405,7 @@ title: Inicio
           {% if p %}
       <a href="{{ p.url | relative_url }}">
         {% if p.photo and p.photo != blank %}
-        <div class="art-block coral small" style="background:none;padding:0;margin-bottom:0.6rem;"><img src="{{ p.photo | relative_url }}" alt="{{ p.name }}" style="width:100%;height:100%;object-fit:cover;border-radius:3px;"></div>
+        <div class="art-block coral small" style="background:none;padding:0;margin-bottom:0.6rem;"><img src="{{ p.photo | relative_url }}" alt="{{ p.name }}" style="width:100%;height:100%;object-fit:cover;border-radius:3px;" onerror="this.parentElement.outerHTML='&lt;div class=&quot;art-block coral small&quot; style=&quot;margin-bottom:0.6rem;&quot;&gt;&lt;/div&gt;'"></div>
         {% else %}
         <div class="art-block coral small" style="margin-bottom:0.6rem;"></div>
         {% endif %}
@@ -420,7 +420,7 @@ title: Inicio
         {% for p in explore_places %}
       <a href="{{ p.url | relative_url }}">
         {% if p.photo and p.photo != blank %}
-        <div class="art-block coral small" style="background:none;padding:0;margin-bottom:0.6rem;"><img src="{{ p.photo | relative_url }}" alt="{{ p.name }}" style="width:100%;height:100%;object-fit:cover;border-radius:3px;"></div>
+        <div class="art-block coral small" style="background:none;padding:0;margin-bottom:0.6rem;"><img src="{{ p.photo | relative_url }}" alt="{{ p.name }}" style="width:100%;height:100%;object-fit:cover;border-radius:3px;" onerror="this.parentElement.outerHTML='&lt;div class=&quot;art-block coral small&quot; style=&quot;margin-bottom:0.6rem;&quot;&gt;&lt;/div&gt;'"></div>
         {% else %}
         <div class="art-block coral small" style="margin-bottom:0.6rem;"></div>
         {% endif %}
