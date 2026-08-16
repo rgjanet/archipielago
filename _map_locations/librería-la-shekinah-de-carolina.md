@@ -1,6 +1,6 @@
 ---
-name: Librería La Shekinah de Carolina
-sede: ''
+name: Librería La Shekinah
+sede: Carolina
 type: Librería
 lat: 18.410997503967323
 lng: -65.99893518565295
