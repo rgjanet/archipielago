@@ -13,7 +13,7 @@ redes:
     url: http://tiktok.com/@libros787
   - label: X
     url: https://x.com/libros787
-shipping: ''
+shipping: Envíos a Puerto Rico y Estados Unidos
 lugar: ''
 ---
 Tu librería más cercana.
