@@ -10,7 +10,7 @@ publisher: Seix Barral
 isbn: 978-607-39-4198-3
 language: Español
 cover: /assets/img/uploads/secuestropulmonar.jpeg
-description: ''
+description: Secuestro pulmonar es una autobiografía del cuerpo, un ensayo sobre cómo pensamos con la carne y una indagación en los misterios de ese extraño proceso que es ver curar una cicatriz.
 synopsis: |-
   En el año 2023 la autora se sometió a una cirugía mayor, una lobectomía y toracotomía abierta por un «secuestro pulmonar», malformación congénita que de poético solo tiene el nombre, y por la que le extirparon la mayor parte del pulmón izquierdo.
 
