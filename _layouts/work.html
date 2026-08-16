@@ -18,7 +18,7 @@ layout: default
   </p>
   {% endif %}
 
-  <div class="work-layout" style="display:grid;grid-template-columns:220px 1fr;gap:2.2rem;margin-top:1.4rem;">
+  <div class="profile-layout">
     <div>
       {% assign cover_clean = page.cover | replace: " ", "" | strip %}{% if cover_clean != blank and cover_clean != empty %}
       <img src="{{ page.cover | relative_url }}" alt="{{ page.title }}" style="width:100%;border-radius:3px;display:block;" onerror="this.parentElement.style.display='none'">
@@ -84,12 +84,3 @@ layout: default
   <p style="margin-top:2rem;"><a href="{{ author_page.url | relative_url }}" style="font-family:var(--font-mono);font-size:0.85rem;">← Volver a {{ page.author }}</a></p>
   {% endif %}
 </article>
-
-<style>
-  @media (max-width: 640px) {
-    .work-layout { grid-template-columns: 1fr !important; }
-  }
-  .work-layout > div:last-child > *:first-child {
-    margin-top: 0 !important;
-  }
-</style>
