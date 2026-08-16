@@ -56,6 +56,17 @@ document.addEventListener('DOMContentLoaded', function () {
     if (loc.hours) html += '<p class="detail">' + escapeHtml(loc.hours) + '</p>';
     if (loc.phone) html += '<p class="detail">' + escapeHtml(loc.phone) + '</p>';
     if (loc.website) html += '<a href="' + loc.website + '" target="_blank" rel="noopener">' + escapeHtml(loc.website.replace(/^https?:\/\//, '').replace(/\/$/, '')) + '</a>';
+    if (loc.redes && loc.redes.length) {
+      html += '<p class="detail" style="margin-top:6px;">';
+      html += loc.redes.map(function (r) {
+        var isUrl = /^https?:\/\//.test(r.url);
+        var label = escapeHtml(r.label) + (r.label && r.url ? ': ' : '') + escapeHtml(r.url);
+        return isUrl
+          ? '<a href="' + r.url + '" target="_blank" rel="noopener" style="margin-right:8px;">' + escapeHtml(r.label) + '</a>'
+          : '<span style="margin-right:8px;">' + label + '</span>';
+      }).join('');
+      html += '</p>';
+    }
     container.innerHTML = html;
     marker.bindPopup(container, { maxWidth: 260 }).openPopup();
     highlightCard(loc._id);
@@ -73,8 +84,6 @@ document.addEventListener('DOMContentLoaded', function () {
     if (el) el.textContent = n === 1 ? '1 lugar' : n + ' lugares';
   }
 
-  // Group entries that share the same "name" (multi-location bookstores/editorials)
-  // so they appear as one labeled group in the sidebar instead of scattered separately.
   function groupByName(list) {
     var groups = [];
     var byName = {};
