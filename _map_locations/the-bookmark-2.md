@@ -4,7 +4,10 @@ sede: Hatillo
 type: Librería
 lat: 18.48266046695463
 lng: -66.76981147476296
-description: Cadena de librerías y cafés independientes con sede en Puerto Rico.
+description: ''
 url: https://thebookmarkpr.com/
+phone: '+17875440214'
+hours: ''
+address: ''
 ---
 
