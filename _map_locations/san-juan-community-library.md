@@ -9,6 +9,12 @@ website: http://www.yourlibrarysanjuan.org/
 phone: '+17877894600'
 hours: ''
 address: ''
-redes: []
+redes:
+  - label: Facebook
+    url: https://www.facebook.com/sanjuancommunitylibrary/
+  - label: Instagram
+    url: https://www.instagram.com/SanJuanCommunityLibrary
+  - label: X
+    url: https://x.com/SJC_Library
 ---
 
