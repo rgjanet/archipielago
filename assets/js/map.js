@@ -49,7 +49,6 @@ document.addEventListener('DOMContentLoaded', function () {
     var container = document.createElement('div');
     container.className = 'pin-popup';
     var html = '';
-    if (loc.photo) html += '<img class="photo" src="' + loc.photo + '" alt="' + escapeHtml(displayName(loc)) + '">';
     html += '<p class="name">' + escapeHtml(displayName(loc)) + '</p>';
     if (loc.type) html += '<p class="type">' + escapeHtml(loc.type) + '</p>';
     if (loc.description) html += '<p class="desc">' + escapeHtml(loc.description) + '</p>';
