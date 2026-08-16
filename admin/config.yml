@@ -116,6 +116,7 @@ collections:
         fields:
           - { label: "Autor destacado (hero)", name: "hero_author", widget: "relation", collection: "authors", search_fields: ["title"], value_field: "title", display_fields: ["title"], required: false, hint: "Vacío = se usa el más reciente" }
           - { label: "Obra destacada", name: "twocol_work", widget: "relation", collection: "works", search_fields: ["title"], value_field: "title", display_fields: ["title"], required: false }
+          - { label: "Segunda obra destacada (bajo el mapa)", name: "sidebar_work", widget: "relation", collection: "works", search_fields: ["title"], value_field: "title", display_fields: ["title"], required: false, hint: "Aparece en la tarjeta pequeña bajo el conteo del mapa" }
           - { label: "Lugar destacado", name: "twocol_place", widget: "relation", collection: "map_locations", search_fields: ["name"], value_field: "name", display_fields: ["name"], required: false }
           - { label: "Multimedia destacado (banda coral)", name: "promo_media", widget: "relation", collection: "media", search_fields: ["title"], value_field: "title", display_fields: ["title"], required: false }
           - label: "Autores en 'Explora' (hasta 3)"
