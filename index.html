@@ -186,7 +186,7 @@ title: Inicio
 
 <div class="tls-hero-row">
   <div class="tls-hero">
-    {% assign lead = site.authors | where: "title", site.data.homepage.hero_author | first %}
+    {% assign lead = site.authors | where: "slug", site.data.homepage.hero_author | first %}
     {% unless lead %}{% assign lead = site.authors | first %}{% endunless %}
     {% if lead and lead.photo and lead.photo != blank %}
     <div class="art-block" style="background:none;padding:0;"><img src="{{ lead.photo | relative_url }}" alt="{{ lead.title }}" style="width:100%;height:100%;object-fit:cover;border-radius:3px;" onerror="this.parentElement.outerHTML='&lt;div class=&quot;art-block&quot;&gt;&lt;span class=&quot;art-label&quot;&gt;Autor destacado&lt;/span&gt;&lt;/div&gt;'"></div>
@@ -206,7 +206,7 @@ title: Inicio
   </div>
 
   <div class="hero-sidebar">
-    {% assign sidebar_work = site.works | where: "title", site.data.homepage.sidebar_work | first %}
+    {% assign sidebar_work = site.works | where: "slug", site.data.homepage.sidebar_work | first %}
     {% unless sidebar_work %}
       {% assign hero_work_title = work.title %}
       {% assign sidebar_work = site.works | where_exp: "w", "w.title != hero_work_title" | first %}
@@ -220,7 +220,7 @@ title: Inicio
     </div>
     {% endif %}
 
-    {% assign sidebar_post = site.blog | where: "title", site.data.homepage.sidebar_post | first %}
+    {% assign sidebar_post = site.blog | where: "slug", site.data.homepage.sidebar_post | first %}
     {% unless sidebar_post %}
       {% assign sidebar_post = site.blog | sort: "date" | reverse | first %}
     {% endunless %}
@@ -257,7 +257,7 @@ title: Inicio
 <hr class="divider">
 
 <div class="tls-twocol">
-  {% assign work = site.works | where: "title", site.data.homepage.twocol_work | first %}
+  {% assign work = site.works | where: "slug", site.data.homepage.twocol_work | first %}
   {% unless work %}{% assign work = site.works | first %}{% endunless %}
   {% if work %}
   <div>
@@ -267,7 +267,7 @@ title: Inicio
     <p class="dek">{{ work.description | default: work.author }}</p>
   </div>
   {% endif %}
-  {% assign place = site.map_locations | where: "name", site.data.homepage.twocol_place | first %}
+  {% assign place = site.map_locations | where: "slug", site.data.homepage.twocol_place | first %}
   {% unless place %}{% assign place = site.map_locations | first %}{% endunless %}
   {% if place %}
   <div>
@@ -295,7 +295,7 @@ title: Inicio
     </div>
     <div class="promo-right">
       <div class="art-block gold" style="margin:0;"></div>
-      {% assign latest_media = site.media | where: "title", site.data.homepage.promo_media | first %}
+      {% assign latest_media = site.media | where: "slug", site.data.homepage.promo_media | first %}
       {% unless latest_media %}{% assign latest_media = site.media | first %}{% endunless %}
       {% if latest_media %}
       <div>
@@ -325,7 +325,7 @@ title: Inicio
       {% if site.data.homepage.explore_authors and site.data.homepage.explore_authors.size > 0 %}
         {% assign curated_authors = site.data.homepage.explore_authors | slice: 0, 3 %}
         {% for n in curated_authors %}
-          {% assign a = site.authors | where: "title", n | first %}
+          {% assign a = site.authors | where: "slug", n | first %}
           {% if a %}
       <a href="{{ a.url | relative_url }}">
         {% if a.photo and a.photo != blank %}
@@ -367,7 +367,7 @@ title: Inicio
       {% if site.data.homepage.explore_works and site.data.homepage.explore_works.size > 0 %}
         {% assign curated_works = site.data.homepage.explore_works | slice: 0, 3 %}
         {% for n in curated_works %}
-          {% assign w = site.works | where: "title", n | first %}
+          {% assign w = site.works | where: "slug", n | first %}
           {% if w %}
       <a href="{{ w.url | relative_url }}">
         <div class="art-block coral small" style="margin-bottom:0.6rem;"></div>
@@ -401,7 +401,7 @@ title: Inicio
       {% if site.data.homepage.explore_places and site.data.homepage.explore_places.size > 0 %}
         {% assign curated_places = site.data.homepage.explore_places | slice: 0, 3 %}
         {% for n in curated_places %}
-          {% assign p = site.map_locations | where: "name", n | first %}
+          {% assign p = site.map_locations | where: "slug", n | first %}
           {% if p %}
       <a href="{{ p.url | relative_url }}">
         {% if p.photo and p.photo != blank %}

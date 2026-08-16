@@ -35,7 +35,7 @@ layout: default
   </p>
   {% endif %}
 
-  {% assign related_posts = site.blog | where: "related_place", page.name | sort: "date" | reverse %}
+  {% assign related_posts = site.blog | where: "related_place", page.slug | sort: "date" | reverse %}
   {% if related_posts.size > 0 %}
   <h2 style="margin-top:2.4rem;">Del blog</h2>
   <div class="card-grid">

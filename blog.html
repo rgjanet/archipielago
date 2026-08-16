@@ -23,8 +23,18 @@ title: Blog
         </p>
         <h2 style="font-size:1.3rem;margin:0 0 0.4rem;">{{ post.title }}</h2>
         {% if post.related_author or post.related_place %}
+          {% assign ra_name = "" %}
+          {% assign rp_name = "" %}
+          {% if post.related_author %}
+            {% assign ra_lookup = site.authors | where: "slug", post.related_author | first %}
+            {% if ra_lookup %}{% assign ra_name = ra_lookup.title %}{% endif %}
+          {% endif %}
+          {% if post.related_place %}
+            {% assign rp_lookup = site.map_locations | where: "slug", post.related_place | first %}
+            {% if rp_lookup %}{% assign rp_name = rp_lookup.name %}{% endif %}
+          {% endif %}
         <p style="font-family:var(--font-mono);font-size:0.7rem;color:var(--coral);text-transform:uppercase;letter-spacing:0.04em;margin:0 0 0.4rem;">
-          Entrevista{% if post.related_author %} · {{ post.related_author }}{% endif %}{% if post.related_place %} · {{ post.related_place }}{% endif %}
+          Entrevista{% if ra_name != "" %} · {{ ra_name }}{% endif %}{% if rp_name != "" %} · {{ rp_name }}{% endif %}
         </p>
         {% endif %}
         <p style="color:var(--tinta-suave);margin:0;">{{ post.excerpt | strip_html | truncate: 140 }}</p>
