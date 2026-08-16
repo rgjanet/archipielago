@@ -4,8 +4,7 @@
   {% assign video_reviews = vc_reviews_only | concat: vc_reels_only %}
   {% if video_reviews.size > 0 %}
   <div class="vc-heading">
-    <h2>{{ include.heading | default: "Reseñas y reels en video" }}</h2>
-    <a href="{{ '/multimedia/' | relative_url }}">Ver todo el multimedia →</a>
+    <h2>{{ include.heading | default: "Videos" }}</h2>
   </div>
   <div class="video-carousel">
     {% for v in video_reviews %}
