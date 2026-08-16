@@ -10,5 +10,14 @@ phone: '+19394971111'
 hours: ''
 address: ''
 photo: ''
+redes:
+  - label: Facebook
+    url: https://www.facebook.com/LeoLeoLibros
+  - label: Instagram
+    url: https://www.instagram.com/leoleolibros/
+  - label: TikTok
+    url: https://www.tiktok.com/@leoleolibros
+  - label: YouTube
+    url: https://www.youtube.com/@leoleolibros
 ---
 
