@@ -66,7 +66,14 @@ collections:
       - { label: "Portada", name: "cover", widget: "image", required: false }
       - { label: "Descripción corta", name: "description", widget: "string", required: false, hint: "Se usa en tarjetas y listados — una o dos oraciones" }
       - { label: "Sinopsis", name: "synopsis", widget: "text", required: false, hint: "Descripción completa del libro — de qué trata, para la página de la obra" }
-      - { label: "Dónde conseguirlo", name: "purchase_url", widget: "string", required: false }
+      - label: "Dónde conseguirlo"
+        name: "buy_links"
+        widget: "list"
+        required: false
+        hint: "Añade una entrada por cada tienda o sitio donde se pueda comprar"
+        fields:
+          - { label: "Tienda / sitio", name: "label", widget: "string", hint: "Ej. Librería CDA, Amazon, directo con la editorial" }
+          - { label: "Enlace", name: "url", widget: "string", hint: "El link directo a la página de compra" }
       - { label: "Reseña / contenido", name: "body", widget: "markdown", required: false, hint: "Tu propio comentario o reseña sobre la obra, si aplica" }
 
   - name: "media"

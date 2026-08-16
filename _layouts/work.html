@@ -65,7 +65,14 @@ layout: default
       <div class="body">{{ content }}</div>
       {% endif %}
 
-      {% if page.purchase_url %}
+      {% if page.buy_links and page.buy_links.size > 0 %}
+      <div style="margin-top:1rem;">
+        <p style="font-family:var(--font-mono);font-size:0.72rem;text-transform:uppercase;letter-spacing:0.05em;color:var(--oro-viejo);margin:0 0 0.4rem;">Dónde conseguirlo</p>
+        {% for link in page.buy_links %}
+        <p style="margin:0 0 0.3rem;"><a href="{{ link.url }}" target="_blank" rel="noopener" style="color:var(--coral);font-family:var(--font-mono);font-size:0.9rem;">{{ link.label }} →</a></p>
+        {% endfor %}
+      </div>
+      {% elsif page.purchase_url and page.purchase_url != blank %}
       <p style="margin-top:1rem;"><a href="{{ page.purchase_url }}" target="_blank" rel="noopener" style="color:var(--coral);font-family:var(--font-mono);">Conseguir el libro →</a></p>
       {% endif %}
     </div>
