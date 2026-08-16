@@ -1,5 +1,5 @@
 ---
-name: Biblioteca Pública de Toa baja
+name: Biblioteca Pública de Toa Baja
 sede: ''
 type: Biblioteca
 lat: 18.447679078511644
