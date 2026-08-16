@@ -55,6 +55,7 @@ document.addEventListener('DOMContentLoaded', function () {
     if (loc.address) html += '<p class="detail">' + escapeHtml(loc.address) + '</p>';
     if (loc.hours) html += '<p class="detail">' + escapeHtml(loc.hours) + '</p>';
     if (loc.phone) html += '<p class="detail">' + escapeHtml(loc.phone) + '</p>';
+    if (loc.website) html += '<a href="' + loc.website + '" target="_blank" rel="noopener">' + escapeHtml(loc.website.replace(/^https?:\/\//, '').replace(/\/$/, '')) + '</a>';
     container.innerHTML = html;
     marker.bindPopup(container, { maxWidth: 260 }).openPopup();
     highlightCard(loc._id);
