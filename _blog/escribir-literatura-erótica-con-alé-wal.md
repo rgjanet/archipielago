@@ -10,6 +10,8 @@ audio_url: ''
 video_url: ''
 embed_code: ''
 ---
+{% include video-embed.html url="https://archive.org/download/entrevista-ale-wal/entrevista%20ale%CC%81%20wal.mp4" %}
+
 Alé Wal creció escuchando a su tía abordar el tema del sexo. Ella solía decir que encima de ser un tabú, quería que su sobrina se dedicara a ser sexóloga. Alé Wal, por otro lado, soñaba con ser periodista y escritora de columnas de amor y sexo.
 
 “Yo era joven y mi tía siempre me daba consejos. Siempre me decía, de eso, tienes que hablar de eso. Mi tía se crió con un tabú en la cuestión sexual. Y yo creo que no era [un tabú] para mí. Para mí siempre ha sido algo básico y normal hablar del tema”, contó Alé Wal a Vivir del Cuento.
