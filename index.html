@@ -91,6 +91,7 @@ title: Inicio
     max-width: 1140px;
     margin: 0 auto;
     padding: 2rem;
+    border-top: 1px solid rgba(28,27,24,0.12);
   }
   @media (max-width: 720px) { .tls-twocol { grid-template-columns: 1fr; } }
   .tls-twocol h2 { font-size: 1.35rem; margin: 0 0 0.4rem; }
@@ -138,6 +139,45 @@ title: Inicio
   .explore-section > .explore-heading h2 { font-style: italic; font-weight: 400; font-size: 2rem; margin: 0; }
   .explore-section > .explore-heading p { font-family: var(--font-mono); font-size: 0.8rem; color: var(--tinta-suave); margin-top: 0.3rem; }
 
+  .video-carousel-section { padding: 3rem 2rem; border-top: 1px solid rgba(28,27,24,0.12); }
+  .video-carousel-section .vc-heading { max-width: 1140px; margin: 0 auto 1.4rem; display: flex; justify-content: space-between; align-items: baseline; }
+  .video-carousel-section .vc-heading h2 { font-size: 1.4rem; margin: 0; }
+  .video-carousel-section .vc-heading a { font-family: var(--font-mono); font-size: 0.76rem; color: var(--coral); text-decoration: none; }
+  .video-carousel {
+    max-width: 1140px;
+    margin: 0 auto;
+    display: flex;
+    gap: 1.2rem;
+    overflow-x: auto;
+    scroll-snap-type: x proximity;
+    padding-bottom: 0.6rem;
+  }
+  .video-carousel::-webkit-scrollbar { height: 6px; }
+  .video-carousel::-webkit-scrollbar-thumb { background: rgba(15,61,62,0.25); border-radius: 999px; }
+  .video-card {
+    flex: 0 0 220px;
+    scroll-snap-align: start;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+  .video-card .vc-thumb {
+    width: 100%;
+    aspect-ratio: 9/16;
+    border-radius: 3px;
+    background: linear-gradient(135deg, var(--mar-profundo), var(--mar-medio));
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 0.6rem;
+  }
+  .video-card .vc-thumb img { width: 100%; height: 100%; object-fit: cover; }
+  .video-card .vc-thumb .vc-play {
+    position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+  }
+  .video-card .vc-thumb .vc-play svg { filter: drop-shadow(0 1px 3px rgba(0,0,0,0.4)); }
+  .video-card h4 { font-size: 0.92rem; margin: 0 0 0.2rem; line-height: 1.3; }
+  .video-card .vc-meta { font-family: var(--font-mono); font-size: 0.7rem; color: var(--tinta-suave); }
+
   .explore-row {
     display: grid;
     grid-template-columns: 240px 1fr;
@@ -184,270 +224,16 @@ title: Inicio
   .footer-cols a:hover { color: var(--coral); }
 </style>
 
-<div class="tls-hero-row">
-  <div class="tls-hero">
-    {% assign lead = site.authors | where: "slug", site.data.homepage.hero_author | first %}
-    {% unless lead %}{% assign lead = site.authors | first %}{% endunless %}
-    {% if lead and lead.photo and lead.photo != blank %}
-    <div class="art-block" style="background:none;padding:0;"><img src="{{ lead.photo | relative_url }}" alt="{{ lead.title }}" style="width:100%;height:100%;object-fit:cover;border-radius:3px;" onerror="this.parentElement.outerHTML='&lt;div class=&quot;art-block&quot;&gt;&lt;span class=&quot;art-label&quot;&gt;Autor destacado&lt;/span&gt;&lt;/div&gt;'"></div>
-    {% else %}
-    <div class="art-block"><span class="art-label">Autor destacado</span></div>
-    {% endif %}
-    {% if lead %}
-    <span class="kicker-tag">{{ lead.region | default: "Puerto Rico" }}<span class="sep">|</span><span class="type">Perfil</span></span>
-    <h1><a href="{{ lead.url | relative_url }}" style="text-decoration:none;color:var(--mar-profundo);">{{ lead.title }}</a></h1>
-    <p class="dek">{{ lead.excerpt | strip_html | truncate: 200 }}</p>
-    <p class="byline">Por <b>Archipiélago</b></p>
-    {% else %}
-    <span class="kicker-tag">Puerto Rico<span class="sep">|</span><span class="type">Perfil</span></span>
-    <h1>Aún no hay autores publicados</h1>
-    <p class="dek">Añade el primero desde <code>/admin</code> para que aparezca aquí como destacado.</p>
-    {% endif %}
-  </div>
-
-  <div class="hero-sidebar">
-    {% assign sidebar_work = site.works | where: "slug", site.data.homepage.sidebar_work | first %}
-    {% unless sidebar_work %}
-      {% assign hero_work_title = work.title %}
-      {% assign sidebar_work = site.works | where_exp: "w", "w.title != hero_work_title" | first %}
-    {% endunless %}
-    {% if sidebar_work %}
-    <div class="sidebar-card">
-      <span class="kicker-tag">Obras<span class="sep">|</span><span class="type">Reseña</span></span>
-      <h3><a href="{{ sidebar_work.url | relative_url }}" style="text-decoration:none;color:inherit;">{{ sidebar_work.title }}</a></h3>
-      <p class="dek">{{ sidebar_work.description | default: sidebar_work.author }}</p>
-      <a class="cta" href="{{ sidebar_work.url | relative_url }}">Leer más →</a>
-    </div>
-    {% endif %}
-
-    {% assign sidebar_post = site.blog | where: "slug", site.data.homepage.sidebar_post | first %}
-    {% unless sidebar_post %}
-      {% assign sidebar_post = site.blog | sort: "date" | reverse | first %}
-    {% endunless %}
-    {% if sidebar_post %}
-    <div class="sidebar-card" style="margin-top:1.2rem;">
-      <span class="kicker-tag">Blog<span class="sep">|</span><span class="type">Entrada</span></span>
-      <h3><a href="{{ sidebar_post.url | relative_url }}" style="text-decoration:none;color:inherit;">{{ sidebar_post.title }}</a></h3>
-      <p class="dek">{{ sidebar_post.description | default: sidebar_post.excerpt | strip_html | truncate: 90 }}</p>
-      <a class="cta" href="{{ sidebar_post.url | relative_url }}">Leer más →</a>
-    </div>
-    {% endif %}
-  </div>
-</div>
-
-<div class="map-banner">
-  <div class="map-banner-inner">
-    <div>
-      <span class="kicker-tag" style="color:var(--coral);">Mapa literario</span>
-      <h2>Explora el archipiélago en el mapa</h2>
-      <p class="dek">{{ site.map_locations.size }} lugares registrados. Librerías, editoriales, bibliotecas y espacios donde vive la literatura puertorriqueña.</p>
-      <a class="cta" href="{{ '/mapa/' | relative_url }}">Ver el mapa completo →</a>
-    </div>
-    <svg class="map-banner-dots" width="220" height="140" viewBox="0 0 220 140" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <circle cx="30" cy="30" r="5" fill="#E8603F"/>
-      <circle cx="90" cy="20" r="7" fill="#F2ECDC" fill-opacity="0.5"/>
-      <circle cx="150" cy="45" r="4" fill="#B98F4C"/>
-      <circle cx="50" cy="75" r="6" fill="#E8603F" fill-opacity="0.7"/>
-      <circle cx="180" cy="80" r="5" fill="#F2ECDC" fill-opacity="0.4"/>
-      <circle cx="110" cy="105" r="6" fill="#B98F4C"/>
-      <circle cx="30" cy="120" r="5" fill="#E8603F" fill-opacity="0.6"/>
-    </svg>
-  </div>
-</div>
-<hr class="divider">
-
-<div class="tls-twocol">
-  {% assign work = site.works | where: "slug", site.data.homepage.twocol_work | first %}
-  {% unless work %}{% assign work = site.works | first %}{% endunless %}
-  {% if work %}
-  <div>
-    {% if work.cover and work.cover != blank %}
-    <div class="art-block coral small" style="background:none;padding:0;"><img src="{{ work.cover | relative_url }}" alt="{{ work.title }}" style="width:100%;height:100%;object-fit:cover;border-radius:3px;" onerror="this.parentElement.outerHTML='&lt;div class=&quot;art-block coral small&quot;&gt;&lt;span class=&quot;art-label&quot;&gt;Obra&lt;/span&gt;&lt;/div&gt;'"></div>
-    {% else %}
-    <div class="art-block coral small"><span class="art-label">Obra</span></div>
-    {% endif %}
-    <span class="kicker-tag">Obras<span class="sep">|</span><span class="type">Reseña</span></span>
-    <h2><a href="{{ work.url | relative_url }}" style="text-decoration:none;color:inherit;">{{ work.title }}</a></h2>
-    <p class="dek">{{ work.description | default: work.author }}</p>
-  </div>
-  {% endif %}
-  {% assign place = site.map_locations | where: "slug", site.data.homepage.twocol_place | first %}
-  {% unless place %}{% assign place = site.map_locations | first %}{% endunless %}
-  {% if place %}
-  <div>
-    {% if place.photo and place.photo != blank %}
-    <div class="art-block small" style="background:none;padding:0;"><img src="{{ place.photo | relative_url }}" alt="{{ place.name }}" style="width:100%;height:100%;object-fit:cover;border-radius:3px;" onerror="this.parentElement.outerHTML='&lt;div class=&quot;art-block small&quot;&gt;&lt;span class=&quot;art-label&quot;&gt;Lugar&lt;/span&gt;&lt;/div&gt;'"></div>
-    {% else %}
-    <div class="art-block small"><span class="art-label">Lugar</span></div>
-    {% endif %}
-    <span class="kicker-tag">Lugares<span class="sep">|</span><span class="type">{{ place.type }}</span></span>
-    {% assign place_sede_clean = place.sede | replace: " ", "" | strip %}
-    <h2><a href="{{ place.url | relative_url }}" style="text-decoration:none;color:inherit;">{{ place.name }}{% if place_sede_clean != blank and place_sede_clean != empty %} — {{ place_sede_clean }}{% endif %}</a></h2>
-    <p class="dek">{{ place.description | truncate: 100 }}</p>
-  </div>
-  {% endif %}
-</div>
-
-<hr class="divider">
-
-<div class="promo-band">
-  <div class="promo-inner">
-    <div>
-      <div class="eyebrow-row"><span class="kicker-tag" style="margin:0;">Multimedia</span></div>
-      <h2>Escucha y mira</h2>
-      <p class="dek">Podcast, entrevistas y reseñas en audio y video de todo el archipiélago literario.</p>
-      <a class="cta" href="{{ '/multimedia/' | relative_url }}">Ver todo el multimedia →</a>
-    </div>
-    <div class="promo-right">
-      <div class="art-block gold" style="margin:0;"></div>
-      {% assign latest_media = site.media | where: "slug", site.data.homepage.promo_media | first %}
-      {% unless latest_media %}{% assign latest_media = site.media | first %}{% endunless %}
-      {% if latest_media %}
-      <div>
-        <p class="promo-meta">{{ latest_media.media_type }}</p>
-        <h3>{{ latest_media.title }}</h3>
-        <p>{{ latest_media.related_author }}</p>
-        <a class="cta" href="{{ latest_media.url | relative_url }}" style="margin:0;">Escuchar →</a>
-      </div>
-      {% endif %}
-    </div>
-  </div>
-</div>
-
-<div class="explore-section">
-  <div class="explore-heading">
-    <h2>Explora Archipiélago</h2>
-    <p>Recorre el sitio</p>
-  </div>
-
-  <div class="explore-row">
-    <div class="label">
-      <h3>Autores</h3>
-      <p>Perfiles de escritoras y escritores puertorriqueños, independientes y establecidos.</p>
-      <a href="{{ '/autores/' | relative_url }}">Ver todos →</a>
-    </div>
-    <div class="explore-cards">
-      {% if site.data.homepage.explore_authors and site.data.homepage.explore_authors.size > 0 %}
-        {% assign curated_authors = site.data.homepage.explore_authors | slice: 0, 3 %}
-        {% for n in curated_authors %}
-          {% assign a = site.authors | where: "slug", n | first %}
-          {% if a %}
-      <a href="{{ a.url | relative_url }}">
-        {% if a.photo and a.photo != blank %}
-        <div class="art-block small" style="background:none;padding:0;margin-bottom:0.6rem;"><img src="{{ a.photo | relative_url }}" alt="{{ a.title }}" style="width:100%;height:100%;object-fit:cover;border-radius:3px;" onerror="this.parentElement.outerHTML='&lt;div class=&quot;art-block small&quot; style=&quot;margin-bottom:0.6rem;&quot;&gt;&lt;/div&gt;'"></div>
-        {% else %}
-        <div class="art-block small" style="margin-bottom:0.6rem;"></div>
-        {% endif %}
-        <span class="kicker-tag">Perfil</span>
-        <h4>{{ a.title }}</h4>
-        <p class="dek">{{ a.region }}</p>
-      </a>
-          {% endif %}
-        {% endfor %}
-      {% else %}
-        {% assign explore_authors = site.authors | slice: 0, 3 %}
-        {% for a in explore_authors %}
-      <a href="{{ a.url | relative_url }}">
-        {% if a.photo and a.photo != blank %}
-        <div class="art-block small" style="background:none;padding:0;margin-bottom:0.6rem;"><img src="{{ a.photo | relative_url }}" alt="{{ a.title }}" style="width:100%;height:100%;object-fit:cover;border-radius:3px;" onerror="this.parentElement.outerHTML='&lt;div class=&quot;art-block small&quot; style=&quot;margin-bottom:0.6rem;&quot;&gt;&lt;/div&gt;'"></div>
-        {% else %}
-        <div class="art-block small" style="margin-bottom:0.6rem;"></div>
-        {% endif %}
-        <span class="kicker-tag">Perfil</span>
-        <h4>{{ a.title }}</h4>
-        <p class="dek">{{ a.region }}</p>
-      </a>
-        {% endfor %}
-      {% endif %}
-    </div>
-  </div>
-
-  <div class="explore-row">
-    <div class="label">
-      <h3>Obras</h3>
-      <p>Libros y publicaciones de autoras y autores puertorriqueños.</p>
-      <a href="{{ '/obras/' | relative_url }}">Ver todas →</a>
-    </div>
-    <div class="explore-cards">
-      {% if site.data.homepage.explore_works and site.data.homepage.explore_works.size > 0 %}
-        {% assign curated_works = site.data.homepage.explore_works | slice: 0, 3 %}
-        {% for n in curated_works %}
-          {% assign w = site.works | where: "slug", n | first %}
-          {% if w %}
-      <a href="{{ w.url | relative_url }}">
-        {% if w.cover and w.cover != blank %}
-        <div class="art-block coral small" style="background:none;padding:0;margin-bottom:0.6rem;"><img src="{{ w.cover | relative_url }}" alt="{{ w.title }}" style="width:100%;height:100%;object-fit:cover;border-radius:3px;" onerror="this.parentElement.outerHTML='&lt;div class=&quot;art-block coral small&quot; style=&quot;margin-bottom:0.6rem;&quot;&gt;&lt;/div&gt;'"></div>
-        {% else %}
-        <div class="art-block coral small" style="margin-bottom:0.6rem;"></div>
-        {% endif %}
-        <span class="kicker-tag">{{ w.genre | default: "Obra" }}</span>
-        <h4>{{ w.title }}</h4>
-        <p class="dek">{{ w.author }}</p>
-      </a>
-          {% endif %}
-        {% endfor %}
-      {% else %}
-        {% assign explore_works = site.works | slice: 0, 3 %}
-        {% for w in explore_works %}
-      <a href="{{ w.url | relative_url }}">
-        {% if w.cover and w.cover != blank %}
-        <div class="art-block coral small" style="background:none;padding:0;margin-bottom:0.6rem;"><img src="{{ w.cover | relative_url }}" alt="{{ w.title }}" style="width:100%;height:100%;object-fit:cover;border-radius:3px;" onerror="this.parentElement.outerHTML='&lt;div class=&quot;art-block coral small&quot; style=&quot;margin-bottom:0.6rem;&quot;&gt;&lt;/div&gt;'"></div>
-        {% else %}
-        <div class="art-block coral small" style="margin-bottom:0.6rem;"></div>
-        {% endif %}
-        <span class="kicker-tag">{{ w.genre | default: "Obra" }}</span>
-        <h4>{{ w.title }}</h4>
-        <p class="dek">{{ w.author }}</p>
-      </a>
-        {% endfor %}
-      {% endif %}
-    </div>
-  </div>
-
-  <div class="explore-row">
-    <div class="label">
-      <h3>Lugares</h3>
-      <p>Librerías, editoriales, bibliotecas y espacios donde vive la literatura puertorriqueña.</p>
-      <a href="{{ '/lugares/' | relative_url }}">Ver todos →</a>
-    </div>
-    <div class="explore-cards">
-      {% if site.data.homepage.explore_places and site.data.homepage.explore_places.size > 0 %}
-        {% assign curated_places = site.data.homepage.explore_places | slice: 0, 3 %}
-        {% for n in curated_places %}
-          {% assign p = site.map_locations | where: "slug", n | first %}
-          {% if p %}
-      <a href="{{ p.url | relative_url }}">
-        {% if p.photo and p.photo != blank %}
-        <div class="art-block coral small" style="background:none;padding:0;margin-bottom:0.6rem;"><img src="{{ p.photo | relative_url }}" alt="{{ p.name }}" style="width:100%;height:100%;object-fit:cover;border-radius:3px;" onerror="this.parentElement.outerHTML='&lt;div class=&quot;art-block coral small&quot; style=&quot;margin-bottom:0.6rem;&quot;&gt;&lt;/div&gt;'"></div>
-        {% else %}
-        <div class="art-block coral small" style="margin-bottom:0.6rem;"></div>
-        {% endif %}
-        <span class="kicker-tag">{{ p.type }}</span>
-        {% assign p_sede_clean = p.sede | replace: " ", "" | strip %}
-        <h4>{{ p.name }}{% if p_sede_clean != blank and p_sede_clean != empty %} — {{ p_sede_clean }}{% endif %}</h4>
-        <p class="dek">{{ p.description | truncate: 60 }}</p>
-      </a>
-          {% endif %}
-        {% endfor %}
-      {% else %}
-        {% assign explore_places = site.map_locations | slice: 0, 3 %}
-        {% for p in explore_places %}
-      <a href="{{ p.url | relative_url }}">
-        {% if p.photo and p.photo != blank %}
-        <div class="art-block coral small" style="background:none;padding:0;margin-bottom:0.6rem;"><img src="{{ p.photo | relative_url }}" alt="{{ p.name }}" style="width:100%;height:100%;object-fit:cover;border-radius:3px;" onerror="this.parentElement.outerHTML='&lt;div class=&quot;art-block coral small&quot; style=&quot;margin-bottom:0.6rem;&quot;&gt;&lt;/div&gt;'"></div>
-        {% else %}
-        <div class="art-block coral small" style="margin-bottom:0.6rem;"></div>
-        {% endif %}
-        <span class="kicker-tag">{{ p.type }}</span>
-        {% assign p_sede_clean = p.sede | replace: " ", "" | strip %}
-        <h4>{{ p.name }}{% if p_sede_clean != blank and p_sede_clean != empty %} — {{ p_sede_clean }}{% endif %}</h4>
-        <p class="dek">{{ p.description | truncate: 60 }}</p>
-      </a>
-        {% endfor %}
-      {% endif %}
-    </div>
-  </div>
-</div>
+{% for block in site.data.homepage_sections.sections %}
+  {% case block.type %}
+    {% when "hero" %}{% include home-hero.html hero_author=block.hero_author sidebar_work=block.sidebar_work sidebar_post=block.sidebar_post %}
+    {% when "mapbanner" %}{% include home-mapbanner.html heading=block.heading %}
+    {% when "twocol" %}{% include home-twocol.html twocol_work=block.twocol_work twocol_place=block.twocol_place %}
+    {% when "videocarousel" %}{% include home-videocarousel.html heading=block.heading %}
+    {% when "promoband" %}{% include home-promoband.html promo_media=block.promo_media %}
+    {% when "explore" %}{% include home-explore.html explore_authors=block.explore_authors explore_works=block.explore_works explore_places=block.explore_places %}
+  {% endcase %}
+{% endfor %}
 
 <div class="site-footer-dark">
   <div class="footer-inner">

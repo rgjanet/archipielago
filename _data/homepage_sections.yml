@@ -1,0 +1,18 @@
+sections:
+  - type: hero
+    hero_author:
+    sidebar_work:
+    sidebar_post:
+  - type: mapbanner
+    heading:
+  - type: twocol
+    twocol_work:
+    twocol_place:
+  - type: videocarousel
+    heading:
+  - type: promoband
+    promo_media:
+  - type: explore
+    explore_authors: []
+    explore_works: []
+    explore_places: []

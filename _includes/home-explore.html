@@ -1,0 +1,134 @@
+<div class="explore-section">
+  <div class="explore-heading">
+    <h2>Explora Archipiélago</h2>
+    <p>Recorre el sitio</p>
+  </div>
+
+  <div class="explore-row">
+    <div class="label">
+      <h3>Autores</h3>
+      <p>Perfiles de escritoras y escritores puertorriqueños, independientes y establecidos.</p>
+      <a href="{{ '/autores/' | relative_url }}">Ver todos →</a>
+    </div>
+    <div class="explore-cards">
+      {% if include.explore_authors and include.explore_authors.size > 0 %}
+        {% assign curated_authors = include.explore_authors | slice: 0, 3 %}
+        {% for n in curated_authors %}
+          {% assign a = site.authors | where: "slug", n | first %}
+          {% if a %}
+      <a href="{{ a.url | relative_url }}">
+        {% if a.photo and a.photo != blank %}
+        <div class="art-block small" style="background:none;padding:0;margin-bottom:0.6rem;"><img src="{{ a.photo | relative_url }}" alt="{{ a.title }}" style="width:100%;height:100%;object-fit:cover;border-radius:3px;" onerror="this.parentElement.outerHTML='&lt;div class=&quot;art-block small&quot; style=&quot;margin-bottom:0.6rem;&quot;&gt;&lt;/div&gt;'"></div>
+        {% else %}
+        <div class="art-block small" style="margin-bottom:0.6rem;"></div>
+        {% endif %}
+        <span class="kicker-tag">Perfil</span>
+        <h4>{{ a.title }}</h4>
+        <p class="dek">{{ a.region }}</p>
+      </a>
+          {% endif %}
+        {% endfor %}
+      {% else %}
+        {% assign explore_authors = site.authors | slice: 0, 3 %}
+        {% for a in explore_authors %}
+      <a href="{{ a.url | relative_url }}">
+        {% if a.photo and a.photo != blank %}
+        <div class="art-block small" style="background:none;padding:0;margin-bottom:0.6rem;"><img src="{{ a.photo | relative_url }}" alt="{{ a.title }}" style="width:100%;height:100%;object-fit:cover;border-radius:3px;" onerror="this.parentElement.outerHTML='&lt;div class=&quot;art-block small&quot; style=&quot;margin-bottom:0.6rem;&quot;&gt;&lt;/div&gt;'"></div>
+        {% else %}
+        <div class="art-block small" style="margin-bottom:0.6rem;"></div>
+        {% endif %}
+        <span class="kicker-tag">Perfil</span>
+        <h4>{{ a.title }}</h4>
+        <p class="dek">{{ a.region }}</p>
+      </a>
+        {% endfor %}
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="explore-row">
+    <div class="label">
+      <h3>Obras</h3>
+      <p>Libros y publicaciones de autoras y autores puertorriqueños.</p>
+      <a href="{{ '/obras/' | relative_url }}">Ver todas →</a>
+    </div>
+    <div class="explore-cards">
+      {% if include.explore_works and include.explore_works.size > 0 %}
+        {% assign curated_works = include.explore_works | slice: 0, 3 %}
+        {% for n in curated_works %}
+          {% assign w = site.works | where: "slug", n | first %}
+          {% if w %}
+      <a href="{{ w.url | relative_url }}">
+        {% if w.cover and w.cover != blank %}
+        <div class="art-block coral small" style="background:none;padding:0;margin-bottom:0.6rem;"><img src="{{ w.cover | relative_url }}" alt="{{ w.title }}" style="width:100%;height:100%;object-fit:cover;border-radius:3px;" onerror="this.parentElement.outerHTML='&lt;div class=&quot;art-block coral small&quot; style=&quot;margin-bottom:0.6rem;&quot;&gt;&lt;/div&gt;'"></div>
+        {% else %}
+        <div class="art-block coral small" style="margin-bottom:0.6rem;"></div>
+        {% endif %}
+        <span class="kicker-tag">{{ w.genre | default: "Obra" }}</span>
+        <h4>{{ w.title }}</h4>
+        <p class="dek">{{ w.author }}</p>
+      </a>
+          {% endif %}
+        {% endfor %}
+      {% else %}
+        {% assign explore_works = site.works | slice: 0, 3 %}
+        {% for w in explore_works %}
+      <a href="{{ w.url | relative_url }}">
+        {% if w.cover and w.cover != blank %}
+        <div class="art-block coral small" style="background:none;padding:0;margin-bottom:0.6rem;"><img src="{{ w.cover | relative_url }}" alt="{{ w.title }}" style="width:100%;height:100%;object-fit:cover;border-radius:3px;" onerror="this.parentElement.outerHTML='&lt;div class=&quot;art-block coral small&quot; style=&quot;margin-bottom:0.6rem;&quot;&gt;&lt;/div&gt;'"></div>
+        {% else %}
+        <div class="art-block coral small" style="margin-bottom:0.6rem;"></div>
+        {% endif %}
+        <span class="kicker-tag">{{ w.genre | default: "Obra" }}</span>
+        <h4>{{ w.title }}</h4>
+        <p class="dek">{{ w.author }}</p>
+      </a>
+        {% endfor %}
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="explore-row">
+    <div class="label">
+      <h3>Lugares</h3>
+      <p>Librerías, editoriales, bibliotecas y espacios donde vive la literatura puertorriqueña.</p>
+      <a href="{{ '/lugares/' | relative_url }}">Ver todos →</a>
+    </div>
+    <div class="explore-cards">
+      {% if include.explore_places and include.explore_places.size > 0 %}
+        {% assign curated_places = include.explore_places | slice: 0, 3 %}
+        {% for n in curated_places %}
+          {% assign p = site.map_locations | where: "slug", n | first %}
+          {% if p %}
+      <a href="{{ p.url | relative_url }}">
+        {% if p.photo and p.photo != blank %}
+        <div class="art-block coral small" style="background:none;padding:0;margin-bottom:0.6rem;"><img src="{{ p.photo | relative_url }}" alt="{{ p.name }}" style="width:100%;height:100%;object-fit:cover;border-radius:3px;" onerror="this.parentElement.outerHTML='&lt;div class=&quot;art-block coral small&quot; style=&quot;margin-bottom:0.6rem;&quot;&gt;&lt;/div&gt;'"></div>
+        {% else %}
+        <div class="art-block coral small" style="margin-bottom:0.6rem;"></div>
+        {% endif %}
+        <span class="kicker-tag">{{ p.type }}</span>
+        {% assign p_sede_clean = p.sede | replace: " ", "" | strip %}
+        <h4>{{ p.name }}{% if p_sede_clean != blank and p_sede_clean != empty %} — {{ p_sede_clean }}{% endif %}</h4>
+        <p class="dek">{{ p.description | truncate: 60 }}</p>
+      </a>
+          {% endif %}
+        {% endfor %}
+      {% else %}
+        {% assign explore_places = site.map_locations | slice: 0, 3 %}
+        {% for p in explore_places %}
+      <a href="{{ p.url | relative_url }}">
+        {% if p.photo and p.photo != blank %}
+        <div class="art-block coral small" style="background:none;padding:0;margin-bottom:0.6rem;"><img src="{{ p.photo | relative_url }}" alt="{{ p.name }}" style="width:100%;height:100%;object-fit:cover;border-radius:3px;" onerror="this.parentElement.outerHTML='&lt;div class=&quot;art-block coral small&quot; style=&quot;margin-bottom:0.6rem;&quot;&gt;&lt;/div&gt;'"></div>
+        {% else %}
+        <div class="art-block coral small" style="margin-bottom:0.6rem;"></div>
+        {% endif %}
+        <span class="kicker-tag">{{ p.type }}</span>
+        {% assign p_sede_clean = p.sede | replace: " ", "" | strip %}
+        <h4>{{ p.name }}{% if p_sede_clean != blank and p_sede_clean != empty %} — {{ p_sede_clean }}{% endif %}</h4>
+        <p class="dek">{{ p.description | truncate: 60 }}</p>
+      </a>
+        {% endfor %}
+      {% endif %}
+    </div>
+  </div>
+</div>

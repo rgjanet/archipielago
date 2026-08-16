@@ -88,6 +88,7 @@ collections:
         name: "media_type"
         widget: "select"
         options: ["Podcast", "Entrevista", "Reseña en video", "Reel"]
+      - { label: "Miniatura / imagen", name: "photo", widget: "image", required: false }
       - { label: "Autor relacionado", name: "related_author", widget: "string", required: false }
       - { label: "URL de audio (mp3)", name: "audio_url", widget: "string", required: false }
       - { label: "URL de video (mp4)", name: "video_url", widget: "string", required: false }
@@ -215,35 +216,6 @@ collections:
   - name: "settings"
     label: "Ajustes del sitio"
     files:
-      - name: "homepage"
-        label: "Destacados de la portada"
-        file: "_data/homepage.yml"
-        fields:
-          - { label: "Autor destacado (hero) — slug exacto", name: "hero_author", widget: "string", required: false, hint: "Slug del autor (de su URL). Vacío = se usa el más reciente" }
-          - { label: "Obra destacada — slug exacto", name: "twocol_work", widget: "string", required: false, hint: "Slug de la obra (de su URL, ej. /obras/mi-obra/ → mi-obra)" }
-          - { label: "Segunda obra destacada — slug exacto", name: "sidebar_work", widget: "string", required: false, hint: "Slug de la obra. Aparece en la tarjeta pequeña bajo el conteo del mapa" }
-          - { label: "Entrada de blog destacada — slug exacto", name: "sidebar_post", widget: "string", required: false, hint: "Slug de la entrada (de su URL, ej. /blog/mi-entrada/ → mi-entrada)" }
-          - { label: "Lugar destacado — slug exacto", name: "twocol_place", widget: "string", required: false, hint: "Slug del lugar (de su URL, ej. /lugares/the-bookmark/ → the-bookmark)" }
-          - { label: "Multimedia destacado — slug exacto", name: "promo_media", widget: "string", required: false, hint: "Slug del episodio (de su URL, ej. /multimedia/mi-episodio/ → mi-episodio)" }
-          - label: "Autores en 'Explora' (hasta 3)"
-            name: "explore_authors"
-            widget: "list"
-            required: false
-            max: 3
-            field: { label: "Autor (slug exacto)", name: "item", widget: "string" }
-          - label: "Obras en 'Explora' (hasta 3)"
-            name: "explore_works"
-            widget: "list"
-            required: false
-            max: 3
-            field: { label: "Obra (slug exacto)", name: "item", widget: "string" }
-          - label: "Lugares en 'Explora' (hasta 3)"
-            name: "explore_places"
-            widget: "list"
-            required: false
-            max: 3
-            field: { label: "Lugar (slug exacto)", name: "item", widget: "string" }
-
       - name: "nav"
         label: "Navegación principal"
         file: "_data/nav.yml"
@@ -255,6 +227,66 @@ collections:
             fields:
               - { label: "Texto", name: "label", widget: "string" }
               - { label: "URL", name: "url", widget: "string", hint: "Interno: /autores/  ·  Externo: https://..." }
+
+      - name: "homepage_sections"
+        label: "Bloques de la portada"
+        file: "_data/homepage_sections.yml"
+        fields:
+          - label: "Bloques"
+            name: "sections"
+            widget: "list"
+            hint: "Arrastra el ícono a la izquierda de cada bloque para reordenarlo. Usa 'Add' para añadir otro bloque (se puede repetir el mismo tipo), o el ícono de papelera para quitar uno."
+            types:
+              - label: "Autor destacado (hero)"
+                name: "hero"
+                widget: "object"
+                fields:
+                  - { label: "Autor destacado — slug exacto", name: "hero_author", widget: "string", required: false, hint: "Slug del autor (de su URL). Vacío = se usa el más reciente" }
+                  - { label: "Obra en la tarjeta lateral — slug exacto", name: "sidebar_work", widget: "string", required: false }
+                  - { label: "Entrada de blog en la tarjeta lateral — slug exacto", name: "sidebar_post", widget: "string", required: false, hint: "Vacío = se usa la más reciente" }
+              - label: "Banda del mapa"
+                name: "mapbanner"
+                widget: "object"
+                fields:
+                  - { label: "Título (opcional)", name: "heading", widget: "string", required: false, hint: "Vacío = 'Explora el archipiélago en el mapa'" }
+              - label: "Obra + Lugar destacados (dos columnas)"
+                name: "twocol"
+                widget: "object"
+                fields:
+                  - { label: "Obra destacada — slug exacto", name: "twocol_work", widget: "string", required: false, hint: "Vacío = se usa la más reciente" }
+                  - { label: "Lugar destacado — slug exacto", name: "twocol_place", widget: "string", required: false, hint: "Vacío = se usa el más reciente" }
+              - label: "Reseñas en video (carrusel)"
+                name: "videocarousel"
+                widget: "object"
+                fields:
+                  - { label: "Título (opcional)", name: "heading", widget: "string", required: false, hint: "Vacío = 'Reseñas en video'" }
+              - label: "Multimedia destacado (banda coral)"
+                name: "promoband"
+                widget: "object"
+                fields:
+                  - { label: "Episodio destacado — slug exacto", name: "promo_media", widget: "string", required: false, hint: "Vacío = se usa el más reciente" }
+              - label: "Explora Archipiélago"
+                name: "explore"
+                widget: "object"
+                fields:
+                  - label: "Autores destacados (hasta 3) — slugs exactos"
+                    name: "explore_authors"
+                    widget: "list"
+                    required: false
+                    max: 3
+                    field: { label: "Autor", name: "item", widget: "string" }
+                  - label: "Obras destacadas (hasta 3) — slugs exactos"
+                    name: "explore_works"
+                    widget: "list"
+                    required: false
+                    max: 3
+                    field: { label: "Obra", name: "item", widget: "string" }
+                  - label: "Lugares destacados (hasta 3) — slugs exactos"
+                    name: "explore_places"
+                    widget: "list"
+                    required: false
+                    max: 3
+                    field: { label: "Lugar", name: "item", widget: "string" }
 
       - name: "footer"
         label: "Pie de página"

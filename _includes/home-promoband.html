@@ -1,0 +1,23 @@
+<div class="promo-band">
+  <div class="promo-inner">
+    <div>
+      <div class="eyebrow-row"><span class="kicker-tag" style="margin:0;">Multimedia</span></div>
+      <h2>Escucha y mira</h2>
+      <p class="dek">Podcast, entrevistas y reseñas en audio y video de todo el archipiélago literario.</p>
+      <a class="cta" href="{{ '/multimedia/' | relative_url }}">Ver todo el multimedia →</a>
+    </div>
+    <div class="promo-right">
+      <div class="art-block gold" style="margin:0;"></div>
+      {% assign latest_media = site.media | where: "slug", include.promo_media | first %}
+      {% unless latest_media %}{% assign latest_media = site.media | first %}{% endunless %}
+      {% if latest_media %}
+      <div>
+        <p class="promo-meta">{{ latest_media.media_type }}</p>
+        <h3>{{ latest_media.title }}</h3>
+        <p>{{ latest_media.related_author }}</p>
+        <a class="cta" href="{{ latest_media.url | relative_url }}" style="margin:0;">Escuchar →</a>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
