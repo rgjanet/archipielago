@@ -1,5 +1,6 @@
 ---
 name: The Bookmark
+sede: Santurce
 type: Librería
 lat: 18.445990902153873
 lng: -66.06724706126857
