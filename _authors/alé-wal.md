@@ -4,7 +4,7 @@ gender: ''
 region: San Juan
 tags:
   - literatura erótica
-photo: ''
+photo: /assets/img/uploads/AleWal.png
 website: ''
 email: alewalautora@gmail.com
 phone: ''
