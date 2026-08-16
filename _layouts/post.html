@@ -7,6 +7,20 @@ layout: default
   <p style="font-family:var(--font-mono);font-size:0.8rem;color:var(--tinta-suave);">
     {{ page.date | date: "%-d de %B, %Y" }}{% if page.author %} · {{ page.author }}{% endif %}
   </p>
+
+  {% if page.audio_url or page.video_url %}
+  <div style="margin-top:1.4rem;">
+    {% include media-toggle.html audio=page.audio_url video=page.video_url %}
+  </div>
+  {% endif %}
+
+  {% if page.embed_code %}
+  <div style="margin-top:1.4rem;max-width:100%;overflow:hidden;">
+    <style>.body-embed iframe { max-width: 100%; }</style>
+    <div class="body-embed">{{ page.embed_code }}</div>
+  </div>
+  {% endif %}
+
   <div class="body" style="margin-top:1.4rem;font-size:1.02rem;line-height:1.75;">
     {{ content }}
   </div>
