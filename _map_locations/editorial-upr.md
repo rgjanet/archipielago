@@ -1,5 +1,5 @@
 ---
-name: Editorial UPR
+name: La Editorial UPR
 sede: ''
 type: Editorial
 lat: 18.39511224154786
