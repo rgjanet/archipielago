@@ -1,6 +1,6 @@
 ---
 title: Libros787.com
-photo: /assets/img/uploads/libros-stacked-blanco_x250.png
+photo: /assets/img/uploads/libros787.png
 website: https://libros787.com/
 email: info@libros787.com
 phone: ''
