@@ -113,6 +113,7 @@ title: Mapa
     {% for loc in site.map_locations %}
     {
       "name": {{ loc.name | jsonify }},
+      "sede": {{ loc.sede | default: "" | jsonify }},
       "type": {{ loc.type | default: "Otro" | jsonify }},
       "lat": {{ loc.lat | default: 0 }},
       "lng": {{ loc.lng | default: 0 }},
