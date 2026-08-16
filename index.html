@@ -2,50 +2,393 @@
 layout: default
 title: Inicio
 ---
-<section class="hero">
-  <span class="eyebrow" style="color:var(--coral);">Literatura puertorriqueña, en un solo lugar</span>
-  <h1>Un archipiélago de voces</h1>
-  <p>
-    Autores, obras y espacios literarios de Puerto Rico — cada uno una isla,
-    todos parte del mismo mapa. Explora quién escribe, qué se publica, y
-    dónde ocurre.
-  </p>
-  <svg class="archipelago-dots" width="220" viewBox="0 0 220 500" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <circle cx="40" cy="60" r="5" fill="#E8603F"/>
-    <circle cx="120" cy="120" r="8" fill="#F2ECDC" fill-opacity="0.5"/>
-    <circle cx="70" cy="220" r="4" fill="#B98F4C"/>
-    <circle cx="160" cy="260" r="6" fill="#E8603F" fill-opacity="0.7"/>
-    <circle cx="30" cy="340" r="7" fill="#F2ECDC" fill-opacity="0.4"/>
-    <circle cx="130" cy="400" r="5" fill="#B98F4C"/>
-    <circle cx="90" cy="460" r="6" fill="#E8603F" fill-opacity="0.6"/>
-  </svg>
-</section>
+<style>
+  .tls-hero-row {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 2rem;
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+  @media (max-width: 860px) { .tls-hero-row { grid-template-columns: 1fr; } }
 
-<section class="section">
-  <span class="eyebrow">Autores destacados</span>
-  <h2>Voces recientes</h2>
-  <div class="card-grid">
-    {% assign featured_authors = site.authors | limit: 6 %}
-    {% for author in featured_authors %}
-    <a class="card" href="{{ author.url | relative_url }}">
-      {% if author.region %}<span class="meta">{{ author.region }}</span>{% endif %}
-      <h3>{{ author.title }}</h3>
-      <p>{{ author.excerpt | strip_html | truncate: 90 }}</p>
-    </a>
-    {% endfor %}
+  .art-block {
+    aspect-ratio: 16/9;
+    border-radius: 3px;
+    display: flex;
+    align-items: flex-end;
+    padding: 1rem;
+    background: linear-gradient(135deg, var(--mar-profundo), var(--mar-medio));
+    margin-bottom: 1rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .art-block .art-label {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    color: rgba(242,236,220,0.7);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .art-block.small { aspect-ratio: 4/3; }
+  .art-block.coral { background: linear-gradient(135deg, var(--coral), #c4482e); }
+  .art-block.gold { background: linear-gradient(135deg, var(--oro-viejo), #8a6a35); }
+
+  .kicker-tag {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--coral);
+    display: block;
+    margin-bottom: 0.4rem;
+  }
+  .kicker-tag .sep { color: var(--oro-viejo); margin: 0 0.4em; }
+  .kicker-tag .type { color: var(--tinta-suave); font-style: italic; text-transform: none; letter-spacing: 0; }
+
+  .tls-hero h1 { font-size: clamp(1.9rem, 4.2vw, 2.7rem); line-height: 1.08; margin: 0 0 0.5rem; }
+  .tls-hero .dek { color: var(--tinta-suave); font-size: 1.02rem; max-width: 46ch; margin: 0 0 0.6rem; }
+  .tls-hero .byline { font-family: var(--font-mono); font-size: 0.75rem; color: var(--tinta-suave); }
+  .tls-hero .byline b { color: var(--tinta); font-weight: 600; font-style: italic; }
+
+  .issue-card {
+    background: var(--papel-alto);
+    border: var(--border);
+    border-radius: 3px;
+    padding: 1.2rem;
+  }
+  .issue-card .art-block { margin-bottom: 0.9rem; }
+  .issue-card .issue-label { font-family: var(--font-mono); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--tinta-suave); margin: 0; }
+  .issue-card .issue-count { font-family: var(--font-display); font-weight: 600; font-size: 1.1rem; margin: 0.2rem 0 0.8rem; }
+  .issue-card a.cta { font-family: var(--font-mono); font-size: 0.78rem; color: var(--coral); text-decoration: none; }
+
+  .divider { border: none; border-top: 1px solid rgba(28,27,24,0.12); max-width: 1140px; margin: 0 auto; }
+
+  .tls-twocol {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+  @media (max-width: 720px) { .tls-twocol { grid-template-columns: 1fr; } }
+  .tls-twocol h2 { font-size: 1.35rem; margin: 0 0 0.4rem; }
+  .tls-twocol .dek { color: var(--tinta-suave); font-size: 0.92rem; margin: 0; }
+
+  .tls-fourcol {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 2rem 2.5rem;
+  }
+  @media (max-width: 860px) { .tls-fourcol { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 480px) { .tls-fourcol { grid-template-columns: 1fr; } }
+  .tls-fourcol h3 { font-size: 1.05rem; margin: 0 0 0.3rem; }
+  .tls-fourcol .dek { color: var(--tinta-suave); font-size: 0.85rem; margin: 0; }
+
+  .promo-band {
+    background: #f4ded6;
+    padding: 2.6rem 2rem;
+  }
+  .promo-inner {
+    max-width: 1140px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
+    align-items: center;
+  }
+  @media (max-width: 720px) { .promo-inner { grid-template-columns: 1fr; } }
+  .promo-inner .eyebrow-row { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.6rem; }
+  .promo-inner h2 { font-size: 1.7rem; margin: 0 0 0.6rem; }
+  .promo-inner .dek { color: var(--tinta-suave); font-size: 0.95rem; max-width: 42ch; }
+  .promo-inner a.cta { font-family: var(--font-mono); font-size: 0.8rem; color: var(--coral); text-decoration: none; display: inline-block; margin-top: 0.6rem; }
+  .promo-right { display: flex; gap: 1.2rem; align-items: center; }
+  .promo-right .art-block { width: 90px; height: 90px; aspect-ratio: unset; margin: 0; flex-shrink: 0; }
+  .promo-right .promo-meta { font-family: var(--font-mono); font-size: 0.7rem; color: var(--tinta-suave); text-transform: uppercase; }
+  .promo-right h3 { font-size: 1.1rem; margin: 0.2rem 0 0.3rem; }
+  .promo-right p { font-size: 0.85rem; color: var(--tinta-suave); margin: 0 0 0.4rem; }
+  .subscribe-row { display: flex; gap: 1.6rem; margin-top: 1.6rem; font-family: var(--font-mono); font-size: 0.78rem; color: var(--tinta-suave); align-items: center; flex-wrap: wrap; }
+
+  .explore-section { padding: 3rem 2rem; }
+  .explore-section > .explore-heading { text-align: center; margin-bottom: 2.4rem; }
+  .explore-section > .explore-heading h2 { font-style: italic; font-weight: 400; font-size: 2rem; margin: 0; }
+  .explore-section > .explore-heading p { font-family: var(--font-mono); font-size: 0.8rem; color: var(--tinta-suave); margin-top: 0.3rem; }
+
+  .explore-row {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    gap: 2rem;
+    max-width: 1140px;
+    margin: 0 auto 2.6rem;
+  }
+  @media (max-width: 780px) { .explore-row { grid-template-columns: 1fr; } }
+  .explore-row .label h3 { font-size: 1.3rem; margin: 0 0 0.5rem; }
+  .explore-row .label p { font-size: 0.88rem; color: var(--tinta-suave); margin: 0 0 0.5rem; }
+  .explore-row .label a { font-family: var(--font-mono); font-size: 0.76rem; color: var(--coral); text-decoration: none; }
+  .explore-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; }
+  @media (max-width: 560px) { .explore-cards { grid-template-columns: 1fr; } }
+  .explore-cards a { text-decoration: none; color: inherit; display: block; }
+  .explore-cards .art-block.small { margin-bottom: 0.6rem; }
+  .explore-cards h4 { font-size: 0.95rem; margin: 0 0 0.2rem; }
+  .explore-cards .dek { font-size: 0.8rem; color: var(--tinta-suave); margin: 0; }
+
+  .site-footer-dark {
+    background: var(--mar-profundo);
+    color: var(--papel);
+    padding: 2.4rem 2rem;
+  }
+  .site-footer-dark .footer-inner { max-width: 1140px; margin: 0 auto; }
+  .site-footer-dark .footer-title {
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+    font-style: italic;
+    border-bottom: 1px solid rgba(242,236,220,0.25);
+    padding-bottom: 1.2rem;
+    margin: 0 0 1.6rem;
+  }
+  .footer-cols { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.6rem; }
+  @media (max-width: 720px) { .footer-cols { grid-template-columns: repeat(2, 1fr); } }
+  .footer-cols h4 {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--oro-viejo);
+    margin: 0 0 0.7rem;
+  }
+  .footer-cols a { display: block; color: rgba(242,236,220,0.85); text-decoration: none; font-size: 0.85rem; margin-bottom: 0.5rem; }
+  .footer-cols a:hover { color: var(--coral); }
+</style>
+
+<div class="tls-hero-row">
+  <div class="tls-hero">
+    <div class="art-block"><span class="art-label">Autor destacado</span></div>
+    {% assign lead = site.authors | where: "title", site.data.homepage.hero_author | first %}
+    {% unless lead %}{% assign lead = site.authors | first %}{% endunless %}
+    {% if lead %}
+    <span class="kicker-tag">{{ lead.region | default: "Puerto Rico" }}<span class="sep">|</span><span class="type">Perfil</span></span>
+    <h1><a href="{{ lead.url | relative_url }}" style="text-decoration:none;color:var(--mar-profundo);">{{ lead.title }}</a></h1>
+    <p class="dek">{{ lead.excerpt | strip_html | truncate: 200 }}</p>
+    <p class="byline">Por <b>Archipiélago</b></p>
+    {% else %}
+    <span class="kicker-tag">Puerto Rico<span class="sep">|</span><span class="type">Perfil</span></span>
+    <h1>Aún no hay autores publicados</h1>
+    <p class="dek">Añade el primero desde <code>/admin</code> para que aparezca aquí como destacado.</p>
+    {% endif %}
   </div>
-  {% if featured_authors.size == 0 %}
-  <p style="color:var(--tinta-suave);font-family:var(--font-mono);font-size:0.85rem;">
-    Aún no hay autores publicados — añade el primero desde /admin.
-  </p>
-  {% endif %}
-</section>
 
-<section class="section" style="border-top:var(--border);">
-  <span class="eyebrow">Explorar</span>
-  <h2>Empieza por el mapa</h2>
-  <p style="max-width:52ch;color:var(--tinta-suave);">
-    Librerías, tertulias y espacios literarios de la isla, marcados uno por uno.
-  </p>
-  <p><a href="{{ '/mapa/' | relative_url }}" style="font-family:var(--font-mono);color:var(--coral);">Ver el mapa completo →</a></p>
-</section>
+  <div class="issue-card">
+    <div class="art-block gold"><span class="art-label">Mapa literario</span></div>
+    <p class="issue-label">Lugares registrados</p>
+    <p class="issue-count">{{ site.map_locations.size }} en el mapa</p>
+    <a class="cta" href="{{ '/mapa/' | relative_url }}">Ver el mapa completo →</a>
+  </div>
+</div>
+
+<hr class="divider">
+
+<div class="tls-twocol">
+  {% assign work = site.works | where: "title", site.data.homepage.twocol_work | first %}
+  {% unless work %}{% assign work = site.works | first %}{% endunless %}
+  {% if work %}
+  <div>
+    <div class="art-block coral small"><span class="art-label">Obra</span></div>
+    <span class="kicker-tag">Obras<span class="sep">|</span><span class="type">Reseña</span></span>
+    <h2><a href="{{ work.url | relative_url }}" style="text-decoration:none;color:inherit;">{{ work.title }}</a></h2>
+    <p class="dek">{{ work.description | default: work.author }}</p>
+  </div>
+  {% endif %}
+  {% assign place = site.map_locations | where: "name", site.data.homepage.twocol_place | first %}
+  {% unless place %}{% assign place = site.map_locations | first %}{% endunless %}
+  {% if place %}
+  <div>
+    <div class="art-block small"><span class="art-label">Lugar</span></div>
+    <span class="kicker-tag">Lugares<span class="sep">|</span><span class="type">{{ place.type }}</span></span>
+    <h2><a href="{{ place.url | relative_url }}" style="text-decoration:none;color:inherit;">{{ place.name }}{% if place.sede %} — {{ place.sede }}{% endif %}</a></h2>
+    <p class="dek">{{ place.description | truncate: 100 }}</p>
+  </div>
+  {% endif %}
+</div>
+
+<hr class="divider">
+
+<div class="tls-fourcol">
+  {% assign authors_rest = site.authors | offset: 1 | limit: 2 %}
+  {% if site.data.homepage.fourcol_authors and site.data.homepage.fourcol_authors.size > 0 %}
+    {% assign fourcol_author_names = site.data.homepage.fourcol_authors %}
+    {% for n in fourcol_author_names %}
+      {% assign a = site.authors | where: "title", n | first %}
+      {% if a %}
+      <div>
+        <span class="kicker-tag">Autores<span class="sep">|</span><span class="type">Perfil</span></span>
+        <h3><a href="{{ a.url | relative_url }}" style="text-decoration:none;color:inherit;">{{ a.title }}</a></h3>
+        <p class="dek">{{ a.excerpt | strip_html | truncate: 70 }}</p>
+      </div>
+      {% endif %}
+    {% endfor %}
+  {% else %}
+    {% for a in authors_rest %}
+    <div>
+      <span class="kicker-tag">Autores<span class="sep">|</span><span class="type">Perfil</span></span>
+      <h3><a href="{{ a.url | relative_url }}" style="text-decoration:none;color:inherit;">{{ a.title }}</a></h3>
+      <p class="dek">{{ a.excerpt | strip_html | truncate: 70 }}</p>
+    </div>
+    {% endfor %}
+  {% endif %}
+  {% if site.data.homepage.fourcol_media and site.data.homepage.fourcol_media.size > 0 %}
+    {% assign fourcol_media_titles = site.data.homepage.fourcol_media %}
+    {% for n in fourcol_media_titles %}
+      {% assign m = site.media | where: "title", n | first %}
+      {% if m %}
+      <div>
+        <span class="kicker-tag">Multimedia<span class="sep">|</span><span class="type">{{ m.media_type }}</span></span>
+        <h3><a href="{{ m.url | relative_url }}" style="text-decoration:none;color:inherit;">{{ m.title }}</a></h3>
+        <p class="dek">{{ m.related_author }}</p>
+      </div>
+      {% endif %}
+    {% endfor %}
+  {% else %}
+    {% assign media_items = site.media | limit: 2 %}
+    {% for m in media_items %}
+    <div>
+      <span class="kicker-tag">Multimedia<span class="sep">|</span><span class="type">{{ m.media_type }}</span></span>
+      <h3><a href="{{ m.url | relative_url }}" style="text-decoration:none;color:inherit;">{{ m.title }}</a></h3>
+      <p class="dek">{{ m.related_author }}</p>
+    </div>
+    {% endfor %}
+  {% endif %}
+</div>
+
+<div class="promo-band">
+  <div class="promo-inner">
+    <div>
+      <div class="eyebrow-row"><span class="kicker-tag" style="margin:0;">Multimedia</span></div>
+      <h2>Escucha y mira</h2>
+      <p class="dek">Podcast, entrevistas y reseñas en audio y video de todo el archipiélago literario.</p>
+      <a class="cta" href="{{ '/multimedia/' | relative_url }}">Ver todo el multimedia →</a>
+      <div class="subscribe-row">
+        <span>Explora por tipo:</span>
+        <span>Podcast</span><span>Entrevista</span><span>Reseña en video</span>
+      </div>
+    </div>
+    <div class="promo-right">
+      <div class="art-block gold" style="margin:0;"></div>
+      {% assign latest_media = site.media | where: "title", site.data.homepage.promo_media | first %}
+      {% unless latest_media %}{% assign latest_media = site.media | first %}{% endunless %}
+      {% if latest_media %}
+      <div>
+        <p class="promo-meta">{{ latest_media.media_type }}</p>
+        <h3>{{ latest_media.title }}</h3>
+        <p>{{ latest_media.related_author }}</p>
+        <a class="cta" href="{{ latest_media.url | relative_url }}" style="margin:0;">Escuchar →</a>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+<div class="explore-section">
+  <div class="explore-heading">
+    <h2>Explora Archipiélago</h2>
+    <p>Recorre el sitio</p>
+  </div>
+
+  <div class="explore-row">
+    <div class="label">
+      <h3>Autores</h3>
+      <p>Perfiles de escritoras y escritores puertorriqueños, independientes y establecidos.</p>
+      <a href="{{ '/autores/' | relative_url }}">Ver todos →</a>
+    </div>
+    <div class="explore-cards">
+      {% if site.data.homepage.explore_authors and site.data.homepage.explore_authors.size > 0 %}
+        {% for n in site.data.homepage.explore_authors %}
+          {% assign a = site.authors | where: "title", n | first %}
+          {% if a %}
+      <a href="{{ a.url | relative_url }}">
+        <div class="art-block small" style="margin-bottom:0.6rem;"></div>
+        <span class="kicker-tag">Perfil</span>
+        <h4>{{ a.title }}</h4>
+        <p class="dek">{{ a.region }}</p>
+      </a>
+          {% endif %}
+        {% endfor %}
+      {% else %}
+        {% assign explore_authors = site.authors | limit: 3 %}
+        {% for a in explore_authors %}
+      <a href="{{ a.url | relative_url }}">
+        <div class="art-block small" style="margin-bottom:0.6rem;"></div>
+        <span class="kicker-tag">Perfil</span>
+        <h4>{{ a.title }}</h4>
+        <p class="dek">{{ a.region }}</p>
+      </a>
+        {% endfor %}
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="explore-row">
+    <div class="label">
+      <h3>Lugares</h3>
+      <p>Librerías, editoriales, bibliotecas y espacios donde vive la literatura puertorriqueña.</p>
+      <a href="{{ '/lugares/' | relative_url }}">Ver todos →</a>
+    </div>
+    <div class="explore-cards">
+      {% if site.data.homepage.explore_places and site.data.homepage.explore_places.size > 0 %}
+        {% for n in site.data.homepage.explore_places %}
+          {% assign p = site.map_locations | where: "name", n | first %}
+          {% if p %}
+      <a href="{{ p.url | relative_url }}">
+        <div class="art-block coral small" style="margin-bottom:0.6rem;"></div>
+        <span class="kicker-tag">{{ p.type }}</span>
+        <h4>{{ p.name }}{% if p.sede %} — {{ p.sede }}{% endif %}</h4>
+        <p class="dek">{{ p.description | truncate: 60 }}</p>
+      </a>
+          {% endif %}
+        {% endfor %}
+      {% else %}
+        {% assign explore_places = site.map_locations | limit: 3 %}
+        {% for p in explore_places %}
+      <a href="{{ p.url | relative_url }}">
+        <div class="art-block coral small" style="margin-bottom:0.6rem;"></div>
+        <span class="kicker-tag">{{ p.type }}</span>
+        <h4>{{ p.name }}{% if p.sede %} — {{ p.sede }}{% endif %}</h4>
+        <p class="dek">{{ p.description | truncate: 60 }}</p>
+      </a>
+        {% endfor %}
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+<div class="site-footer-dark">
+  <div class="footer-inner">
+    <p class="footer-title">Archipiélago</p>
+    <div class="footer-cols">
+      <div>
+        <h4>Explorar</h4>
+        <a href="{{ '/autores/' | relative_url }}">Autores</a>
+        <a href="{{ '/lugares/' | relative_url }}">Lugares</a>
+        <a href="{{ '/mapa/' | relative_url }}">Mapa</a>
+        <a href="{{ '/multimedia/' | relative_url }}">Multimedia</a>
+      </div>
+      <div>
+        <h4>Sobre el proyecto</h4>
+        <a href="{{ '/' | relative_url }}">Qué es Archipiélago</a>
+      </div>
+      <div>
+        <h4>Colabora</h4>
+        <a href="{{ '/admin/' | relative_url }}">Añadir contenido</a>
+      </div>
+      <div>
+        <h4>Síguenos</h4>
+        <a href="#">Instagram</a>
+        <a href="#">Facebook</a>
+      </div>
+    </div>
+  </div>
+</div>

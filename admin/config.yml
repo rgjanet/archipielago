@@ -93,3 +93,35 @@ collections:
         fields:
           - { label: "Plataforma", name: "label", widget: "string", hint: "Ej. Instagram, Facebook, TikTok" }
           - { label: "Enlace o @usuario", name: "url", widget: "string" }
+
+  - name: "settings"
+    label: "Portada"
+    files:
+      - name: "homepage"
+        label: "Destacados de la portada"
+        file: "_data/homepage.yml"
+        fields:
+          - { label: "Autor destacado (hero)", name: "hero_author", widget: "relation", collection: "authors", search_fields: ["title"], value_field: "title", display_fields: ["title"], required: false, hint: "Vacío = se usa el más reciente" }
+          - { label: "Obra destacada", name: "twocol_work", widget: "relation", collection: "works", search_fields: ["title"], value_field: "title", display_fields: ["title"], required: false }
+          - { label: "Lugar destacado", name: "twocol_place", widget: "relation", collection: "map_locations", search_fields: ["name"], value_field: "name", display_fields: ["name"], required: false }
+          - label: "Autores en la fila de cuatro"
+            name: "fourcol_authors"
+            widget: "list"
+            required: false
+            field: { label: "Autor", name: "item", widget: "relation", collection: "authors", search_fields: ["title"], value_field: "title", display_fields: ["title"] }
+          - label: "Multimedia en la fila de cuatro"
+            name: "fourcol_media"
+            widget: "list"
+            required: false
+            field: { label: "Multimedia", name: "item", widget: "relation", collection: "media", search_fields: ["title"], value_field: "title", display_fields: ["title"] }
+          - { label: "Multimedia destacado (banda coral)", name: "promo_media", widget: "relation", collection: "media", search_fields: ["title"], value_field: "title", display_fields: ["title"], required: false }
+          - label: "Autores en 'Explora' (hasta 3)"
+            name: "explore_authors"
+            widget: "list"
+            required: false
+            field: { label: "Autor", name: "item", widget: "relation", collection: "authors", search_fields: ["title"], value_field: "title", display_fields: ["title"] }
+          - label: "Lugares en 'Explora' (hasta 3)"
+            name: "explore_places"
+            widget: "list"
+            required: false
+            field: { label: "Lugar", name: "item", widget: "relation", collection: "map_locations", search_fields: ["name"], value_field: "name", display_fields: ["name"] }
