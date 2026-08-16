@@ -1,6 +1,9 @@
 {% assign v_clean = include.url | replace: " ", "" | strip %}
 {% if v_clean != blank and v_clean != empty %}
-  {% assign is_direct_file = include.url contains ".mp4" or include.url contains ".webm" or include.url contains ".mov" or include.url contains ".ogv" %}
+  {% assign is_direct_file = false %}
+  {% if include.url contains ".mp4" or include.url contains ".webm" or include.url contains ".mov" or include.url contains ".ogv" %}
+    {% assign is_direct_file = true %}
+  {% endif %}
   {% if is_direct_file %}
 <video controls src="{{ include.url }}" style="width:100%;border-radius:3px;margin:1.2rem 0;display:block;"></video>
   {% else %}

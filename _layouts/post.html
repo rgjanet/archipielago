@@ -9,15 +9,14 @@ layout: default
     {{ page.date | date: "%-d" }} de {{ site.data.meses[page_mes_i] }} de {{ page.date | date: "%Y" }}{% if page.author %} · {{ page.author }}{% endif %}
   </p>
 
-  {% if page.photo and page.photo != blank %}
+  {% assign photo_clean = page.photo | replace: " ", "" | strip %}
+  {% if photo_clean != blank and photo_clean != empty %}
   <img src="{{ page.photo | relative_url }}" alt="{{ page.title }}" style="width:100%;border-radius:3px;margin:1.2rem 0;display:block;" onerror="this.style.display='none'">
   {% endif %}
 
   {% assign audio_clean = page.audio_url | replace: " ", "" | strip %}
   {% assign video_clean = page.video_url | replace: " ", "" | strip %}
-  {% assign has_audio = audio_clean != blank and audio_clean != empty %}
-  {% assign has_video = video_clean != blank and video_clean != empty %}
-  {% if has_audio or has_video %}
+  {% if audio_clean != blank and audio_clean != empty or video_clean != blank and video_clean != empty %}
   <div style="margin-top:1.4rem;">
     {% include media-players.html audio=page.audio_url video=page.video_url %}
   </div>

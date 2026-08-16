@@ -16,9 +16,7 @@ layout: default
 
   {% assign audio_clean = page.audio_url | replace: " ", "" | strip %}
   {% assign video_clean = page.video_url | replace: " ", "" | strip %}
-  {% assign has_audio = audio_clean != blank and audio_clean != empty %}
-  {% assign has_video = video_clean != blank and video_clean != empty %}
-  {% if has_audio or has_video %}
+  {% if audio_clean != blank and audio_clean != empty or video_clean != blank and video_clean != empty %}
   <div style="margin-top:1rem;">
     {% include media-players.html audio=page.audio_url video=page.video_url %}
   </div>
