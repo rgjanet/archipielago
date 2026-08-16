@@ -6,7 +6,7 @@ layout: default
   {% assign sede_clean = page.sede | replace: " ", "" | strip %}
   <h1>{{ page.name }}{% if sede_clean != blank and sede_clean != empty %} <span style="font-style:normal;font-size:0.5em;color:var(--tinta-suave);">— {{ sede_clean }}</span>{% endif %}</h1>
 
-  {% if page.photo and page.photo != blank %}
+  {% assign photo_clean = page.photo | replace: " ", "" | strip %}{% if photo_clean != blank and photo_clean != empty %}
   <img src="{{ page.photo | relative_url }}" alt="{{ page.name }}" style="width:100%;max-width:480px;border-radius:3px;margin:1.2rem 0;display:block;" onerror="this.style.display='none'">
   {% endif %}
 
@@ -15,12 +15,12 @@ layout: default
   {% endif %}
 
   <div style="margin-top:1.4rem;display:flex;flex-direction:column;gap:0.3rem;color:var(--tinta-suave);font-size:0.92rem;">
-    {% if page.address and page.address != blank %}<p style="margin:0;">📍 {{ page.address }}</p>{% endif %}
-    {% if page.hours and page.hours != blank %}<p style="margin:0;">🕘 {{ page.hours }}</p>{% endif %}
-    {% if page.phone and page.phone != blank %}<p style="margin:0;">☎ {{ page.phone }}</p>{% endif %}
+    {% assign address_clean = page.address | replace: " ", "" | strip %}{% if address_clean != blank and address_clean != empty %}<p style="margin:0;">📍 {{ page.address }}</p>{% endif %}
+    {% assign hours_clean = page.hours | replace: " ", "" | strip %}{% if hours_clean != blank and hours_clean != empty %}<p style="margin:0;">🕘 {{ page.hours }}</p>{% endif %}
+    {% assign phone_clean = page.phone | replace: " ", "" | strip %}{% if phone_clean != blank and phone_clean != empty %}<p style="margin:0;">☎ {{ page.phone }}</p>{% endif %}
   </div>
 
-  {% if page.website and page.website != blank %}
+  {% assign website_clean = page.website | replace: " ", "" | strip %}{% if website_clean != blank and website_clean != empty %}
   <p style="margin-top:1rem;">
     <a href="{{ page.website }}" target="_blank" rel="noopener" style="color:var(--coral);font-family:var(--font-mono);">
       {{ page.website | remove_first: "https://" | remove_first: "http://" | remove_first: "www." }} →

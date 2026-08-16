@@ -5,18 +5,18 @@ layout: default
   <span class="eyebrow">Autor{% if page.gender == 'f' %}a{% endif %}</span>
   <h1>{{ page.title }}</h1>
   {% if page.region %}<p class="meta" style="font-family:var(--font-mono);color:var(--oro-viejo);">{{ page.region }}</p>{% endif %}
-  {% if page.photo and page.photo != blank %}<img src="{{ page.photo | relative_url }}" alt="{{ page.title }}" style="max-width:280px;border-radius:3px;margin:1.2rem 0;" onerror="this.style.display='none'">{% endif %}
+  {% assign photo_clean = page.photo | replace: " ", "" | strip %}{% if photo_clean != blank and photo_clean != empty %}<img src="{{ page.photo | relative_url }}" alt="{{ page.title }}" style="max-width:280px;border-radius:3px;margin:1.2rem 0;" onerror="this.style.display='none'">{% endif %}
 
   <div class="bio">{{ content }}</div>
 
-  {% if page.phone and page.phone != blank or page.email and page.email != blank %}
+  {% assign wrap_email_clean = page.email | replace: " ", "" | strip %}{% assign wrap_phone_clean = page.phone | replace: " ", "" | strip %}{% if wrap_email_clean != blank and wrap_email_clean != empty or wrap_phone_clean != blank and wrap_phone_clean != empty %}
   <div style="margin-top:1.2rem;display:flex;flex-direction:column;gap:0.3rem;color:var(--tinta-suave);font-size:0.92rem;">
-    {% if page.email and page.email != blank %}<p style="margin:0;">✉ <a href="mailto:{{ page.email }}" style="color:inherit;">{{ page.email }}</a></p>{% endif %}
-    {% if page.phone and page.phone != blank %}<p style="margin:0;">☎ {{ page.phone }}</p>{% endif %}
+    {% assign email_clean = page.email | replace: " ", "" | strip %}{% if email_clean != blank and email_clean != empty %}<p style="margin:0;">✉ <a href="mailto:{{ page.email }}" style="color:inherit;">{{ page.email }}</a></p>{% endif %}
+    {% assign phone_clean = page.phone | replace: " ", "" | strip %}{% if phone_clean != blank and phone_clean != empty %}<p style="margin:0;">☎ {{ page.phone }}</p>{% endif %}
   </div>
   {% endif %}
 
-  {% if page.website and page.website != blank %}
+  {% assign website_clean = page.website | replace: " ", "" | strip %}{% if website_clean != blank and website_clean != empty %}
   <p style="margin-top:0.6rem;">
     <a href="{{ page.website }}" target="_blank" rel="noopener" style="color:var(--coral);font-family:var(--font-mono);">
       {{ page.website | remove_first: "https://" | remove_first: "http://" | remove_first: "www." }} →
@@ -32,7 +32,7 @@ layout: default
   </p>
   {% endif %}
 
-  {% if page.links %}
+  {% if page.links and page.links.size > 0 %}
   <p style="margin-top:0.6rem;">
     {% for link in page.links %}
       <a href="{{ link.url }}" target="_blank" rel="noopener">{{ link.label }}</a>{% unless forloop.last %} · {% endunless %}

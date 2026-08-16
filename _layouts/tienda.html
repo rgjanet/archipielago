@@ -5,11 +5,11 @@ layout: default
   <span class="eyebrow">Librería en línea</span>
   <h1>{{ page.title }}</h1>
 
-  {% if page.photo and page.photo != blank %}
+  {% assign photo_clean = page.photo | replace: " ", "" | strip %}{% if photo_clean != blank and photo_clean != empty %}
   <img src="{{ page.photo | relative_url }}" alt="{{ page.title }}" style="max-width:280px;border-radius:3px;margin:1.2rem 0;" onerror="this.style.display='none'">
   {% endif %}
 
-  {% if page.website and page.website != blank %}
+  {% assign website_clean = page.website | replace: " ", "" | strip %}{% if website_clean != blank and website_clean != empty %}
   <p>
     <a href="{{ page.website }}" target="_blank" rel="noopener" style="color:var(--coral);font-family:var(--font-mono);font-size:0.95rem;">
       Visitar tienda: {{ page.website | remove_first: "https://" | remove_first: "http://" | remove_first: "www." }} →
@@ -19,14 +19,14 @@ layout: default
 
   <div class="bio">{{ content }}</div>
 
-  {% if page.shipping and page.shipping != blank %}
+  {% assign shipping_clean = page.shipping | replace: " ", "" | strip %}{% if shipping_clean != blank and shipping_clean != empty %}
   <p style="margin-top:0.8rem;color:var(--tinta-suave);font-size:0.92rem;">🚚 {{ page.shipping }}</p>
   {% endif %}
 
-  {% if page.email and page.email != blank or page.phone and page.phone != blank %}
+  {% assign wrap_email_clean = page.email | replace: " ", "" | strip %}{% assign wrap_phone_clean = page.phone | replace: " ", "" | strip %}{% if wrap_email_clean != blank and wrap_email_clean != empty or wrap_phone_clean != blank and wrap_phone_clean != empty %}
   <div style="margin-top:0.8rem;display:flex;flex-direction:column;gap:0.3rem;color:var(--tinta-suave);font-size:0.92rem;">
-    {% if page.email and page.email != blank %}<p style="margin:0;">✉ <a href="mailto:{{ page.email }}" style="color:inherit;">{{ page.email }}</a></p>{% endif %}
-    {% if page.phone and page.phone != blank %}<p style="margin:0;">☎ {{ page.phone }}</p>{% endif %}
+    {% assign email_clean = page.email | replace: " ", "" | strip %}{% if email_clean != blank and email_clean != empty %}<p style="margin:0;">✉ <a href="mailto:{{ page.email }}" style="color:inherit;">{{ page.email }}</a></p>{% endif %}
+    {% assign phone_clean = page.phone | replace: " ", "" | strip %}{% if phone_clean != blank and phone_clean != empty %}<p style="margin:0;">☎ {{ page.phone }}</p>{% endif %}
   </div>
   {% endif %}
 
@@ -38,7 +38,7 @@ layout: default
   </p>
   {% endif %}
 
-  {% if page.lugar and page.lugar != blank %}
+  {% assign lugar_clean = page.lugar | replace: " ", "" | strip %}{% if lugar_clean != blank and lugar_clean != empty %}
     {% assign lugar_page = site.map_locations | where: "slug", page.lugar | first %}
     {% if lugar_page %}
     <p style="margin-top:0.8rem;">

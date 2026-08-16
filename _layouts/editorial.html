@@ -4,22 +4,22 @@ layout: default
 <article class="section">
   <span class="eyebrow">Editorial</span>
   <h1>{{ page.title }}</h1>
-  {% if page.founded and page.founded != blank %}<p class="meta" style="font-family:var(--font-mono);color:var(--oro-viejo);">Fundada en {{ page.founded }}</p>{% endif %}
+  {% assign founded_clean = page.founded | replace: " ", "" | strip %}{% if founded_clean != blank and founded_clean != empty %}<p class="meta" style="font-family:var(--font-mono);color:var(--oro-viejo);">Fundada en {{ page.founded }}</p>{% endif %}
 
-  {% if page.photo and page.photo != blank %}
+  {% assign photo_clean = page.photo | replace: " ", "" | strip %}{% if photo_clean != blank and photo_clean != empty %}
   <img src="{{ page.photo | relative_url }}" alt="{{ page.title }}" style="max-width:280px;border-radius:3px;margin:1.2rem 0;" onerror="this.style.display='none'">
   {% endif %}
 
   <div class="bio">{{ content }}</div>
 
-  {% if page.email and page.email != blank or page.phone and page.phone != blank %}
+  {% assign wrap_email_clean = page.email | replace: " ", "" | strip %}{% assign wrap_phone_clean = page.phone | replace: " ", "" | strip %}{% if wrap_email_clean != blank and wrap_email_clean != empty or wrap_phone_clean != blank and wrap_phone_clean != empty %}
   <div style="margin-top:1.2rem;display:flex;flex-direction:column;gap:0.3rem;color:var(--tinta-suave);font-size:0.92rem;">
-    {% if page.email and page.email != blank %}<p style="margin:0;">✉ <a href="mailto:{{ page.email }}" style="color:inherit;">{{ page.email }}</a></p>{% endif %}
-    {% if page.phone and page.phone != blank %}<p style="margin:0;">☎ {{ page.phone }}</p>{% endif %}
+    {% assign email_clean = page.email | replace: " ", "" | strip %}{% if email_clean != blank and email_clean != empty %}<p style="margin:0;">✉ <a href="mailto:{{ page.email }}" style="color:inherit;">{{ page.email }}</a></p>{% endif %}
+    {% assign phone_clean = page.phone | replace: " ", "" | strip %}{% if phone_clean != blank and phone_clean != empty %}<p style="margin:0;">☎ {{ page.phone }}</p>{% endif %}
   </div>
   {% endif %}
 
-  {% if page.website and page.website != blank %}
+  {% assign website_clean = page.website | replace: " ", "" | strip %}{% if website_clean != blank and website_clean != empty %}
   <p style="margin-top:0.6rem;">
     <a href="{{ page.website }}" target="_blank" rel="noopener" style="color:var(--coral);font-family:var(--font-mono);">
       {{ page.website | remove_first: "https://" | remove_first: "http://" | remove_first: "www." }} →
@@ -35,7 +35,7 @@ layout: default
   </p>
   {% endif %}
 
-  {% if page.lugar and page.lugar != blank %}
+  {% assign lugar_clean = page.lugar | replace: " ", "" | strip %}{% if lugar_clean != blank and lugar_clean != empty %}
     {% assign lugar_page = site.map_locations | where: "slug", page.lugar | first %}
     {% if lugar_page %}
     <p style="margin-top:0.8rem;">
@@ -44,7 +44,7 @@ layout: default
     {% endif %}
   {% endif %}
 
-  {% if page.guidelines and page.guidelines != blank %}
+  {% assign guidelines_clean = page.guidelines | replace: " ", "" | strip %}{% if guidelines_clean != blank and guidelines_clean != empty %}
   <h2 style="margin-top:2.4rem;">Lineamientos de sometimiento</h2>
   <div class="body">{{ page.guidelines | markdownify }}</div>
   {% endif %}
