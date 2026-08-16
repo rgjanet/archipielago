@@ -1,0 +1,37 @@
+---
+layout: default
+---
+<article class="section">
+  <span class="eyebrow">{{ page.type | default: "Lugar" }}</span>
+  <h1>{{ page.name }}{% if page.sede %} <span style="font-style:normal;font-size:0.5em;color:var(--tinta-suave);">— {{ page.sede }}</span>{% endif %}</h1>
+
+  {% if page.content and page.content != "" %}
+  <div class="body">{{ content }}</div>
+  {% endif %}
+
+  <div style="margin-top:1.4rem;display:flex;flex-direction:column;gap:0.3rem;color:var(--tinta-suave);font-size:0.92rem;">
+    {% if page.address %}<p style="margin:0;">📍 {{ page.address }}</p>{% endif %}
+    {% if page.hours %}<p style="margin:0;">🕘 {{ page.hours }}</p>{% endif %}
+    {% if page.phone %}<p style="margin:0;">☎ {{ page.phone }}</p>{% endif %}
+  </div>
+
+  {% if page.website %}
+  <p style="margin-top:1rem;">
+    <a href="{{ page.website }}" target="_blank" rel="noopener" style="color:var(--coral);font-family:var(--font-mono);">
+      {{ page.website | remove_first: "https://" | remove_first: "http://" | remove_first: "www." }} →
+    </a>
+  </p>
+  {% endif %}
+
+  {% if page.redes and page.redes.size > 0 %}
+  <p style="margin-top:0.6rem;font-family:var(--font-mono);font-size:0.85rem;">
+    {% for r in page.redes %}
+      <a href="{{ r.url }}" target="_blank" rel="noopener" style="margin-right:1rem;">{{ r.label }}</a>
+    {% endfor %}
+  </p>
+  {% endif %}
+
+  <p style="margin-top:2rem;">
+    <a href="{{ '/mapa/' | relative_url }}" style="font-family:var(--font-mono);font-size:0.85rem;">← Ver en el mapa</a>
+  </p>
+</article>

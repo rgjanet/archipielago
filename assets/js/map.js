@@ -49,7 +49,10 @@ document.addEventListener('DOMContentLoaded', function () {
     var container = document.createElement('div');
     container.className = 'pin-popup';
     var html = '';
-    html += '<p class="name">' + escapeHtml(displayName(loc)) + '</p>';
+    var nameHtml = escapeHtml(displayName(loc));
+    html += loc.page_url
+      ? '<p class="name"><a href="' + loc.page_url + '" style="color:var(--mar-profundo);text-decoration:none;">' + nameHtml + '</a></p>'
+      : '<p class="name">' + nameHtml + '</p>';
     if (loc.type) html += '<p class="type">' + escapeHtml(loc.type) + '</p>';
     if (loc.description) html += '<p class="desc">' + escapeHtml(loc.description) + '</p>';
     if (loc.address) html += '<p class="detail">' + escapeHtml(loc.address) + '</p>';
@@ -84,6 +87,8 @@ document.addEventListener('DOMContentLoaded', function () {
     if (el) el.textContent = n === 1 ? '1 lugar' : n + ' lugares';
   }
 
+  // Group entries that share the same "name" (multi-location bookstores/editorials)
+  // so they appear as one labeled group in the sidebar instead of scattered separately.
   function groupByName(list) {
     var groups = [];
     var byName = {};
@@ -125,7 +130,7 @@ document.addEventListener('DOMContentLoaded', function () {
         var card = document.createElement('div');
         card.className = 'place-card' + (loc._id === activeId ? ' active' : '');
         card.dataset.id = loc._id;
-        card.innerHTML = '<p class="name">' + escapeHtml(displayName(loc)) + '</p>' +
+        card.innerHTML = '<p class="name">' + (loc.page_url ? '<a href="' + loc.page_url + '" style="color:inherit;text-decoration:none;">' + escapeHtml(displayName(loc)) + '</a>' : escapeHtml(displayName(loc))) + '</p>' +
           '<p class="type">' + escapeHtml(loc.type) + '</p>' +
           '<p class="desc">' + escapeHtml(loc.description || '') + '</p>';
         card.addEventListener('click', function () {

@@ -1,0 +1,22 @@
+---
+layout: default
+title: Lugares
+---
+<section class="section">
+  <span class="eyebrow">Directorio</span>
+  <h1>Lugares</h1>
+  <p style="max-width:52ch;color:var(--tinta-suave);">
+    Librerías, editoriales, bibliotecas y espacios literarios de la isla.
+    Para verlos todos juntos en contexto, visita el <a href="{{ '/mapa/' | relative_url }}" style="color:var(--coral);">mapa</a>.
+  </p>
+
+  <div class="card-grid">
+    {% for loc in site.map_locations %}
+    <a class="card" href="{{ loc.url | relative_url }}">
+      <span class="meta">{{ loc.type }}</span>
+      <h3>{{ loc.name }}{% if loc.sede %} — {{ loc.sede }}{% endif %}</h3>
+      <p>{{ loc.description | truncate: 90 }}</p>
+    </a>
+    {% endfor %}
+  </div>
+</section>

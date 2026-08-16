@@ -21,7 +21,8 @@ collections:
     output: true
     permalink: /multimedia/:slug/
   map_locations:
-    output: false
+    output: true
+    permalink: /lugares/:slug/
 
 defaults:
   - scope:
@@ -39,6 +40,11 @@ defaults:
       type: media
     values:
       layout: media
+  - scope:
+      path: ""
+      type: map_locations
+    values:
+      layout: place
 
 plugins:
   - jekyll-relative-links
