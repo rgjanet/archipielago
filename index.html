@@ -345,7 +345,7 @@ title: Inicio
           {% endif %}
         {% endfor %}
       {% else %}
-        {% assign explore_authors = site.authors | limit: 3 %}
+        {% assign explore_authors = site.authors | slice: 0, 3 %}
         {% for a in explore_authors %}
       <a href="{{ a.url | relative_url }}">
         {% if a.photo and a.photo != blank %}
@@ -387,7 +387,7 @@ title: Inicio
           {% endif %}
         {% endfor %}
       {% else %}
-        {% assign explore_works = site.works | limit: 3 %}
+        {% assign explore_works = site.works | slice: 0, 3 %}
         {% for w in explore_works %}
       <a href="{{ w.url | relative_url }}">
         {% if w.cover and w.cover != blank %}
@@ -430,7 +430,7 @@ title: Inicio
           {% endif %}
         {% endfor %}
       {% else %}
-        {% assign explore_places = site.map_locations | limit: 3 %}
+        {% assign explore_places = site.map_locations | slice: 0, 3 %}
         {% for p in explore_places %}
       <a href="{{ p.url | relative_url }}">
         {% if p.photo and p.photo != blank %}
