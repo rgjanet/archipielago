@@ -5,7 +5,7 @@ author: ''
 description: Leo Leo Libros, en San Juan, ofrece al público los mejores libros infantiles en español para todas las etapas de la niñez, con miras a desarrollar lectores en Puerto Rico.
 photo: /assets/img/uploads/leoleolibros.png
 related_author: ''
-related_place: Leo Leo Libros
+related_place: leo-leo-libros
 audio_url: ''
 video_url: ''
 embed_code: ''
