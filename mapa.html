@@ -122,7 +122,8 @@ title: Mapa
       "website": {{ loc.website | default: "" | jsonify }},
       "phone": {{ loc.phone | default: "" | jsonify }},
       "hours": {{ loc.hours | default: "" | jsonify }},
-      "address": {{ loc.address | default: "" | jsonify }}
+      "address": {{ loc.address | default: "" | jsonify }},
+      "redes": {{ loc.redes | default: empty | jsonify }}
     }{% unless forloop.last %},{% endunless %}
     {% endfor %}
   ];
