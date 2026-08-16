@@ -1,5 +1,7 @@
 <div class="video-carousel-section">
-  {% assign video_reviews = site.media | where_exp: "m", "m.media_type == 'Reseña en video' or m.media_type == 'Reel'" %}
+  {% assign vc_reviews_only = site.media | where: "media_type", "Reseña en video" %}
+  {% assign vc_reels_only = site.media | where: "media_type", "Reel" %}
+  {% assign video_reviews = vc_reviews_only | concat: vc_reels_only %}
   {% if video_reviews.size > 0 %}
   <div class="vc-heading">
     <h2>{{ include.heading | default: "Reseñas y reels en video" }}</h2>
