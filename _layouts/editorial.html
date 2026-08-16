@@ -6,48 +6,54 @@ layout: default
   <h1>{{ page.title }}</h1>
   {% assign founded_clean = page.founded | replace: " ", "" | strip %}{% if founded_clean != blank and founded_clean != empty %}<p class="meta" style="font-family:var(--font-mono);color:var(--oro-viejo);">Fundada en {{ page.founded }}</p>{% endif %}
 
-  {% assign photo_clean = page.photo | replace: " ", "" | strip %}{% if photo_clean != blank and photo_clean != empty %}
-  <img src="{{ page.photo | relative_url }}" alt="{{ page.title }}" style="max-width:280px;border-radius:3px;margin:1.2rem 0;" onerror="this.style.display='none'">
-  {% endif %}
+  <div class="profile-layout">
+    <div>
+      {% assign photo_clean = page.photo | replace: " ", "" | strip %}{% if photo_clean != blank and photo_clean != empty %}
+      <img src="{{ page.photo | relative_url }}" alt="{{ page.title }}" style="width:100%;border-radius:3px;display:block;" onerror="this.parentElement.style.display='none'">
+      {% endif %}
+    </div>
 
-  <div class="bio">{{ content }}</div>
+    <div style="min-width:0;">
+      <div class="bio">{{ content }}</div>
 
-  {% assign wrap_email_clean = page.email | replace: " ", "" | strip %}{% assign wrap_phone_clean = page.phone | replace: " ", "" | strip %}{% if wrap_email_clean != blank and wrap_email_clean != empty or wrap_phone_clean != blank and wrap_phone_clean != empty %}
-  <div style="margin-top:1.2rem;display:flex;flex-direction:column;gap:0.3rem;color:var(--tinta-suave);font-size:0.92rem;">
-    {% assign email_clean = page.email | replace: " ", "" | strip %}{% if email_clean != blank and email_clean != empty %}<p style="margin:0;">✉ <a href="mailto:{{ page.email }}" style="color:inherit;">{{ page.email }}</a></p>{% endif %}
-    {% assign phone_clean = page.phone | replace: " ", "" | strip %}{% if phone_clean != blank and phone_clean != empty %}<p style="margin:0;">☎ {{ page.phone }}</p>{% endif %}
+      {% assign wrap_email_clean = page.email | replace: " ", "" | strip %}{% assign wrap_phone_clean = page.phone | replace: " ", "" | strip %}{% if wrap_email_clean != blank and wrap_email_clean != empty or wrap_phone_clean != blank and wrap_phone_clean != empty %}
+      <div style="margin-top:1.2rem;display:flex;flex-direction:column;gap:0.3rem;color:var(--tinta-suave);font-size:0.92rem;">
+        {% assign email_clean = page.email | replace: " ", "" | strip %}{% if email_clean != blank and email_clean != empty %}<p style="margin:0;">✉ <a href="mailto:{{ page.email }}" style="color:inherit;">{{ page.email }}</a></p>{% endif %}
+        {% assign phone_clean = page.phone | replace: " ", "" | strip %}{% if phone_clean != blank and phone_clean != empty %}<p style="margin:0;">☎ {{ page.phone }}</p>{% endif %}
+      </div>
+      {% endif %}
+
+      {% assign website_clean = page.website | replace: " ", "" | strip %}{% if website_clean != blank and website_clean != empty %}
+      <p style="margin-top:0.6rem;">
+        <a href="{{ page.website }}" target="_blank" rel="noopener" style="color:var(--coral);font-family:var(--font-mono);">
+          {{ page.website | remove_first: "https://" | remove_first: "http://" | remove_first: "www." }} →
+        </a>
+      </p>
+      {% endif %}
+
+      {% if page.redes and page.redes.size > 0 %}
+      <p style="margin-top:0.6rem;font-family:var(--font-mono);font-size:0.85rem;">
+        {% for r in page.redes %}
+          <a href="{{ r.url }}" target="_blank" rel="noopener" style="margin-right:1rem;">{{ r.label }}</a>
+        {% endfor %}
+      </p>
+      {% endif %}
+
+      {% assign lugar_clean = page.lugar | replace: " ", "" | strip %}{% if lugar_clean != blank and lugar_clean != empty %}
+        {% assign lugar_page = site.map_locations | where: "slug", page.lugar | first %}
+        {% if lugar_page %}
+        <p style="margin-top:0.8rem;">
+          <a href="{{ lugar_page.url | relative_url }}" style="font-family:var(--font-mono);font-size:0.85rem;color:var(--coral);">📍 Ver en el mapa: {{ lugar_page.name }} →</a>
+        </p>
+        {% endif %}
+      {% endif %}
+
+      {% assign guidelines_clean = page.guidelines | replace: " ", "" | strip %}{% if guidelines_clean != blank and guidelines_clean != empty %}
+      <h2 style="margin-top:1.6rem;font-size:1.2rem;">Lineamientos de sometimiento</h2>
+      <div class="body">{{ page.guidelines | markdownify }}</div>
+      {% endif %}
+    </div>
   </div>
-  {% endif %}
-
-  {% assign website_clean = page.website | replace: " ", "" | strip %}{% if website_clean != blank and website_clean != empty %}
-  <p style="margin-top:0.6rem;">
-    <a href="{{ page.website }}" target="_blank" rel="noopener" style="color:var(--coral);font-family:var(--font-mono);">
-      {{ page.website | remove_first: "https://" | remove_first: "http://" | remove_first: "www." }} →
-    </a>
-  </p>
-  {% endif %}
-
-  {% if page.redes and page.redes.size > 0 %}
-  <p style="margin-top:0.6rem;font-family:var(--font-mono);font-size:0.85rem;">
-    {% for r in page.redes %}
-      <a href="{{ r.url }}" target="_blank" rel="noopener" style="margin-right:1rem;">{{ r.label }}</a>
-    {% endfor %}
-  </p>
-  {% endif %}
-
-  {% assign lugar_clean = page.lugar | replace: " ", "" | strip %}{% if lugar_clean != blank and lugar_clean != empty %}
-    {% assign lugar_page = site.map_locations | where: "slug", page.lugar | first %}
-    {% if lugar_page %}
-    <p style="margin-top:0.8rem;">
-      <a href="{{ lugar_page.url | relative_url }}" style="font-family:var(--font-mono);font-size:0.85rem;color:var(--coral);">📍 Ver en el mapa: {{ lugar_page.name }} →</a>
-    </p>
-    {% endif %}
-  {% endif %}
-
-  {% assign guidelines_clean = page.guidelines | replace: " ", "" | strip %}{% if guidelines_clean != blank and guidelines_clean != empty %}
-  <h2 style="margin-top:2.4rem;">Lineamientos de sometimiento</h2>
-  <div class="body">{{ page.guidelines | markdownify }}</div>
-  {% endif %}
 
   {% assign published_works = site.works | where: "publisher", page.title %}
   {% if published_works.size > 0 %}
@@ -55,7 +61,7 @@ layout: default
   <div class="card-grid">
     {% for work in published_works %}
     <a class="card" href="{{ work.url | relative_url }}">
-      {% if work.cover and work.cover != blank %}
+      {% assign wp_cover_clean = work.cover | replace: " ", "" | strip %}{% if wp_cover_clean != blank and wp_cover_clean != empty %}
       <img src="{{ work.cover | relative_url }}" alt="{{ work.title }}" style="width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:3px;margin-bottom:0.6rem;" onerror="this.style.display='none'">
       {% endif %}
       <span class="meta">{{ work.author }}{% if work.year %} · {{ work.year }}{% endif %}</span>

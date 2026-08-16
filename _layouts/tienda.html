@@ -5,45 +5,51 @@ layout: default
   <span class="eyebrow">Librería en línea</span>
   <h1>{{ page.title }}</h1>
 
-  {% assign photo_clean = page.photo | replace: " ", "" | strip %}{% if photo_clean != blank and photo_clean != empty %}
-  <img src="{{ page.photo | relative_url }}" alt="{{ page.title }}" style="max-width:280px;border-radius:3px;margin:1.2rem 0;" onerror="this.style.display='none'">
-  {% endif %}
+  <div class="profile-layout">
+    <div>
+      {% assign photo_clean = page.photo | replace: " ", "" | strip %}{% if photo_clean != blank and photo_clean != empty %}
+      <img src="{{ page.photo | relative_url }}" alt="{{ page.title }}" style="width:100%;border-radius:3px;display:block;" onerror="this.parentElement.style.display='none'">
+      {% endif %}
+    </div>
 
-  {% assign website_clean = page.website | replace: " ", "" | strip %}{% if website_clean != blank and website_clean != empty %}
-  <p>
-    <a href="{{ page.website }}" target="_blank" rel="noopener" style="color:var(--coral);font-family:var(--font-mono);font-size:0.95rem;">
-      Visitar tienda: {{ page.website | remove_first: "https://" | remove_first: "http://" | remove_first: "www." }} →
-    </a>
-  </p>
-  {% endif %}
+    <div style="min-width:0;">
+      {% assign website_clean = page.website | replace: " ", "" | strip %}{% if website_clean != blank and website_clean != empty %}
+      <p style="margin-top:0;">
+        <a href="{{ page.website }}" target="_blank" rel="noopener" style="color:var(--coral);font-family:var(--font-mono);font-size:0.95rem;">
+          Visitar tienda: {{ page.website | remove_first: "https://" | remove_first: "http://" | remove_first: "www." }} →
+        </a>
+      </p>
+      {% endif %}
 
-  <div class="bio">{{ content }}</div>
+      <div class="bio">{{ content }}</div>
 
-  {% assign shipping_clean = page.shipping | replace: " ", "" | strip %}{% if shipping_clean != blank and shipping_clean != empty %}
-  <p style="margin-top:0.8rem;color:var(--tinta-suave);font-size:0.92rem;">🚚 {{ page.shipping }}</p>
-  {% endif %}
+      {% assign shipping_clean = page.shipping | replace: " ", "" | strip %}{% if shipping_clean != blank and shipping_clean != empty %}
+      <p style="margin-top:0.8rem;color:var(--tinta-suave);font-size:0.92rem;">🚚 {{ page.shipping }}</p>
+      {% endif %}
 
-  {% assign wrap_email_clean = page.email | replace: " ", "" | strip %}{% assign wrap_phone_clean = page.phone | replace: " ", "" | strip %}{% if wrap_email_clean != blank and wrap_email_clean != empty or wrap_phone_clean != blank and wrap_phone_clean != empty %}
-  <div style="margin-top:0.8rem;display:flex;flex-direction:column;gap:0.3rem;color:var(--tinta-suave);font-size:0.92rem;">
-    {% assign email_clean = page.email | replace: " ", "" | strip %}{% if email_clean != blank and email_clean != empty %}<p style="margin:0;">✉ <a href="mailto:{{ page.email }}" style="color:inherit;">{{ page.email }}</a></p>{% endif %}
-    {% assign phone_clean = page.phone | replace: " ", "" | strip %}{% if phone_clean != blank and phone_clean != empty %}<p style="margin:0;">☎ {{ page.phone }}</p>{% endif %}
+      {% assign wrap_email_clean = page.email | replace: " ", "" | strip %}{% assign wrap_phone_clean = page.phone | replace: " ", "" | strip %}{% if wrap_email_clean != blank and wrap_email_clean != empty or wrap_phone_clean != blank and wrap_phone_clean != empty %}
+      <div style="margin-top:0.8rem;display:flex;flex-direction:column;gap:0.3rem;color:var(--tinta-suave);font-size:0.92rem;">
+        {% assign email_clean = page.email | replace: " ", "" | strip %}{% if email_clean != blank and email_clean != empty %}<p style="margin:0;">✉ <a href="mailto:{{ page.email }}" style="color:inherit;">{{ page.email }}</a></p>{% endif %}
+        {% assign phone_clean = page.phone | replace: " ", "" | strip %}{% if phone_clean != blank and phone_clean != empty %}<p style="margin:0;">☎ {{ page.phone }}</p>{% endif %}
+      </div>
+      {% endif %}
+
+      {% if page.redes and page.redes.size > 0 %}
+      <p style="margin-top:0.6rem;font-family:var(--font-mono);font-size:0.85rem;">
+        {% for r in page.redes %}
+          <a href="{{ r.url }}" target="_blank" rel="noopener" style="margin-right:1rem;">{{ r.label }}</a>
+        {% endfor %}
+      </p>
+      {% endif %}
+
+      {% assign lugar_clean = page.lugar | replace: " ", "" | strip %}{% if lugar_clean != blank and lugar_clean != empty %}
+        {% assign lugar_page = site.map_locations | where: "slug", page.lugar | first %}
+        {% if lugar_page %}
+        <p style="margin-top:0.8rem;">
+          <a href="{{ lugar_page.url | relative_url }}" style="font-family:var(--font-mono);font-size:0.85rem;color:var(--coral);">📍 También tienen tienda física: {{ lugar_page.name }} →</a>
+        </p>
+        {% endif %}
+      {% endif %}
+    </div>
   </div>
-  {% endif %}
-
-  {% if page.redes and page.redes.size > 0 %}
-  <p style="margin-top:0.6rem;font-family:var(--font-mono);font-size:0.85rem;">
-    {% for r in page.redes %}
-      <a href="{{ r.url }}" target="_blank" rel="noopener" style="margin-right:1rem;">{{ r.label }}</a>
-    {% endfor %}
-  </p>
-  {% endif %}
-
-  {% assign lugar_clean = page.lugar | replace: " ", "" | strip %}{% if lugar_clean != blank and lugar_clean != empty %}
-    {% assign lugar_page = site.map_locations | where: "slug", page.lugar | first %}
-    {% if lugar_page %}
-    <p style="margin-top:0.8rem;">
-      <a href="{{ lugar_page.url | relative_url }}" style="font-family:var(--font-mono);font-size:0.85rem;color:var(--coral);">📍 También tienen tienda física: {{ lugar_page.name }} →</a>
-    </p>
-    {% endif %}
-  {% endif %}
 </article>
