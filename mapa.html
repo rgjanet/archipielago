@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: full
 title: Mapa
 ---
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" />
@@ -7,12 +7,7 @@ title: Mapa
   #map-app {
     display: grid;
     grid-template-columns: 340px 1fr;
-    height: 78vh;
-    min-height: 560px;
-    border: var(--border);
-    border-radius: var(--radius);
-    overflow: hidden;
-    margin-top: 1.4rem;
+    height: 100vh;
   }
   #map-sidebar {
     background: var(--mar-profundo);
@@ -22,11 +17,35 @@ title: Mapa
     overflow: hidden;
     border-right: 6px solid var(--coral);
   }
+  #map-header {
+    padding: 20px 20px 14px;
+    border-bottom: 1px solid rgba(242,236,220,0.18);
+  }
+  #map-header .back {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: rgba(242,236,220,0.7);
+    text-decoration: none;
+    display: inline-block;
+    margin-bottom: 10px;
+  }
+  #map-header .back:hover { color: var(--coral); }
+  #map-header h1 {
+    font-size: 1.5rem;
+    color: var(--papel-alto);
+    margin: 0 0 6px;
+  }
+  #map-header p {
+    font-size: 0.82rem;
+    color: rgba(242,236,220,0.75);
+    margin: 0;
+    line-height: 1.5;
+  }
   #map-filter {
     display: flex;
     flex-wrap: wrap;
     gap: 0.4rem;
-    padding: 16px 20px;
+    padding: 14px 20px;
     border-bottom: 1px solid rgba(242,236,220,0.18);
   }
   #map-filter button {
@@ -69,28 +88,25 @@ title: Mapa
   .pin-popup .desc { font-size: 0.85rem; line-height: 1.5; margin: 0 0 8px; }
   .pin-popup a { font-family: var(--font-mono); font-size: 0.78rem; color: var(--coral); }
   @media (max-width: 720px) {
-    #map-app { grid-template-columns: 1fr; grid-template-rows: 40vh 45vh; height: auto; }
+    #map-app { grid-template-columns: 1fr; grid-template-rows: 42vh 58vh; }
     #map-sidebar { border-right: none; border-bottom: 6px solid var(--coral); }
+    html, body { overflow: auto; }
   }
 </style>
 
-<section class="section">
-  <span class="eyebrow">Archipiélago</span>
-  <h1>El mapa literario</h1>
-  <p style="max-width:56ch;color:var(--tinta-suave);">
-    Librerías, casas editoriales, tertulias y lugares donde se hace y se
-    lee literatura puertorriqueña — añadidos desde el CMS, sin tocar código.
-  </p>
-
-  <div id="map-app">
-    <div id="map-sidebar">
-      <div id="map-filter"></div>
-      <div id="map-list-wrap"><div id="map-list"></div></div>
-      <div id="map-count">0 lugares</div>
+<div id="map-app">
+  <div id="map-sidebar">
+    <div id="map-header">
+      <a class="back" href="{{ '/' | relative_url }}">← Archipiélago</a>
+      <h1>El mapa literario</h1>
+      <p>Librerías, editoriales, tertulias y espacios de la isla.</p>
     </div>
-    <div id="lit-map"></div>
+    <div id="map-filter"></div>
+    <div id="map-list-wrap"><div id="map-list"></div></div>
+    <div id="map-count">0 lugares</div>
   </div>
-</section>
+  <div id="lit-map"></div>
+</div>
 
 <script>
   window.MAP_LOCATIONS = [
