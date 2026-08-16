@@ -6,6 +6,46 @@
   <title>Archipiélago · Admin</title>
 </head>
 <body>
-  <script type="module" src="https://unpkg.com/@sveltia/cms@^0.113.5/dist/sveltia-cms.js"></script>
+  <script type="module">
+    import CMS from 'https://unpkg.com/@sveltia/cms@^0.113.5/dist/sveltia-cms.js';
+
+    // Estos tres botones aparecen en la barra de herramientas de cualquier
+    // campo de texto tipo "markdown", permitiendo insertar audio, video o
+    // una imagen justo donde esté el cursor -- sin escribir código.
+
+    CMS.registerEditorComponent({
+      id: 'audio-embed',
+      label: 'Audio',
+      fields: [
+        { name: 'url', label: 'URL del audio (mp3)', widget: 'string' },
+      ],
+      pattern: /{% include audio-embed\.html url="(?<url>.*?)" %}/,
+      toBlock: ({ url }) => `{% include audio-embed.html url="${url}" %}`,
+      toPreview: ({ url }) => `🎧 Audio: ${url}`,
+    });
+
+    CMS.registerEditorComponent({
+      id: 'video-embed',
+      label: 'Video',
+      fields: [
+        { name: 'url', label: 'URL del video (mp4, o enlace de Internet Archive)', widget: 'string' },
+      ],
+      pattern: /{% include video-embed\.html url="(?<url>.*?)" %}/,
+      toBlock: ({ url }) => `{% include video-embed.html url="${url}" %}`,
+      toPreview: ({ url }) => `🎬 Video: ${url}`,
+    });
+
+    CMS.registerEditorComponent({
+      id: 'image-embed',
+      label: 'Imagen',
+      fields: [
+        { name: 'url', label: 'Imagen', widget: 'image' },
+        { name: 'alt', label: 'Texto alternativo', widget: 'string', required: false },
+      ],
+      pattern: /{% include image-embed\.html url="(?<url>.*?)" alt="(?<alt>.*?)" %}/,
+      toBlock: ({ url, alt }) => `{% include image-embed.html url="${url}" alt="${alt || ''}" %}`,
+      toPreview: ({ url, alt }) => `<img src="${url}" alt="${alt || ''}" style="max-width:100%;">`,
+    });
+  </script>
 </body>
 </html>
