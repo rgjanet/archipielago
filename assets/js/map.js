@@ -31,6 +31,10 @@ document.addEventListener('DOMContentLoaded', function () {
     return d.innerHTML;
   }
 
+  function displayName(loc) {
+    return loc.sede ? loc.name + ' — ' + loc.sede : loc.name;
+  }
+
   var markers = {};
   var activeId = null;
 
@@ -44,7 +48,7 @@ document.addEventListener('DOMContentLoaded', function () {
   function openPopup(loc, marker) {
     var container = document.createElement('div');
     container.className = 'pin-popup';
-    var html = '<p class="name">' + escapeHtml(loc.name) + '</p>' +
+    var html = '<p class="name">' + escapeHtml(displayName(loc)) + '</p>' +
       '<p class="type">' + escapeHtml(loc.type) + '</p>' +
       (loc.description ? '<p class="desc">' + escapeHtml(loc.description) + '</p>' : '');
     if (loc.url) html += '<a href="' + loc.url + '" target="_blank" rel="noopener">Más info →</a>';
@@ -65,6 +69,25 @@ document.addEventListener('DOMContentLoaded', function () {
     if (el) el.textContent = n === 1 ? '1 lugar' : n + ' lugares';
   }
 
+  // Group entries that share the same "name" (multi-location bookstores/editorials)
+  // so they appear as one labeled group in the sidebar instead of scattered separately.
+  function groupByName(list) {
+    var groups = [];
+    var byName = {};
+    list.forEach(function (loc) {
+      if (!byName[loc.name]) {
+        byName[loc.name] = { name: loc.name, items: [] };
+        groups.push(byName[loc.name]);
+      }
+      byName[loc.name].items.push(loc);
+    });
+    groups.sort(function (a, b) { return a.name.localeCompare(b.name, 'es'); });
+    groups.forEach(function (g) {
+      g.items.sort(function (a, b) { return (a.sede || '').localeCompare(b.sede || '', 'es'); });
+    });
+    return groups;
+  }
+
   function renderList(filterType) {
     var list = document.getElementById('map-list');
     if (!list) return;
@@ -76,19 +99,28 @@ document.addEventListener('DOMContentLoaded', function () {
       renderCount(0);
       return;
     }
+    var groups = groupByName(filtered);
     list.innerHTML = '';
-    filtered.forEach(function (loc) {
-      var card = document.createElement('div');
-      card.className = 'place-card' + (loc._id === activeId ? ' active' : '');
-      card.dataset.id = loc._id;
-      card.innerHTML = '<p class="name">' + escapeHtml(loc.name) + '</p>' +
-        '<p class="type">' + escapeHtml(loc.type) + '</p>' +
-        '<p class="desc">' + escapeHtml(loc.description || '') + '</p>';
-      card.addEventListener('click', function () {
-        map.setView([loc.lat, loc.lng], 13, { animate: true });
-        openPopup(loc, markers[loc._id]);
+    groups.forEach(function (group) {
+      if (group.items.length > 1) {
+        var groupLabel = document.createElement('div');
+        groupLabel.style.cssText = 'padding:10px 20px 2px;font-family:var(--font-mono);font-size:0.66rem;letter-spacing:0.05em;text-transform:uppercase;color:rgba(242,236,220,0.5);';
+        groupLabel.textContent = group.name + ' · ' + group.items.length + ' sedes';
+        list.appendChild(groupLabel);
+      }
+      group.items.forEach(function (loc) {
+        var card = document.createElement('div');
+        card.className = 'place-card' + (loc._id === activeId ? ' active' : '');
+        card.dataset.id = loc._id;
+        card.innerHTML = '<p class="name">' + escapeHtml(displayName(loc)) + '</p>' +
+          '<p class="type">' + escapeHtml(loc.type) + '</p>' +
+          '<p class="desc">' + escapeHtml(loc.description || '') + '</p>';
+        card.addEventListener('click', function () {
+          map.setView([loc.lat, loc.lng], 13, { animate: true });
+          openPopup(loc, markers[loc._id]);
+        });
+        list.appendChild(card);
       });
-      list.appendChild(card);
     });
     renderCount(filtered.length);
   }
