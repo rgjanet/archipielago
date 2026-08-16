@@ -48,10 +48,14 @@ document.addEventListener('DOMContentLoaded', function () {
   function openPopup(loc, marker) {
     var container = document.createElement('div');
     container.className = 'pin-popup';
-    var html = '<p class="name">' + escapeHtml(displayName(loc)) + '</p>' +
-      '<p class="type">' + escapeHtml(loc.type) + '</p>' +
-      (loc.description ? '<p class="desc">' + escapeHtml(loc.description) + '</p>' : '');
-    if (loc.url) html += '<a href="' + loc.url + '" target="_blank" rel="noopener">Más info →</a>';
+    var html = '';
+    if (loc.photo) html += '<img class="photo" src="' + loc.photo + '" alt="' + escapeHtml(displayName(loc)) + '">';
+    html += '<p class="name">' + escapeHtml(displayName(loc)) + '</p>';
+    if (loc.type) html += '<p class="type">' + escapeHtml(loc.type) + '</p>';
+    if (loc.description) html += '<p class="desc">' + escapeHtml(loc.description) + '</p>';
+    if (loc.address) html += '<p class="detail">' + escapeHtml(loc.address) + '</p>';
+    if (loc.hours) html += '<p class="detail">' + escapeHtml(loc.hours) + '</p>';
+    if (loc.phone) html += '<p class="detail">' + escapeHtml(loc.phone) + '</p>';
     container.innerHTML = html;
     marker.bindPopup(container, { maxWidth: 260 }).openPopup();
     highlightCard(loc._id);
