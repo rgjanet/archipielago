@@ -41,7 +41,7 @@ collections:
         fields:
           - { label: "Texto", name: "label", widget: "string" }
           - { label: "URL", name: "url", widget: "string" }
-      - { label: "Biografía", name: "body", widget: "markdown" }
+      - { label: "Biografía", name: "body", widget: "markdown", required: false }
 
   - name: "works"
     label: "Obras"
@@ -163,7 +163,7 @@ collections:
           - { label: "Enlace o @usuario", name: "url", widget: "string" }
       - { label: "Envíos", name: "shipping", widget: "string", required: false, hint: "Ej. 'Envíos a toda la isla' o 'Solo P.R. y EE.UU.'" }
       - { label: "Lugar físico (slug exacto, opcional)", name: "lugar", widget: "string", required: false, hint: "Si también tienen tienda física ya en Lugares, escribe su slug — ej. /lugares/the-bookmark/ → the-bookmark" }
-      - { label: "Descripción", name: "body", widget: "markdown" }
+      - { label: "Descripción", name: "body", widget: "markdown", required: false }
 
   - name: "editoriales"
     label: "Editoriales"
@@ -186,7 +186,7 @@ collections:
           - { label: "Plataforma", name: "label", widget: "string", hint: "Ej. Instagram, Facebook, TikTok" }
           - { label: "Enlace o @usuario", name: "url", widget: "string" }
       - { label: "Lugar físico (slug exacto, opcional)", name: "lugar", widget: "string", required: false, hint: "Si tienen tienda/oficina en el mapa, escribe su slug — ej. /lugares/editorial-upr/ → editorial-upr" }
-      - { label: "Descripción / Bio", name: "body", widget: "markdown" }
+      - { label: "Descripción / Bio", name: "body", widget: "markdown", required: false }
       - { label: "Lineamientos de sometimiento", name: "guidelines", widget: "markdown", required: false, hint: "Si aceptan manuscritos, describe el proceso aquí" }
 
   - name: "settings"
