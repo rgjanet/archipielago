@@ -3,11 +3,11 @@ title: Escribir literatura erótica con Alé Wal
 date: 2026-07-05T01:25:00
 author: Janet Rodríguez
 description: Con el pasar de los años, Alé Wal logró combinar el sexo y la escritura, un libro a la vez.
-photo: /assets/img/uploads/AleWal.png
+photo: ''
 related_author: alé-wal
 related_place: ''
 audio_url: ''
-video_url: https://archive.org/download/entrevista-ale-wal/entrevista%20ale%CC%81%20wal.mp4
+video_url: ''
 embed_code: ''
 ---
 Alé Wal creció escuchando a su tía abordar el tema del sexo. Ella solía decir que encima de ser un tabú, quería que su sobrina se dedicara a ser sexóloga. Alé Wal, por otro lado, soñaba con ser periodista y escritora de columnas de amor y sexo.
@@ -17,6 +17,8 @@ Alé Wal creció escuchando a su tía abordar el tema del sexo. Ella solía deci
 Con el pasar de los años, logró combinar ambos intereses —el sexo y la escritura—, un libro a la vez.
 
 # El reto de escribir literatura erótica
+
+{% include image-embed.html url="assets/img/uploads/AleWal.png" alt="Alé Wal" %} 
 
 “Cuando empecé a escribir erótico, era resaltar ese acto físico, lo que está alrededor. Ese momento íntimo y físico en que dos personas, o uno mismo, se da placer, se encuentra, se disfruta. En todos mis libros ha sido eso, resaltar ese momento”, recuerda.
 
