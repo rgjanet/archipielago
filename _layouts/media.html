@@ -4,14 +4,45 @@ layout: default
 <article class="section">
   <span class="eyebrow">{{ page.media_type | default: "Multimedia" }}</span>
   <h1>{{ page.title }}</h1>
-  {% if page.related_author %}<p class="meta" style="font-family:var(--font-mono);color:var(--oro-viejo);">con {{ page.related_author }}</p>{% endif %}
 
-  {% assign photo_clean = page.photo | replace: " ", "" | strip %}
-  {% if photo_clean != blank and photo_clean != empty %}
-  <img src="{{ page.photo | relative_url }}" alt="{{ page.title }}" style="width:100%;max-width:480px;border-radius:3px;margin:1.2rem 0;display:block;" onerror="this.style.display=&#39;none&#39;">
-  {% endif %}
+  {% assign related_author_page = site.authors | where: "title", page.related_author | first %}
 
-  {% include media-players.html audio=page.audio_url video=page.video_url %}
+  <div class="work-layout" style="display:grid;grid-template-columns:220px 1fr;gap:2.2rem;margin-top:1.4rem;">
+    <div>
+      {% assign photo_clean = page.photo | replace: " ", "" | strip %}
+      {% if photo_clean != blank and photo_clean != empty %}
+      <img src="{{ page.photo | relative_url }}" alt="{{ page.title }}" style="width:100%;border-radius:3px;display:block;" onerror="this.style.display='none'">
+      {% endif %}
+    </div>
 
-  <div class="body">{{ content }}</div>
+    <div style="min-width:0;">
+      {% include media-players.html audio=page.audio_url video=page.video_url %}
+
+      {% if related_author_page %}
+      <a href="{{ related_author_page.url | relative_url }}" style="display:flex;gap:0.9rem;align-items:center;text-decoration:none;color:inherit;margin-top:1rem;padding:0.9rem;border:var(--border);border-radius:3px;background:var(--papel-alto);max-width:60ch;">
+        {% assign rap_photo_clean = related_author_page.photo | replace: " ", "" | strip %}
+        {% if rap_photo_clean != blank and rap_photo_clean != empty %}
+        <img src="{{ related_author_page.photo | relative_url }}" alt="{{ related_author_page.title }}" style="width:56px;height:56px;border-radius:50%;object-fit:cover;flex-shrink:0;" onerror="this.style.display='none'">
+        {% endif %}
+        <span>
+          <span style="display:block;font-family:var(--font-mono);font-size:0.68rem;text-transform:uppercase;letter-spacing:0.05em;color:var(--oro-viejo);">Con</span>
+          <span style="display:block;font-family:var(--font-display);font-size:1.05rem;color:var(--mar-profundo);margin:0.15rem 0 0.15rem;">{{ related_author_page.title }}</span>
+          {% if related_author_page.excerpt %}<span style="display:block;font-size:0.85rem;color:var(--tinta-suave);">{{ related_author_page.excerpt | strip_html | truncate: 90 }}</span>{% endif %}
+        </span>
+      </a>
+      {% elsif page.related_author %}
+      <p class="meta" style="font-family:var(--font-mono);color:var(--oro-viejo);margin-top:1rem;">Con {{ page.related_author }}</p>
+      {% endif %}
+
+      {% if page.content and page.content != "" %}
+      <div class="body" style="margin-top:1.4rem;">{{ content }}</div>
+      {% endif %}
+    </div>
+  </div>
 </article>
+
+<style>
+  @media (max-width: 640px) {
+    .work-layout { grid-template-columns: 1fr !important; }
+  }
+</style>
