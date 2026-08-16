@@ -1,5 +1,5 @@
 ---
-name: Librería Cristiana La Shekinah
+name: Librería La Shekinah
 sede: Caguas
 type: Librería
 lat: 18.212690126511525
