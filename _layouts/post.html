@@ -28,6 +28,20 @@ layout: default
   <div class="body" style="margin-top:1.4rem;font-size:1.02rem;line-height:1.75;">
     {{ content }}
   </div>
+
+  {% if page.related_author or page.related_place %}
+  <div style="margin-top:1.6rem;padding-top:1.2rem;border-top:1px solid rgba(28,27,24,0.12);font-family:var(--font-mono);font-size:0.82rem;">
+    {% if page.related_author %}
+      {% assign ra = site.authors | where: "title", page.related_author | first %}
+      {% if ra %}<a href="{{ ra.url | relative_url }}" style="color:var(--coral);margin-right:1.2rem;">Sobre {{ ra.title }} →</a>{% endif %}
+    {% endif %}
+    {% if page.related_place %}
+      {% assign rp = site.map_locations | where: "name", page.related_place | first %}
+      {% if rp %}<a href="{{ rp.url | relative_url }}" style="color:var(--coral);">Sobre {{ rp.name }} →</a>{% endif %}
+    {% endif %}
+  </div>
+  {% endif %}
+
   <p style="margin-top:2.4rem;">
     <a href="{{ '/blog/' | relative_url }}" style="font-family:var(--font-mono);font-size:0.85rem;">← Volver al blog</a>
   </p>

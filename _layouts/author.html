@@ -30,4 +30,21 @@ layout: default
     {% endfor %}
   </div>
   {% endif %}
+
+  {% assign related_posts = site.blog | where: "related_author", page.title | sort: "date" | reverse %}
+  {% if related_posts.size > 0 %}
+  <h2 style="margin-top:2.4rem;">Del blog</h2>
+  <div class="card-grid">
+    {% for post in related_posts %}
+    <a class="card" href="{{ post.url | relative_url }}">
+      {% if post.photo and post.photo != blank %}
+      <img src="{{ post.photo | relative_url }}" alt="{{ post.title }}" style="width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:3px;margin-bottom:0.6rem;" onerror="this.style.display='none'">
+      {% endif %}
+      <span class="meta">{{ post.date | date: "%-d de %B, %Y" }}</span>
+      <h3>{{ post.title }}</h3>
+      <p>{{ post.description | default: post.excerpt | strip_html | truncate: 80 }}</p>
+    </a>
+    {% endfor %}
+  </div>
+  {% endif %}
 </article>

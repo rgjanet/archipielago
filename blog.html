@@ -22,6 +22,11 @@ title: Blog
           {{ post.date | date: "%-d de %B, %Y" }}{% if post.author %} · {{ post.author }}{% endif %}
         </p>
         <h2 style="font-size:1.3rem;margin:0 0 0.4rem;">{{ post.title }}</h2>
+        {% if post.related_author or post.related_place %}
+        <p style="font-family:var(--font-mono);font-size:0.7rem;color:var(--coral);text-transform:uppercase;letter-spacing:0.04em;margin:0 0 0.4rem;">
+          Entrevista{% if post.related_author %} · {{ post.related_author }}{% endif %}{% if post.related_place %} · {{ post.related_place }}{% endif %}
+        </p>
+        {% endif %}
         <p style="color:var(--tinta-suave);margin:0;">{{ post.excerpt | strip_html | truncate: 140 }}</p>
       </div>
     </a>
