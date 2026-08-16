@@ -82,7 +82,7 @@ collections:
       - { label: "Latitud", name: "lat", widget: "number", value_type: "float", min: -90, max: 90 }
       - { label: "Longitud", name: "lng", widget: "number", value_type: "float", min: -180, max: 180 }
       - { label: "Descripción", name: "description", widget: "text", required: false }
-      - { label: "Sitio web", name: "url", widget: "string", required: false }
+      - { label: "Sitio web", name: "website", widget: "string", required: false }
       - { label: "Teléfono", name: "phone", widget: "string", required: false }
       - { label: "Horario", name: "hours", widget: "string", required: false, hint: "Ej. Lun–Sáb 10am–6pm" }
       - { label: "Dirección", name: "address", widget: "string", required: false }
