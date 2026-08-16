@@ -85,7 +85,6 @@ title: Mapa
   .leaflet-popup-tip { background: var(--papel-alto); }
   .pin-popup .name { font-family: var(--font-display); font-weight: 600; color: var(--mar-profundo); font-size: 1rem; margin: 0 0 4px; }
   .pin-popup .type { font-family: var(--font-mono); font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--oro-viejo); margin: 0 0 6px; }
-  .pin-popup img.photo { width: 100%; max-height: 120px; object-fit: cover; border-radius: 3px; margin: 0 0 8px; display: block; }
   .pin-popup .desc { font-size: 0.85rem; line-height: 1.5; margin: 0 0 8px; }
   .pin-popup .detail { font-size: 0.78rem; color: var(--tinta-suave); margin: 0 0 3px; }
   .pin-popup a { font-family: var(--font-mono); font-size: 0.78rem; color: var(--coral); }
@@ -123,8 +122,7 @@ title: Mapa
       "website": {{ loc.website | default: "" | jsonify }},
       "phone": {{ loc.phone | default: "" | jsonify }},
       "hours": {{ loc.hours | default: "" | jsonify }},
-      "address": {{ loc.address | default: "" | jsonify }},
-      "photo": {% if loc.photo != blank %}{{ loc.photo | relative_url | jsonify }}{% else %}""{% endif %}
+      "address": {{ loc.address | default: "" | jsonify }}
     }{% unless forloop.last %},{% endunless %}
     {% endfor %}
   ];
