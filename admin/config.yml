@@ -127,8 +127,8 @@ collections:
       - { label: "Autor/a", name: "author", widget: "string", required: false }
       - { label: "Extracto", name: "description", widget: "text", required: false, hint: "Se usa en el listado del blog; si se deja vacío se toma del inicio del texto" }
       - { label: "Imagen destacada", name: "photo", widget: "image", required: false }
-      - { label: "Autor/a relacionado/a", name: "related_author", widget: "relation", collection: "authors", search_fields: ["title"], value_field: "{{slug}}", display_fields: ["title"], required: false, hint: "Si esta entrada es una entrevista o pieza sobre un autor, aparecerá en su perfil" }
-      - { label: "Lugar relacionado", name: "related_place", widget: "relation", collection: "map_locations", search_fields: ["name"], value_field: "{{slug}}", display_fields: ["name"], required: false, hint: "Si esta entrada es sobre una librería, editorial, etc., aparecerá en su página" }
+      - { label: "Autor/a relacionado/a (slug exacto)", name: "related_author", widget: "string", required: false, hint: "El slug del autor tal como aparece en su URL, ej. /autores/marigloria-palma/ → marigloria-palma" }
+      - { label: "Lugar relacionado (slug exacto)", name: "related_place", widget: "string", required: false, hint: "El slug del lugar tal como aparece en su URL, ej. /lugares/the-bookmark/ → the-bookmark" }
       - { label: "URL de audio (mp3)", name: "audio_url", widget: "string", required: false, hint: "Si añades audio Y video, aparece un switch para alternar entre los dos" }
       - { label: "URL de video (mp4)", name: "video_url", widget: "string", required: false }
       - { label: "Código de embed", name: "embed_code", widget: "text", required: false, hint: "Pega aquí el <iframe> de YouTube, Spotify, etc. Aparece después del audio/video." }
@@ -141,27 +141,27 @@ collections:
         label: "Destacados de la portada"
         file: "_data/homepage.yml"
         fields:
-          - { label: "Autor destacado (hero)", name: "hero_author", widget: "relation", collection: "authors", search_fields: ["title"], value_field: "{{slug}}", display_fields: ["title"], required: false, hint: "Vacío = se usa el más reciente" }
-          - { label: "Obra destacada", name: "twocol_work", widget: "relation", collection: "works", search_fields: ["title"], value_field: "{{slug}}", display_fields: ["title"], required: false }
-          - { label: "Segunda obra destacada (bajo el mapa)", name: "sidebar_work", widget: "relation", collection: "works", search_fields: ["title"], value_field: "{{slug}}", display_fields: ["title"], required: false, hint: "Aparece en la tarjeta pequeña bajo el conteo del mapa" }
-          - { label: "Entrada de blog destacada", name: "sidebar_post", widget: "relation", collection: "blog", search_fields: ["title"], value_field: "{{slug}}", display_fields: ["title"], required: false, hint: "Segunda tarjeta pequeña, junto a la obra destacada" }
-          - { label: "Lugar destacado", name: "twocol_place", widget: "relation", collection: "map_locations", search_fields: ["name"], value_field: "{{slug}}", display_fields: ["name"], required: false }
-          - { label: "Multimedia destacado (banda coral)", name: "promo_media", widget: "relation", collection: "media", search_fields: ["title"], value_field: "{{slug}}", display_fields: ["title"], required: false }
+          - { label: "Autor destacado (hero) — slug exacto", name: "hero_author", widget: "string", required: false, hint: "Slug del autor (de su URL). Vacío = se usa el más reciente" }
+          - { label: "Obra destacada — slug exacto", name: "twocol_work", widget: "string", required: false, hint: "Slug de la obra (de su URL, ej. /obras/mi-obra/ → mi-obra)" }
+          - { label: "Segunda obra destacada — slug exacto", name: "sidebar_work", widget: "string", required: false, hint: "Slug de la obra. Aparece en la tarjeta pequeña bajo el conteo del mapa" }
+          - { label: "Entrada de blog destacada — slug exacto", name: "sidebar_post", widget: "string", required: false, hint: "Slug de la entrada (de su URL, ej. /blog/mi-entrada/ → mi-entrada)" }
+          - { label: "Lugar destacado — slug exacto", name: "twocol_place", widget: "string", required: false, hint: "Slug del lugar (de su URL, ej. /lugares/the-bookmark/ → the-bookmark)" }
+          - { label: "Multimedia destacado — slug exacto", name: "promo_media", widget: "string", required: false, hint: "Slug del episodio (de su URL, ej. /multimedia/mi-episodio/ → mi-episodio)" }
           - label: "Autores en 'Explora' (hasta 3)"
             name: "explore_authors"
             widget: "list"
             required: false
             max: 3
-            field: { label: "Autor", name: "item", widget: "relation", collection: "authors", search_fields: ["title"], value_field: "{{slug}}", display_fields: ["title"] }
+            field: { label: "Autor (slug exacto)", name: "item", widget: "string" }
           - label: "Obras en 'Explora' (hasta 3)"
             name: "explore_works"
             widget: "list"
             required: false
             max: 3
-            field: { label: "Obra", name: "item", widget: "relation", collection: "works", search_fields: ["title"], value_field: "{{slug}}", display_fields: ["title"] }
+            field: { label: "Obra (slug exacto)", name: "item", widget: "string" }
           - label: "Lugares en 'Explora' (hasta 3)"
             name: "explore_places"
             widget: "list"
             required: false
             max: 3
-            field: { label: "Lugar", name: "item", widget: "relation", collection: "map_locations", search_fields: ["name"], value_field: "{{slug}}", display_fields: ["name"] }
+            field: { label: "Lugar (slug exacto)", name: "item", widget: "string" }
