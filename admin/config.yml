@@ -1,11 +1,7 @@
 backend:
   name: github
-  repo: rgjanet/archipielago   # e.g. janet/archipielago
+  repo: rgjanet/archipielago
   branch: main
-
-# Uses GitHub OAuth via Decap's hosted auth helper. See README.md for setup.
-site_url: https://rgjanet.com/archipielago
-display_url: https://rgjanet.com/archipielago
 
 media_folder: "assets/img/uploads"
 public_folder: "/assets/img/uploads"
