@@ -70,6 +70,7 @@ document.addEventListener('DOMContentLoaded', function () {
       }).join('');
       html += '</p>';
     }
+    if (loc.page_url) html += '<p style="margin-top:8px;"><a href="' + loc.page_url + '">Más info →</a></p>';
     container.innerHTML = html;
     marker.bindPopup(container, { maxWidth: 260 }).openPopup();
     highlightCard(loc._id);
