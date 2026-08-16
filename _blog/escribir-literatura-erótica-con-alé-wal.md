@@ -4,7 +4,7 @@ date: 2026-07-05T01:25:00
 author: Janet Rodríguez
 description: Con el pasar de los años, Alé Wal logró combinar el sexo y la escritura, un libro a la vez.
 photo: /assets/img/uploads/AleWal.png
-related_author: Alé Wal
+related_author: alé-wal
 related_place: ''
 audio_url: ''
 video_url: ''
@@ -26,7 +26,7 @@ Desde entonces, Alé Wal ha ido perdiendo el miedo a escuchar la opinión de la 
 
 # Relatar desde múltiples experiencias
 
-En sus libros _Encuerándome 1 y 2, Relájate, mija; Te cuento de amor, no de sexo; y Súper B___,&#160;_Alé Wal escribe “a partir de lo que yo he podido sentir como mujer, pero muchas de las historias [giran] alrededor de cosas que me han contado, cosas que me ha dicho mi tía, cosas que me han dicho la gente, experiencias que me han contado”.
+En sus libros _Encuerándome 1 y 2, Relájate, mija; Te cuento de amor, no de sexo; y Súper B___, _Alé Wal escribe “a partir de lo que yo he podido sentir como mujer, pero muchas de las historias [giran] alrededor de cosas que me han contado, cosas que me ha dicho mi tía, cosas que me han dicho la gente, experiencias que me han contado”.
 
 De hecho, a través de la escritura busca navegar el erotismo desde una perspectiva nostálgica, en la que el acto sexual puede tanto destruir como darle vida a una persona.
 
