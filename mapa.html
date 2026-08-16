@@ -1,6 +1,6 @@
 ---
 layout: full
-title: Mapa literario
+title: Mapa
 ---
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" />
 <style>
@@ -124,7 +124,7 @@ title: Mapa literario
       "phone": {{ loc.phone | default: "" | jsonify }},
       "hours": {{ loc.hours | default: "" | jsonify }},
       "address": {{ loc.address | default: "" | jsonify }},
-      "photo": {% if loc.photo %}{{ loc.photo | relative_url | jsonify }}{% else %}""{% endif %}
+      "photo": {% if loc.photo != blank %}{{ loc.photo | relative_url | jsonify }}{% else %}""{% endif %}
     }{% unless forloop.last %},{% endunless %}
     {% endfor %}
   ];
