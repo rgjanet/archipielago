@@ -74,7 +74,7 @@ collections:
         fields:
           - { label: "Tienda / sitio", name: "label", widget: "string", hint: "Ej. Librería CDA, Amazon, directo con la editorial" }
           - { label: "Enlace", name: "url", widget: "string", hint: "El link directo a la página de compra" }
-      - { label: "Reseña / contenido", name: "body", widget: "markdown", required: false, hint: "Tu propio comentario o reseña sobre la obra, si aplica" }
+      - { label: "Notas / contenido", name: "body", widget: "markdown", required: false, hint: "Cualquier texto adicional sobre la obra — no tiene que ser una reseña" }
 
   - name: "media"
     label: "Multimedia"
