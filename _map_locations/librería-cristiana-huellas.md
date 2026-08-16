@@ -1,6 +1,6 @@
 ---
 name: Librería Cristiana Huellas
-sede: ''
+sede: Carolina
 type: Librería
 lat: 18.37607079014695
 lng: -65.92831683963244
