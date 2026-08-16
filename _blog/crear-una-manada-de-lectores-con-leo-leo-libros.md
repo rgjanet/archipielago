@@ -1,7 +1,7 @@
 ---
 title: Crear una manada de lectores con Leo Leo Libros
 date: 2025-05-19T01:03:00
-author: ''
+author: Janet Rodríguez
 description: Leo Leo Libros, en San Juan, ofrece al público los mejores libros infantiles en español para todas las etapas de la niñez, con miras a desarrollar lectores en Puerto Rico.
 photo: /assets/img/uploads/leoleolibros.png
 related_author: ''
