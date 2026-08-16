@@ -1,7 +1,11 @@
 backend:
   name: github
-  repo: rgjanet/archipielago
+  repo: YOUR_GITHUB_USERNAME/YOUR_REPO_NAME   # e.g. janet/archipielago
   branch: main
+
+# Uses GitHub OAuth via Decap's hosted auth helper. See README.md for setup.
+site_url: https://YOUR_GITHUB_USERNAME.github.io/YOUR_REPO_NAME
+display_url: https://YOUR_GITHUB_USERNAME.github.io/YOUR_REPO_NAME
 
 media_folder: "assets/img/uploads"
 public_folder: "/assets/img/uploads"
@@ -71,8 +75,7 @@ collections:
     create: true
     slug: "{{slug}}"
     identifier_field: name
-    editor:
-      preview: false
+    preview_path: "mapa"
     fields:
       - { label: "Nombre del lugar", name: "name", widget: "string", hint: "Si tiene varias sedes, usa el mismo nombre en cada entrada (ej. 'The Bookmark')" }
       - { label: "Sede / sucursal (opcional)", name: "sede", widget: "string", required: false, hint: "Ej. 'San Juan', 'Ponce' — para distinguir ubicaciones de un mismo negocio" }
@@ -83,4 +86,8 @@ collections:
       - { label: "Latitud", name: "lat", widget: "number", value_type: "float", min: -90, max: 90 }
       - { label: "Longitud", name: "lng", widget: "number", value_type: "float", min: -180, max: 180 }
       - { label: "Descripción", name: "description", widget: "text", required: false }
-      - { label: "Enlace (opcional)", name: "url", widget: "string", required: false }
+      - { label: "Sitio web", name: "url", widget: "string", required: false }
+      - { label: "Teléfono", name: "phone", widget: "string", required: false }
+      - { label: "Horario", name: "hours", widget: "string", required: false, hint: "Ej. Lun–Sáb 10am–6pm" }
+      - { label: "Dirección", name: "address", widget: "string", required: false }
+      - { label: "Foto", name: "photo", widget: "image", required: false }
