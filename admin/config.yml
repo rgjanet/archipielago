@@ -71,7 +71,8 @@ collections:
     create: true
     slug: "{{slug}}"
     identifier_field: name
-    preview_path: "mapa/"
+    editor:
+      preview: false
     fields:
       - { label: "Nombre del lugar", name: "name", widget: "string", hint: "Si tiene varias sedes, usa el mismo nombre en cada entrada (ej. 'The Bookmark')" }
       - { label: "Sede / sucursal (opcional)", name: "sede", widget: "string", required: false, hint: "Ej. 'San Juan', 'Ponce' — para distinguir ubicaciones de un mismo negocio" }
