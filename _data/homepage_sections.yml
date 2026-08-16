@@ -1,17 +1,17 @@
 sections:
   - type: hero
-    hero_author:
-    sidebar_work:
-    sidebar_post:
+    hero_author: ''
+    sidebar_work: ''
+    sidebar_post: ''
   - type: mapbanner
-    heading:
+    heading: ''
   - type: twocol
-    twocol_work:
-    twocol_place:
+    twocol_work: ''
+    twocol_place: ''
   - type: videocarousel
-    heading:
+    heading: https://archive.org/download/llegamos-a-los-100-rev-2/llegamos%20a%20los%20100%20rev%202.mp4
   - type: promoband
-    promo_media:
+    promo_media: ''
   - type: explore
     explore_authors: []
     explore_works: []
