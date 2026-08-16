@@ -32,6 +32,9 @@ collections:
   tiendas:
     output: true
     permalink: /tiendas-en-linea/:slug/
+  revista:
+    output: true
+    permalink: /revista/:slug/
 
 defaults:
   - scope:
@@ -69,6 +72,11 @@ defaults:
       type: tiendas
     values:
       layout: tienda
+  - scope:
+      path: ""
+      type: revista
+    values:
+      layout: articulo
 
 plugins:
   - jekyll-relative-links

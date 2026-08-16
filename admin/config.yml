@@ -142,6 +142,29 @@ collections:
       - { label: "Código de embed", name: "embed_code", widget: "text", required: false, hint: "Pega aquí el <iframe> de YouTube, Spotify, etc. Aparece después del audio/video." }
       - { label: "Contenido", name: "body", widget: "markdown" }
 
+  - name: "revista"
+    label: "Revista"
+    folder: "_revista"
+    create: true
+    slug: "{{slug}}"
+    identifier_field: title
+    fields:
+      - { label: "Título", name: "title", widget: "string" }
+      - { label: "Edición", name: "edicion", widget: "string", hint: "Usa el mismo texto exacto en todas las piezas de una misma edición — ej. 'Edición 1 — Verano 2026'" }
+      - label: "Sección"
+        name: "seccion"
+        widget: "select"
+        options: ["Ensayo", "Entrevista", "Ficción", "Poesía", "Reseña", "Reportaje", "Otro"]
+      - { label: "Autor/a (como aparece en la firma)", name: "byline", widget: "string" }
+      - { label: "Fecha de publicación", name: "date", widget: "datetime" }
+      - { label: "Extracto", name: "description", widget: "text", required: false, hint: "Para la tabla de contenido de la edición" }
+      - { label: "Imagen destacada", name: "photo", widget: "image", required: false }
+      - { label: "Autor/a relacionado/a (slug exacto, opcional)", name: "related_author", widget: "string", required: false, hint: "Si escribe alguien que ya tiene perfil en Autores, aparecerá también ahí" }
+      - { label: "Lugar relacionado (slug exacto, opcional)", name: "related_place", widget: "string", required: false }
+      - { label: "URL de audio (mp3, opcional)", name: "audio_url", widget: "string", required: false }
+      - { label: "URL de video (mp4, opcional)", name: "video_url", widget: "string", required: false }
+      - { label: "Contenido", name: "body", widget: "markdown" }
+
   - name: "tiendas"
     label: "Librerías en línea"
     folder: "_tiendas"
@@ -190,7 +213,7 @@ collections:
       - { label: "Lineamientos de sometimiento", name: "guidelines", widget: "markdown", required: false, hint: "Si aceptan manuscritos, describe el proceso aquí" }
 
   - name: "settings"
-    label: "Portada"
+    label: "Ajustes del sitio"
     files:
       - name: "homepage"
         label: "Destacados de la portada"
@@ -220,3 +243,32 @@ collections:
             required: false
             max: 3
             field: { label: "Lugar (slug exacto)", name: "item", widget: "string" }
+
+      - name: "nav"
+        label: "Navegación principal"
+        file: "_data/nav.yml"
+        fields:
+          - label: "Enlaces"
+            name: "links"
+            widget: "list"
+            hint: "El orden aquí es el orden en que aparecen en el menú"
+            fields:
+              - { label: "Texto", name: "label", widget: "string" }
+              - { label: "URL", name: "url", widget: "string", hint: "Interno: /autores/  ·  Externo: https://..." }
+
+      - name: "footer"
+        label: "Pie de página"
+        file: "_data/footer.yml"
+        fields:
+          - label: "Columnas"
+            name: "columns"
+            widget: "list"
+            hint: "Cada columna es un grupo de enlaces con su propio título"
+            fields:
+              - { label: "Título de la columna", name: "heading", widget: "string" }
+              - label: "Enlaces"
+                name: "links"
+                widget: "list"
+                fields:
+                  - { label: "Texto", name: "label", widget: "string" }
+                  - { label: "URL", name: "url", widget: "string", hint: "Interno: /autores/  ·  Externo: https://instagram.com/tu-cuenta" }

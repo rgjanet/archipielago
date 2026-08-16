@@ -1,13 +1,12 @@
 <nav class="site-nav">
   <a class="brand" href="{{ '/' | relative_url }}">Archipiélago</a>
   <div class="links">
-    <a href="{{ '/autores/' | relative_url }}">Autores</a>
-    <a href="{{ '/obras/' | relative_url }}">Obras</a>
-    <a href="{{ '/editoriales/' | relative_url }}">Editoriales</a>
-    <a href="{{ '/lugares/' | relative_url }}">Lugares</a>
-    <a href="{{ '/tiendas-en-linea/' | relative_url }}">En línea</a>
-    <a href="{{ '/mapa/' | relative_url }}">Mapa</a>
-    <a href="{{ '/multimedia/' | relative_url }}">Multimedia</a>
-    <a href="{{ '/blog/' | relative_url }}">Blog</a>
+    {% for item in site.data.nav.links %}
+      {% if item.url contains "http" %}
+      <a href="{{ item.url }}">{{ item.label }}</a>
+      {% else %}
+      <a href="{{ item.url | relative_url }}">{{ item.label }}</a>
+      {% endif %}
+    {% endfor %}
   </div>
 </nav>

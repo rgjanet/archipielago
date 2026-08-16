@@ -1,0 +1,52 @@
+---
+layout: default
+---
+<article class="section" style="max-width:720px;">
+  <span class="eyebrow">{{ page.seccion }} · {{ page.edicion }}</span>
+  <h1>{{ page.title }}</h1>
+  {% assign date_mes_i = page.date | date: "%-m" | minus: 1 %}
+  <p style="font-family:var(--font-mono);font-size:0.8rem;color:var(--tinta-suave);">
+    Por {{ page.byline }} · {{ page.date | date: "%-d" }} de {{ site.data.meses[date_mes_i] }} de {{ page.date | date: "%Y" }}
+  </p>
+
+  {% assign photo_clean = page.photo | replace: " ", "" | strip %}
+  {% if photo_clean != blank and photo_clean != empty %}
+  <img src="{{ page.photo | relative_url }}" alt="{{ page.title }}" style="width:100%;border-radius:3px;margin:1.2rem 0;display:block;" onerror="this.style.display='none'">
+  {% endif %}
+
+  {% assign has_audio = page.audio_url and page.audio_url != blank %}
+  {% assign has_video = page.video_url and page.video_url != blank %}
+  {% if has_audio or has_video %}
+  <div style="margin-top:1rem;">
+    {% include media-toggle.html audio=page.audio_url video=page.video_url %}
+  </div>
+  {% endif %}
+
+  {% assign description_clean = page.description | replace: " ", "" | strip %}
+  {% if description_clean != blank and description_clean != empty %}
+  <p style="font-size:1.1rem;color:var(--tinta-suave);font-style:italic;margin-top:1rem;">{{ page.description }}</p>
+  {% endif %}
+
+  <div class="body" style="margin-top:1.4rem;font-size:1.02rem;line-height:1.75;">
+    {{ content }}
+  </div>
+
+  {% assign related_author_clean = page.related_author | replace: " ", "" | strip %}
+  {% assign related_place_clean = page.related_place | replace: " ", "" | strip %}
+  {% if related_author_clean != blank and related_author_clean != empty or related_place_clean != blank and related_place_clean != empty %}
+  <div style="margin-top:1.6rem;padding-top:1.2rem;border-top:1px solid rgba(28,27,24,0.12);font-family:var(--font-mono);font-size:0.82rem;">
+    {% if related_author_clean != blank and related_author_clean != empty %}
+      {% assign ra = site.authors | where: "slug", page.related_author | first %}
+      {% if ra %}<a href="{{ ra.url | relative_url }}" style="color:var(--coral);margin-right:1.2rem;">Sobre {{ ra.title }} →</a>{% endif %}
+    {% endif %}
+    {% if related_place_clean != blank and related_place_clean != empty %}
+      {% assign rp = site.map_locations | where: "slug", page.related_place | first %}
+      {% if rp %}<a href="{{ rp.url | relative_url }}" style="color:var(--coral);">Sobre {{ rp.name }} →</a>{% endif %}
+    {% endif %}
+  </div>
+  {% endif %}
+
+  <p style="margin-top:2.4rem;">
+    <a href="{{ '/revista/' | relative_url }}" style="font-family:var(--font-mono);font-size:0.85rem;">← Volver a la revista</a>
+  </p>
+</article>

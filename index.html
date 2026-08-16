@@ -453,29 +453,18 @@ title: Inicio
   <div class="footer-inner">
     <p class="footer-title">Archipiélago</p>
     <div class="footer-cols">
+      {% for col in site.data.footer.columns %}
       <div>
-        <h4>Explorar</h4>
-        <a href="{{ '/autores/' | relative_url }}">Autores</a>
-        <a href="{{ '/obras/' | relative_url }}">Obras</a>
-        <a href="{{ '/editoriales/' | relative_url }}">Editoriales</a>
-        <a href="{{ '/lugares/' | relative_url }}">Lugares</a>
-        <a href="{{ '/tiendas-en-linea/' | relative_url }}">Librerías en línea</a>
-        <a href="{{ '/mapa/' | relative_url }}">Mapa</a>
-        <a href="{{ '/multimedia/' | relative_url }}">Multimedia</a>
+        <h4>{{ col.heading }}</h4>
+        {% for link in col.links %}
+          {% if link.url contains "http" %}
+          <a href="{{ link.url }}">{{ link.label }}</a>
+          {% else %}
+          <a href="{{ link.url | relative_url }}">{{ link.label }}</a>
+          {% endif %}
+        {% endfor %}
       </div>
-      <div>
-        <h4>Sobre el proyecto</h4>
-        <a href="{{ '/' | relative_url }}">Qué es Archipiélago</a>
-      </div>
-      <div>
-        <h4>Colabora</h4>
-        <a href="{{ '/admin/' | relative_url }}">Añadir contenido</a>
-      </div>
-      <div>
-        <h4>Síguenos</h4>
-        <a href="#">Instagram</a>
-        <a href="#">Facebook</a>
-      </div>
+      {% endfor %}
     </div>
   </div>
 </div>

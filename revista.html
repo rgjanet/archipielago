@@ -1,0 +1,55 @@
+---
+layout: default
+title: Revista
+---
+<style>
+  .edicion-block + .edicion-block { border-top: 2px solid var(--mar-profundo); margin-top: 2.6rem; padding-top: 2.2rem; }
+  .toc-item { display: flex; gap: 1.2rem; align-items: flex-start; padding: 1rem 0; border-bottom: 1px solid rgba(28,27,24,0.1); text-decoration: none; color: inherit; }
+  .toc-item:last-child { border-bottom: none; }
+  .toc-item .toc-photo { width: 96px; height: 72px; object-fit: cover; border-radius: 3px; flex-shrink: 0; }
+  .toc-item .toc-seccion { font-family: var(--font-mono); font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--coral); margin: 0 0 0.2rem; }
+  .toc-item h3 { font-size: 1.1rem; margin: 0 0 0.2rem; }
+  .toc-item .toc-byline { font-family: var(--font-mono); font-size: 0.72rem; color: var(--tinta-suave); margin: 0 0 0.3rem; }
+  .toc-item .toc-dek { font-size: 0.88rem; color: var(--tinta-suave); margin: 0; }
+</style>
+
+<section class="section">
+  <span class="eyebrow">Archipiélago</span>
+  <h1>Revista</h1>
+  <p style="max-width:56ch;color:var(--tinta-suave);">
+    Ensayos, entrevistas, ficción y poesía — piezas más largas organizadas por edición.
+  </p>
+
+  {% assign sorted_all = site.revista | sort: "date" | reverse %}
+  {% assign pieces_by_edicion = sorted_all | group_by: "edicion" %}
+  <!-- Sorting all pieces newest-first before grouping means each group's items are
+       already in the right order, AND the groups themselves come out ordered with
+       whichever edición contains the most recent piece appearing first -- no fragile
+       nested-property sort needed. -->
+
+  {% for grp in pieces_by_edicion %}
+  <div class="edicion-block">
+    <h2 style="margin-top:0;">{{ grp.name }}</h2>
+    {% for piece in grp.items %}
+    <a class="toc-item" href="{{ piece.url | relative_url }}">
+      {% assign toc_photo_clean = piece.photo | replace: " ", "" | strip %}
+      {% if toc_photo_clean != blank and toc_photo_clean != empty %}
+      <img class="toc-photo" src="{{ piece.photo | relative_url }}" alt="{{ piece.title }}" onerror="this.style.display='none'">
+      {% endif %}
+      <span>
+        <span class="toc-seccion">{{ piece.seccion }}</span>
+        <h3>{{ piece.title }}</h3>
+        <p class="toc-byline">Por {{ piece.byline }}</p>
+        {% if piece.description and piece.description != blank %}<p class="toc-dek">{{ piece.description }}</p>{% endif %}
+      </span>
+    </a>
+    {% endfor %}
+  </div>
+  {% endfor %}
+
+  {% if site.revista.size == 0 %}
+  <p style="color:var(--tinta-suave);font-family:var(--font-mono);font-size:0.85rem;">
+    Aún no hay piezas publicadas — añade la primera desde /admin.
+  </p>
+  {% endif %}
+</section>
