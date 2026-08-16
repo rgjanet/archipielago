@@ -86,4 +86,3 @@ collections:
       - { label: "Teléfono", name: "phone", widget: "string", required: false }
       - { label: "Horario", name: "hours", widget: "string", required: false, hint: "Ej. Lun–Sáb 10am–6pm" }
       - { label: "Dirección", name: "address", widget: "string", required: false }
-      - { label: "Foto", name: "photo", widget: "image", required: false }
