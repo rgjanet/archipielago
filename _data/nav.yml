@@ -1,10 +1,15 @@
 links:
-  - { label: "Autores", url: "/autores/" }
-  - { label: "Obras", url: "/obras/" }
-  - { label: "Editoriales", url: "/editoriales/" }
-  - { label: "Lugares", url: "/lugares/" }
-  - { label: "En línea", url: "/tiendas-en-linea/" }
-  - { label: "Revista", url: "/revista/" }
-  - { label: "Mapa", url: "/mapa/" }
-  - { label: "Multimedia", url: "/multimedia/" }
-  - { label: "Blog", url: "/blog/" }
+  - label: Autores
+    url: /autores/
+  - label: Obras
+    url: /obras/
+  - label: Editoriales
+    url: /editoriales/
+  - label: Lugares
+    url: /lugares/
+  - label: Tiendas en línea
+    url: /tiendas-en-linea/
+  - label: Mapa
+    url: /mapa/
+  - label: Blog
+    url: /blog/
