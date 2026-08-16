@@ -1,0 +1,11 @@
+{% assign v_clean = include.url | replace: " ", "" | strip %}
+{% if v_clean != blank and v_clean != empty %}
+  {% assign is_direct_file = include.url contains ".mp4" or include.url contains ".webm" or include.url contains ".mov" or include.url contains ".ogv" %}
+  {% if is_direct_file %}
+<video controls src="{{ include.url }}" style="width:100%;border-radius:3px;margin:1.2rem 0;display:block;"></video>
+  {% else %}
+<div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:3px;margin:1.2rem 0;">
+  <iframe src="{{ include.url }}" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;" allowfullscreen></iframe>
+</div>
+  {% endif %}
+{% endif %}

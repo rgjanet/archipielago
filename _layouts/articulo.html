@@ -14,11 +14,13 @@ layout: default
   <img src="{{ page.photo | relative_url }}" alt="{{ page.title }}" style="width:100%;border-radius:3px;margin:1.2rem 0;display:block;" onerror="this.style.display='none'">
   {% endif %}
 
-  {% assign has_audio = page.audio_url and page.audio_url != blank %}
-  {% assign has_video = page.video_url and page.video_url != blank %}
+  {% assign audio_clean = page.audio_url | replace: " ", "" | strip %}
+  {% assign video_clean = page.video_url | replace: " ", "" | strip %}
+  {% assign has_audio = audio_clean != blank and audio_clean != empty %}
+  {% assign has_video = video_clean != blank and video_clean != empty %}
   {% if has_audio or has_video %}
   <div style="margin-top:1rem;">
-    {% include media-toggle.html audio=page.audio_url video=page.video_url %}
+    {% include media-players.html audio=page.audio_url video=page.video_url %}
   </div>
   {% endif %}
 

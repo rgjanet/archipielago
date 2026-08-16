@@ -1,0 +1,17 @@
+{% assign has_audio_raw = include.audio | replace: " ", "" | strip %}
+{% assign has_video_raw = include.video | replace: " ", "" | strip %}
+{% assign has_audio = has_audio_raw != blank and has_audio_raw != empty %}
+{% assign has_video = has_video_raw != blank and has_video_raw != empty %}
+{% if has_audio %}
+<audio controls src="{{ include.audio }}" style="width:100%;margin-bottom:0.8rem;display:block;"></audio>
+{% endif %}
+{% if has_video %}
+  {% assign is_direct_file = include.video contains ".mp4" or include.video contains ".webm" or include.video contains ".mov" or include.video contains ".ogv" %}
+  {% if is_direct_file %}
+<video controls src="{{ include.video }}" style="width:100%;border-radius:3px;display:block;"></video>
+  {% else %}
+<div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:3px;">
+  <iframe src="{{ include.video }}" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;" allowfullscreen></iframe>
+</div>
+  {% endif %}
+{% endif %}

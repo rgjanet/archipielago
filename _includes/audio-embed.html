@@ -1,0 +1,4 @@
+{% assign a_clean = include.url | replace: " ", "" | strip %}
+{% if a_clean != blank and a_clean != empty %}
+<audio controls src="{{ include.url }}" style="width:100%;margin:1.2rem 0;display:block;"></audio>
+{% endif %}

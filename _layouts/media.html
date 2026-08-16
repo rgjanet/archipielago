@@ -8,10 +8,10 @@ layout: default
 
   {% assign photo_clean = page.photo | replace: " ", "" | strip %}
   {% if photo_clean != blank and photo_clean != empty %}
-  <img src="{{ page.photo | relative_url }}" alt="{{ page.title }}" style="width:100%;max-width:480px;border-radius:3px;margin:1.2rem 0;display:block;" onerror="this.style.display='"none"'">
+  <img src="{{ page.photo | relative_url }}" alt="{{ page.title }}" style="width:100%;max-width:480px;border-radius:3px;margin:1.2rem 0;display:block;" onerror="this.style.display=&#39;none&#39;">
   {% endif %}
 
-  {% include media-toggle.html audio=page.audio_url video=page.video_url %}
+  {% include media-players.html audio=page.audio_url video=page.video_url %}
 
   <div class="body">{{ content }}</div>
 </article>
