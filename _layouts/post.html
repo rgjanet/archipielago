@@ -12,7 +12,9 @@ layout: default
   <img src="{{ page.photo | relative_url }}" alt="{{ page.title }}" style="width:100%;border-radius:3px;margin:1.2rem 0;display:block;" onerror="this.style.display='none'">
   {% endif %}
 
-  {% if page.audio_url or page.video_url %}
+  {% assign has_audio = page.audio_url and page.audio_url != blank %}
+  {% assign has_video = page.video_url and page.video_url != blank %}
+  {% if has_audio or has_video %}
   <div style="margin-top:1.4rem;">
     {% include media-toggle.html audio=page.audio_url video=page.video_url %}
   </div>
