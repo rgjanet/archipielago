@@ -32,7 +32,8 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   function displayName(loc) {
-    return loc.sede ? loc.name + ' — ' + loc.sede : loc.name;
+    var sedeClean = (loc.sede || '').replace(/\u00a0/g, '').trim();
+    return sedeClean ? loc.name + ' — ' + sedeClean : loc.name;
   }
 
   var markers = {};

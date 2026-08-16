@@ -17,7 +17,8 @@ title: Lugares
       <img src="{{ loc.photo | relative_url }}" alt="{{ loc.name }}" style="width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:3px;margin-bottom:0.8rem;" onerror="this.style.display='none'">
       {% endif %}
       <span class="meta">{{ loc.type }}</span>
-      <h3>{{ loc.name }}{% if loc.sede and loc.sede != blank %} — {{ loc.sede }}{% endif %}</h3>
+      {% assign loc_sede_clean = loc.sede | replace: " ", "" | strip %}
+      <h3>{{ loc.name }}{% if loc_sede_clean != blank and loc_sede_clean != empty %} — {{ loc_sede_clean }}{% endif %}</h3>
       <p>{{ loc.description | truncate: 90 }}</p>
     </a>
     {% endfor %}

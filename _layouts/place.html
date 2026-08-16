@@ -3,7 +3,8 @@ layout: default
 ---
 <article class="section">
   <span class="eyebrow">{{ page.type | default: "Lugar" }}</span>
-  <h1>{{ page.name }}{% if page.sede and page.sede != blank %} <span style="font-style:normal;font-size:0.5em;color:var(--tinta-suave);">— {{ page.sede }}</span>{% endif %}</h1>
+  {% assign sede_clean = page.sede | replace: " ", "" | strip %}
+  <h1>{{ page.name }}{% if sede_clean != blank and sede_clean != empty %} <span style="font-style:normal;font-size:0.5em;color:var(--tinta-suave);">— {{ sede_clean }}</span>{% endif %}</h1>
 
   {% if page.photo and page.photo != blank %}
   <img src="{{ page.photo | relative_url }}" alt="{{ page.name }}" style="width:100%;max-width:480px;border-radius:3px;margin:1.2rem 0;display:block;" onerror="this.style.display='none'">

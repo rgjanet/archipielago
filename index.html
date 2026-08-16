@@ -277,7 +277,8 @@ title: Inicio
     <div class="art-block small"><span class="art-label">Lugar</span></div>
     {% endif %}
     <span class="kicker-tag">Lugares<span class="sep">|</span><span class="type">{{ place.type }}</span></span>
-    <h2><a href="{{ place.url | relative_url }}" style="text-decoration:none;color:inherit;">{{ place.name }}{% if place.sede and place.sede != blank %} — {{ place.sede }}{% endif %}</a></h2>
+    {% assign place_sede_clean = place.sede | replace: " ", "" | strip %}
+    <h2><a href="{{ place.url | relative_url }}" style="text-decoration:none;color:inherit;">{{ place.name }}{% if place_sede_clean != blank and place_sede_clean != empty %} — {{ place_sede_clean }}{% endif %}</a></h2>
     <p class="dek">{{ place.description | truncate: 100 }}</p>
   </div>
   {% endif %}
@@ -410,7 +411,8 @@ title: Inicio
         <div class="art-block coral small" style="margin-bottom:0.6rem;"></div>
         {% endif %}
         <span class="kicker-tag">{{ p.type }}</span>
-        <h4>{{ p.name }}{% if p.sede and p.sede != blank %} — {{ p.sede }}{% endif %}</h4>
+        {% assign p_sede_clean = p.sede | replace: " ", "" | strip %}
+        <h4>{{ p.name }}{% if p_sede_clean != blank and p_sede_clean != empty %} — {{ p_sede_clean }}{% endif %}</h4>
         <p class="dek">{{ p.description | truncate: 60 }}</p>
       </a>
           {% endif %}
@@ -425,7 +427,8 @@ title: Inicio
         <div class="art-block coral small" style="margin-bottom:0.6rem;"></div>
         {% endif %}
         <span class="kicker-tag">{{ p.type }}</span>
-        <h4>{{ p.name }}{% if p.sede and p.sede != blank %} — {{ p.sede }}{% endif %}</h4>
+        {% assign p_sede_clean = p.sede | replace: " ", "" | strip %}
+        <h4>{{ p.name }}{% if p_sede_clean != blank and p_sede_clean != empty %} — {{ p_sede_clean }}{% endif %}</h4>
         <p class="dek">{{ p.description | truncate: 60 }}</p>
       </a>
         {% endfor %}
