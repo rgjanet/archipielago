@@ -52,28 +52,35 @@ title: Inicio
   .tls-hero .byline { font-family: var(--font-mono); font-size: 0.75rem; color: var(--tinta-suave); }
   .tls-hero .byline b { color: var(--tinta); font-weight: 600; font-style: italic; }
 
-  .issue-card {
-    background: var(--papel-alto);
-    border: var(--border);
-    border-radius: 3px;
-    padding: 1.2rem;
-  }
-  .issue-card .art-block { margin-bottom: 0.9rem; }
-  .issue-card .issue-label { font-family: var(--font-mono); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--tinta-suave); margin: 0; }
-  .issue-card .issue-count { font-family: var(--font-display); font-weight: 600; font-size: 1.1rem; margin: 0.2rem 0 0.8rem; }
-  .issue-card a.cta { font-family: var(--font-mono); font-size: 0.78rem; color: var(--coral); text-decoration: none; }
-
   .sidebar-card {
     background: var(--papel-alto);
     border: var(--border);
     border-radius: 3px;
     padding: 1.2rem;
-    margin-top: 1.2rem;
   }
   .sidebar-card .kicker-tag { margin-bottom: 0.5rem; }
   .sidebar-card h3 { font-size: 1.1rem; margin: 0 0 0.4rem; }
   .sidebar-card p.dek { font-size: 0.85rem; color: var(--tinta-suave); margin: 0 0 0.6rem; }
   .sidebar-card a.cta { font-family: var(--font-mono); font-size: 0.78rem; color: var(--coral); text-decoration: none; }
+
+  .map-banner {
+    background: var(--mar-profundo);
+    padding: 2.6rem 2rem;
+  }
+  .map-banner-inner {
+    max-width: 1140px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+  .map-banner-inner h2 { color: var(--papel-alto); font-size: 1.6rem; margin: 0 0 0.5rem; }
+  .map-banner-inner .dek { color: rgba(242,236,220,0.8); max-width: 46ch; margin: 0 0 0.8rem; }
+  .map-banner-inner a.cta { font-family: var(--font-mono); font-size: 0.82rem; color: var(--coral); text-decoration: none; }
+  .map-banner-dots { flex-shrink: 0; }
+  @media (max-width: 640px) { .map-banner-dots { display: none; } }
 
   .divider { border: none; border-top: 1px solid rgba(28,27,24,0.12); max-width: 1140px; margin: 0 auto; }
 
@@ -195,13 +202,6 @@ title: Inicio
   </div>
 
   <div class="hero-sidebar">
-    <div class="issue-card">
-      <div class="art-block gold"><span class="art-label">Mapa literario</span></div>
-      <p class="issue-label">Lugares registrados</p>
-      <p class="issue-count">{{ site.map_locations.size }} en el mapa</p>
-      <a class="cta" href="{{ '/mapa/' | relative_url }}">Ver el mapa completo →</a>
-    </div>
-
     {% assign sidebar_work = site.works | where: "title", site.data.homepage.sidebar_work | first %}
     {% unless sidebar_work %}
       {% assign hero_work_title = work.title %}
@@ -215,9 +215,41 @@ title: Inicio
       <a class="cta" href="{{ sidebar_work.url | relative_url }}">Leer más →</a>
     </div>
     {% endif %}
+
+    {% assign sidebar_post = site.blog | where: "title", site.data.homepage.sidebar_post | first %}
+    {% unless sidebar_post %}
+      {% assign sidebar_post = site.blog | sort: "date" | reverse | first %}
+    {% endunless %}
+    {% if sidebar_post %}
+    <div class="sidebar-card" style="margin-top:1.2rem;">
+      <span class="kicker-tag">Blog<span class="sep">|</span><span class="type">Entrada</span></span>
+      <h3><a href="{{ sidebar_post.url | relative_url }}" style="text-decoration:none;color:inherit;">{{ sidebar_post.title }}</a></h3>
+      <p class="dek">{{ sidebar_post.description | default: sidebar_post.excerpt | strip_html | truncate: 90 }}</p>
+      <a class="cta" href="{{ sidebar_post.url | relative_url }}">Leer más →</a>
+    </div>
+    {% endif %}
   </div>
 </div>
 
+<div class="map-banner">
+  <div class="map-banner-inner">
+    <div>
+      <span class="kicker-tag" style="color:var(--coral);">Mapa literario</span>
+      <h2>Explora el archipiélago en el mapa</h2>
+      <p class="dek">{{ site.map_locations.size }} lugares registrados — librerías, editoriales, bibliotecas, tertulias y espacios donde vive la literatura puertorriqueña.</p>
+      <a class="cta" href="{{ '/mapa/' | relative_url }}">Ver el mapa completo →</a>
+    </div>
+    <svg class="map-banner-dots" width="220" height="140" viewBox="0 0 220 140" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <circle cx="30" cy="30" r="5" fill="#E8603F"/>
+      <circle cx="90" cy="20" r="7" fill="#F2ECDC" fill-opacity="0.5"/>
+      <circle cx="150" cy="45" r="4" fill="#B98F4C"/>
+      <circle cx="50" cy="75" r="6" fill="#E8603F" fill-opacity="0.7"/>
+      <circle cx="180" cy="80" r="5" fill="#F2ECDC" fill-opacity="0.4"/>
+      <circle cx="110" cy="105" r="6" fill="#B98F4C"/>
+      <circle cx="30" cy="120" r="5" fill="#E8603F" fill-opacity="0.6"/>
+    </svg>
+  </div>
+</div>
 <hr class="divider">
 
 <div class="tls-twocol">
