@@ -5,7 +5,7 @@ description: >
   independiente en un mismo lugar — un mapa vivo de dónde y cómo se escribe
   la isla hoy.
 baseurl: "/archipielago"
-url: ""
+url: "https://rgjanet.com"
 
 markdown: kramdown
 permalink: /:collection/:slug/
