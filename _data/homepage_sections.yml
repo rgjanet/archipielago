@@ -1,8 +1,10 @@
 sections:
   - type: hero
+    hero_type: Entrada de blog
+    hero_slug: crear-una-manada-de-lectores-con-leo-leo-libros
+    sidebar_work: secuestro-pulmonar
+    sidebar_post: escribir-literatura-erótica-con-alé-wal
     hero_author: ''
-    sidebar_work: ''
-    sidebar_post: ''
   - type: mapbanner
     heading: ''
   - type: twocol
