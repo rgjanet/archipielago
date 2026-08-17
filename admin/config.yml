@@ -260,6 +260,11 @@ collections:
                 widget: "object"
                 fields:
                   - { label: "Título (opcional)", name: "heading", widget: "string", required: false, hint: "Vacío = 'Reseñas en video'" }
+              - label: "Podcast (carrusel)"
+                name: "podcast"
+                widget: "object"
+                fields:
+                  - { label: "Título (opcional)", name: "heading", widget: "string", required: false, hint: "Vacío = 'Podcast'" }
               - label: "Multimedia destacado (banda coral)"
                 name: "promoband"
                 widget: "object"
