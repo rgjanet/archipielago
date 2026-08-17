@@ -243,8 +243,15 @@ collections:
                 fields:
                   - { label: "Tipo de contenido", name: "hero_type", widget: "select", options: ["Autor", "Obra", "Entrada de blog", "Lugar"], default: "Autor" }
                   - { label: "Slug exacto del contenido elegido", name: "hero_slug", widget: "string", required: false, hint: "Ej. si Tipo es 'Autor', escribe el slug de un autor (de su URL). Vacío = se usa el más reciente de ese tipo." }
-                  - { label: "Obra en la tarjeta lateral — slug exacto", name: "sidebar_work", widget: "string", required: false }
-                  - { label: "Entrada de blog en la tarjeta lateral — slug exacto", name: "sidebar_post", widget: "string", required: false, hint: "Vacío = se usa la más reciente" }
+                  - label: "Tarjetas laterales (hasta 3)"
+                    name: "sidebar_items"
+                    widget: "list"
+                    required: false
+                    max: 3
+                    hint: "Cada tarjeta puede ser de un tipo distinto — Autor, Obra, Entrada de blog o Lugar"
+                    fields:
+                      - { label: "Tipo", name: "tipo", widget: "select", options: ["Obra", "Autor", "Entrada de blog", "Lugar"], default: "Obra" }
+                      - { label: "Slug exacto", name: "slug", widget: "string", required: false, hint: "Vacío = se usa el más reciente de ese tipo" }
               - label: "Banda del mapa"
                 name: "mapbanner"
                 widget: "object"
