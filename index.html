@@ -258,7 +258,7 @@ title: Inicio
 
 {% for block in site.data.homepage_sections.sections %}
   {% case block.type %}
-    {% when "hero" %}{% include home-hero.html hero_type=block.hero_type hero_slug=block.hero_slug sidebar_work=block.sidebar_work sidebar_post=block.sidebar_post %}
+    {% when "hero" %}{% include home-hero.html hero_type=block.hero_type hero_slug=block.hero_slug sidebar_items=block.sidebar_items %}
     {% when "mapbanner" %}{% include home-mapbanner.html heading=block.heading %}
     {% when "twocol" %}{% include home-twocol.html twocol_work=block.twocol_work twocol_place=block.twocol_place %}
     {% when "videocarousel" %}{% include home-videocarousel.html heading=block.heading %}
