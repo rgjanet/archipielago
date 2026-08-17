@@ -10,8 +10,8 @@ sections:
     twocol_place: ''
   - type: videocarousel
     heading: ''
-  - type: promoband
-    promo_media: ''
+  - type: podcast
+    heading: ''
   - type: explore
     explore_authors: []
     explore_works: []
