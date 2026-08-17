@@ -2,6 +2,13 @@ sections:
   - type: hero
     hero_type: Entrada de blog
     hero_slug: crear-una-manada-de-lectores-con-leo-leo-libros
+    sidebar_items:
+      - tipo: Entrada de blog
+        slug: escribir-literatura-erótica-con-alé-wal
+      - tipo: Obra
+        slug: secuestro-pulmonar
+      - tipo: Obra
+        slug: esto-también-es-una-casa
     sidebar_work: secuestro-pulmonar
     sidebar_post: escribir-literatura-erótica-con-alé-wal
     hero_author: ''
