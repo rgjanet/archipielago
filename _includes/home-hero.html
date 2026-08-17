@@ -52,29 +52,67 @@
   </div>
 
   <div class="hero-sidebar">
-    {% assign sidebar_work = site.works | where: "slug", include.sidebar_work | first %}
-    {% unless sidebar_work %}{% assign sidebar_work = site.works | first %}{% endunless %}
-    {% if sidebar_work %}
-    <div class="sidebar-card">
-      <span class="kicker-tag">Obras<span class="sep">|</span><span class="type">Reseña</span></span>
-      <h3><a href="{{ sidebar_work.url | relative_url }}" style="text-decoration:none;color:inherit;">{{ sidebar_work.title }}</a></h3>
-      <p class="dek">{{ sidebar_work.description | default: sidebar_work.author }}</p>
-      <a class="cta" href="{{ sidebar_work.url | relative_url }}">Leer más →</a>
-    </div>
-    {% endif %}
-
-    {% assign sidebar_post = site.blog | where: "slug", include.sidebar_post | first %}
-    {% unless sidebar_post %}
+    {% assign sidebar_items = include.sidebar_items %}
+    {% if sidebar_items and sidebar_items.size > 0 %}
+      {% for item in sidebar_items %}
+        {% assign side_type = item.tipo | default: "Obra" %}
+        {% assign side_item = nil %}
+        {% assign side_eyebrow = "Obra" %}
+        {% if side_type == "Autor" %}
+          {% assign side_item = site.authors | where: "slug", item.slug | first %}
+          {% unless side_item %}{% assign side_item = site.authors | first %}{% endunless %}
+          {% assign side_eyebrow = "Autor" %}
+        {% elsif side_type == "Entrada de blog" %}
+          {% assign side_item = site.blog | where: "slug", item.slug | first %}
+          {% unless side_item %}
+            {% assign side_blog_sorted = site.blog | sort: "date" | reverse %}
+            {% assign side_item = side_blog_sorted | first %}
+          {% endunless %}
+          {% assign side_eyebrow = "Blog" %}
+        {% elsif side_type == "Lugar" %}
+          {% assign side_item = site.map_locations | where: "slug", item.slug | first %}
+          {% unless side_item %}{% assign side_item = site.map_locations | first %}{% endunless %}
+          {% assign side_eyebrow = "Lugar" %}
+        {% else %}
+          {% assign side_item = site.works | where: "slug", item.slug | first %}
+          {% unless side_item %}{% assign side_item = site.works | first %}{% endunless %}
+          {% assign side_eyebrow = "Obra" %}
+        {% endif %}
+        {% if side_item %}
+        <div class="sidebar-card"{% unless forloop.first %} style="margin-top:1.2rem;"{% endunless %}>
+          <span class="kicker-tag">{{ side_eyebrow }}<span class="sep">|</span><span class="type">{{ side_type }}</span></span>
+          <h3><a href="{{ side_item.url | relative_url }}" style="text-decoration:none;color:inherit;">{{ side_item.title | default: side_item.name }}</a></h3>
+          <p class="dek">
+            {% if side_type == "Autor" %}{{ side_item.excerpt | strip_html | truncate: 90 }}
+            {% elsif side_type == "Entrada de blog" %}{{ side_item.description | default: side_item.excerpt | strip_html | truncate: 90 }}
+            {% elsif side_type == "Lugar" %}{{ side_item.description | truncate: 90 }}
+            {% else %}{{ side_item.description | default: side_item.author }}
+            {% endif %}
+          </p>
+          <a class="cta" href="{{ side_item.url | relative_url }}">Leer más →</a>
+        </div>
+        {% endif %}
+      {% endfor %}
+    {% else %}
+      {% assign sidebar_work = site.works | first %}
+      {% if sidebar_work %}
+      <div class="sidebar-card">
+        <span class="kicker-tag">Obras<span class="sep">|</span><span class="type">Reseña</span></span>
+        <h3><a href="{{ sidebar_work.url | relative_url }}" style="text-decoration:none;color:inherit;">{{ sidebar_work.title }}</a></h3>
+        <p class="dek">{{ sidebar_work.description | default: sidebar_work.author }}</p>
+        <a class="cta" href="{{ sidebar_work.url | relative_url }}">Leer más →</a>
+      </div>
+      {% endif %}
       {% assign sidebar_post_sorted = site.blog | sort: "date" | reverse %}
       {% assign sidebar_post = sidebar_post_sorted | first %}
-    {% endunless %}
-    {% if sidebar_post %}
-    <div class="sidebar-card" style="margin-top:1.2rem;">
-      <span class="kicker-tag">Blog<span class="sep">|</span><span class="type">Entrada</span></span>
-      <h3><a href="{{ sidebar_post.url | relative_url }}" style="text-decoration:none;color:inherit;">{{ sidebar_post.title }}</a></h3>
-      <p class="dek">{{ sidebar_post.description | default: sidebar_post.excerpt | strip_html | truncate: 90 }}</p>
-      <a class="cta" href="{{ sidebar_post.url | relative_url }}">Leer más →</a>
-    </div>
+      {% if sidebar_post %}
+      <div class="sidebar-card" style="margin-top:1.2rem;">
+        <span class="kicker-tag">Blog<span class="sep">|</span><span class="type">Entrada</span></span>
+        <h3><a href="{{ sidebar_post.url | relative_url }}" style="text-decoration:none;color:inherit;">{{ sidebar_post.title }}</a></h3>
+        <p class="dek">{{ sidebar_post.description | default: sidebar_post.excerpt | strip_html | truncate: 90 }}</p>
+        <a class="cta" href="{{ sidebar_post.url | relative_url }}">Leer más →</a>
+      </div>
+      {% endif %}
     {% endif %}
   </div>
 </div>
