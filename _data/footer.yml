@@ -13,8 +13,6 @@ columns:
         url: /tiendas-en-linea/
       - label: Mapa
         url: /mapa/
-      - label: Multimedia
-        url: /multimedia/
   - heading: Sobre el proyecto
     links:
       - label: ¿Qué es Archipiélago?
