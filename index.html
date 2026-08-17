@@ -172,11 +172,45 @@ title: Inicio
   }
   .video-card .vc-thumb img { width: 100%; height: 100%; object-fit: cover; }
   .video-card .vc-thumb .vc-play {
-    position: absolute; top: 10px; left: 10px; z-index: 2;
+    position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; z-index: 2;
   }
   .video-card .vc-thumb .vc-play svg { filter: drop-shadow(0 1px 3px rgba(0,0,0,0.4)); }
   .video-card h4 { font-size: 0.92rem; margin: 0 0 0.2rem; line-height: 1.3; text-align: center; }
   .video-card .vc-meta { font-family: var(--font-mono); font-size: 0.7rem; color: var(--tinta-suave); text-align: center; }
+
+  .podcast-section { padding: 3rem 2rem; border-top: 1px solid rgba(28,27,24,0.12); }
+  .podcast-section .pc-heading { max-width: 1140px; margin: 0 auto 1.4rem; }
+  .podcast-section .pc-heading h2 { font-size: 1.4rem; margin: 0; }
+  .podcast-carousel {
+    max-width: 1140px;
+    margin: 0 auto;
+    display: flex;
+    gap: 1.2rem;
+    overflow-x: auto;
+    scroll-snap-type: x proximity;
+    padding-bottom: 0.6rem;
+  }
+  .podcast-carousel::-webkit-scrollbar { height: 6px; }
+  .podcast-carousel::-webkit-scrollbar-thumb { background: rgba(15,61,62,0.25); border-radius: 999px; }
+  .podcast-card {
+    flex: 0 0 160px;
+    scroll-snap-align: start;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+  .podcast-card .pc-cover {
+    width: 100%;
+    aspect-ratio: 1/1;
+    border-radius: 6px;
+    background: linear-gradient(135deg, var(--oro-viejo), #8a6a35);
+    overflow: hidden;
+    margin-bottom: 0.6rem;
+  }
+  .podcast-card .pc-cover img { width: 100%; height: 100%; object-fit: cover; }
+  .podcast-card .pc-cover-fallback { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; }
+  .podcast-card h4 { font-size: 0.88rem; margin: 0 0 0.2rem; line-height: 1.3; }
+  .podcast-card .pc-meta { font-family: var(--font-mono); font-size: 0.68rem; color: var(--tinta-suave); }
 
   .explore-row {
     display: grid;
@@ -230,6 +264,7 @@ title: Inicio
     {% when "mapbanner" %}{% include home-mapbanner.html heading=block.heading %}
     {% when "twocol" %}{% include home-twocol.html twocol_work=block.twocol_work twocol_place=block.twocol_place %}
     {% when "videocarousel" %}{% include home-videocarousel.html heading=block.heading %}
+    {% when "podcast" %}{% include home-podcast.html heading=block.heading %}
     {% when "promoband" %}{% include home-promoband.html promo_media=block.promo_media %}
     {% when "explore" %}{% include home-explore.html explore_authors=block.explore_authors explore_works=block.explore_works explore_places=block.explore_places %}
   {% endcase %}
