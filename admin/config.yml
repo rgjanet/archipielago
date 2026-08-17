@@ -237,11 +237,12 @@ collections:
             widget: "list"
             hint: "Arrastra el ícono a la izquierda de cada bloque para reordenarlo. Usa 'Add' para añadir otro bloque (se puede repetir el mismo tipo), o el ícono de papelera para quitar uno."
             types:
-              - label: "Autor destacado (hero)"
+              - label: "Destacado (hero)"
                 name: "hero"
                 widget: "object"
                 fields:
-                  - { label: "Autor destacado — slug exacto", name: "hero_author", widget: "string", required: false, hint: "Slug del autor (de su URL). Vacío = se usa el más reciente" }
+                  - { label: "Tipo de contenido", name: "hero_type", widget: "select", options: ["Autor", "Obra", "Entrada de blog", "Lugar"], default: "Autor" }
+                  - { label: "Slug exacto del contenido elegido", name: "hero_slug", widget: "string", required: false, hint: "Ej. si Tipo es 'Autor', escribe el slug de un autor (de su URL). Vacío = se usa el más reciente de ese tipo." }
                   - { label: "Obra en la tarjeta lateral — slug exacto", name: "sidebar_work", widget: "string", required: false }
                   - { label: "Entrada de blog en la tarjeta lateral — slug exacto", name: "sidebar_post", widget: "string", required: false, hint: "Vacío = se usa la más reciente" }
               - label: "Banda del mapa"
