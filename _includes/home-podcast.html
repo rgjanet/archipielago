@@ -1,6 +1,6 @@
+{% assign podcast_episodes = site.media | where: "media_type", "Podcast" %}
+{% if podcast_episodes.size > 0 %}
 <div class="podcast-section">
-  {% assign podcast_episodes = site.media | where: "media_type", "Podcast" %}
-  {% if podcast_episodes.size > 0 %}
   <div class="pc-heading">
     <h2>{{ include.heading | default: "Podcast" }}</h2>
   </div>
@@ -22,5 +22,5 @@
     </a>
     {% endfor %}
   </div>
-  {% endif %}
 </div>
+{% endif %}
