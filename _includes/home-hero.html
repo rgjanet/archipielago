@@ -1,30 +1,59 @@
 <div class="tls-hero-row">
   <div class="tls-hero">
-    {% assign lead = site.authors | where: "slug", include.hero_author | first %}
-    {% unless lead %}{% assign lead = site.authors | first %}{% endunless %}
-    {% if lead and lead.photo and lead.photo != blank %}
-    <div class="art-block" style="background:none;padding:0;"><img src="{{ lead.photo | relative_url }}" alt="{{ lead.title }}" style="width:100%;height:100%;object-fit:cover;border-radius:3px;" onerror="this.parentElement.outerHTML='&lt;div class=&quot;art-block&quot;&gt;&lt;span class=&quot;art-label&quot;&gt;Autor destacado&lt;/span&gt;&lt;/div&gt;'"></div>
+    {% assign hero_type = include.hero_type | default: "Autor" %}
+    {% assign lead = nil %}
+    {% assign hero_eyebrow = "Perfil" %}
+
+    {% if hero_type == "Obra" %}
+      {% assign lead = site.works | where: "slug", include.hero_slug | first %}
+      {% unless lead %}{% assign lead = site.works | first %}{% endunless %}
+      {% assign hero_eyebrow = "Obra" %}
+    {% elsif hero_type == "Entrada de blog" %}
+      {% assign lead = site.blog | where: "slug", include.hero_slug | first %}
+      {% unless lead %}
+        {% assign sorted_blog = site.blog | sort: "date" | reverse %}
+        {% assign lead = sorted_blog | first %}
+      {% endunless %}
+      {% assign hero_eyebrow = "Blog" %}
+    {% elsif hero_type == "Lugar" %}
+      {% assign lead = site.map_locations | where: "slug", include.hero_slug | first %}
+      {% unless lead %}{% assign lead = site.map_locations | first %}{% endunless %}
+      {% assign hero_eyebrow = "Lugar" %}
     {% else %}
-    <div class="art-block"><span class="art-label">Autor destacado</span></div>
+      {% assign lead = site.authors | where: "slug", include.hero_slug | first %}
+      {% unless lead %}{% assign lead = site.authors | first %}{% endunless %}
+      {% assign hero_eyebrow = "Perfil" %}
     {% endif %}
+
+    {% assign hero_photo = "" %}
+    {% if hero_type == "Obra" %}{% assign hero_photo = lead.cover %}{% else %}{% assign hero_photo = lead.photo %}{% endif %}
+    {% assign hero_photo_clean = hero_photo | replace: " ", "" | strip %}
+    {% if lead and hero_photo_clean != blank and hero_photo_clean != empty %}
+    <div class="art-block" style="background:none;padding:0;"><img src="{{ hero_photo | relative_url }}" alt="{{ lead.title | default: lead.name }}" style="width:100%;height:100%;object-fit:cover;border-radius:3px;" onerror="this.parentElement.outerHTML='&lt;div class=&quot;art-block&quot;&gt;&lt;span class=&quot;art-label&quot;&gt;Destacado&lt;/span&gt;&lt;/div&gt;'"></div>
+    {% else %}
+    <div class="art-block"><span class="art-label">Destacado</span></div>
+    {% endif %}
+
     {% if lead %}
-    <span class="kicker-tag">{{ lead.region | default: "Puerto Rico" }}<span class="sep">|</span><span class="type">Perfil</span></span>
-    <h1><a href="{{ lead.url | relative_url }}" style="text-decoration:none;color:var(--mar-profundo);">{{ lead.title }}</a></h1>
-    <p class="dek">{{ lead.excerpt | strip_html | truncate: 200 }}</p>
+    <span class="kicker-tag">{{ lead.region | default: "Puerto Rico" }}<span class="sep">|</span><span class="type">{{ hero_eyebrow }}</span></span>
+    <h1><a href="{{ lead.url | relative_url }}" style="text-decoration:none;color:var(--mar-profundo);">{{ lead.title | default: lead.name }}</a></h1>
+    <p class="dek">
+      {% if hero_type == "Obra" %}{{ lead.description | default: lead.synopsis | truncate: 200 }}
+      {% elsif hero_type == "Lugar" %}{{ lead.description | truncate: 200 }}
+      {% else %}{{ lead.excerpt | strip_html | truncate: 200 }}
+      {% endif %}
+    </p>
     <p class="byline">Por <b>Archipiélago</b></p>
     {% else %}
     <span class="kicker-tag">Puerto Rico<span class="sep">|</span><span class="type">Perfil</span></span>
-    <h1>Aún no hay autores publicados</h1>
+    <h1>Aún no hay contenido publicado</h1>
     <p class="dek">Añade el primero desde <code>/admin</code> para que aparezca aquí como destacado.</p>
     {% endif %}
   </div>
 
   <div class="hero-sidebar">
     {% assign sidebar_work = site.works | where: "slug", include.sidebar_work | first %}
-    {% unless sidebar_work %}
-      {% assign hero_work_title = work.title %}
-      {% assign sidebar_work = site.works | where_exp: "w", "w.title != hero_work_title" | first %}
-    {% endunless %}
+    {% unless sidebar_work %}{% assign sidebar_work = site.works | first %}{% endunless %}
     {% if sidebar_work %}
     <div class="sidebar-card">
       <span class="kicker-tag">Obras<span class="sep">|</span><span class="type">Reseña</span></span>
@@ -36,7 +65,8 @@
 
     {% assign sidebar_post = site.blog | where: "slug", include.sidebar_post | first %}
     {% unless sidebar_post %}
-      {% assign sidebar_post = site.blog | sort: "date" | reverse | first %}
+      {% assign sidebar_post_sorted = site.blog | sort: "date" | reverse %}
+      {% assign sidebar_post = sidebar_post_sorted | first %}
     {% endunless %}
     {% if sidebar_post %}
     <div class="sidebar-card" style="margin-top:1.2rem;">
