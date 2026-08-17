@@ -6,6 +6,36 @@
   <title>{% if page.title %}{{ page.title }} · {% endif %}{{ site.title }}</title>
   <meta name="description" content="{{ page.description | default: site.description }}">
   <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
+
+  {% assign meta_title = page.title | default: page.name | default: site.title %}
+
+  {% assign meta_desc = page.description | strip | default: "" %}
+  {% if meta_desc == blank %}
+    {% assign raw_excerpt = page.excerpt | strip_html | strip_newlines %}
+    {% assign meta_desc = raw_excerpt | truncate: 160 %}
+  {% endif %}
+  {% if meta_desc == blank %}
+    {% assign meta_desc = site.description %}
+  {% endif %}
+
+  {% assign meta_image = page.photo | default: page.cover %}
+  {% assign meta_image_clean = meta_image | replace: " ", "" | strip %}
+
+  <meta property="og:title" content="{{ meta_title | escape }}">
+  <meta property="og:description" content="{{ meta_desc | escape }}">
+  {% if meta_image_clean != blank and meta_image_clean != empty %}
+  <meta property="og:image" content="{{ meta_image | absolute_url }}">
+  {% endif %}
+  <meta property="og:url" content="{{ page.url | absolute_url }}">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="{{ site.title }}">
+  {% if meta_image_clean != blank and meta_image_clean != empty %}
+  <meta name="twitter:card" content="summary_large_image">
+  {% else %}
+  <meta name="twitter:card" content="summary">
+  {% endif %}
+  <meta name="twitter:title" content="{{ meta_title | escape }}">
+  <meta name="twitter:description" content="{{ meta_desc | escape }}">
 </head>
 <body>
   {% include nav.html %}
