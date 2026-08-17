@@ -97,7 +97,7 @@
       {% assign sidebar_work = site.works | first %}
       {% if sidebar_work %}
       <div class="sidebar-card">
-        <span class="kicker-tag">Obras<span class="sep">|</span><span class="type">Reseña</span></span>
+        <span class="kicker-tag">Obras<span class="sep">|</span><span class="type">Obra</span></span>
         <h3><a href="{{ sidebar_work.url | relative_url }}" style="text-decoration:none;color:inherit;">{{ sidebar_work.title }}</a></h3>
         <p class="dek">{{ sidebar_work.description | default: sidebar_work.author }}</p>
         <a class="cta" href="{{ sidebar_work.url | relative_url }}">Leer más →</a>
