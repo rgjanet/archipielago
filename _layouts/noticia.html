@@ -1,0 +1,38 @@
+---
+layout: default
+---
+<article class="section" style="max-width:720px;">
+  <span class="eyebrow">Noticia</span>
+  <h1>{{ page.title }}</h1>
+  {% assign noticia_mes_i = page.date | date: "%-m" | minus: 1 %}
+  <p style="font-family:var(--font-mono);font-size:0.8rem;color:var(--tinta-suave);">
+    {{ page.date | date: "%-d" }} de {{ site.data.meses[noticia_mes_i] }} de {{ page.date | date: "%Y" }}{% assign fuente_clean = page.fuente | replace: " ", "" | strip %}{% if fuente_clean != blank and fuente_clean != empty %} · {{ page.fuente }}{% endif %}
+  </p>
+
+  {% assign photo_clean = page.photo | replace: " ", "" | strip %}
+  {% if photo_clean != blank and photo_clean != empty %}
+  <img src="{{ page.photo | relative_url }}" alt="{{ page.title }}" style="width:100%;border-radius:3px;margin:1.2rem 0;display:block;" onerror="this.style.display='none'">
+  {% endif %}
+
+  {% if page.description and page.description != blank %}
+  <p style="font-size:1.05rem;color:var(--tinta-suave);line-height:1.7;">{{ page.description }}</p>
+  {% endif %}
+
+  {% assign body_clean = page.content | strip %}
+  {% if body_clean != blank and body_clean != empty %}
+  <div class="body" style="margin-top:1.4rem;font-size:1.02rem;line-height:1.75;">
+    {{ content }}
+  </div>
+  {% endif %}
+
+  {% assign enlace_clean = page.enlace | replace: " ", "" | strip %}
+  {% if enlace_clean != blank and enlace_clean != empty %}
+  <p style="margin-top:1.4rem;">
+    <a href="{{ page.enlace }}" target="_blank" rel="noopener" style="color:var(--coral);font-family:var(--font-mono);">Ver enlace relacionado →</a>
+  </p>
+  {% endif %}
+
+  <p style="margin-top:2.4rem;">
+    <a href="{{ '/noticias/' | relative_url }}" style="font-family:var(--font-mono);font-size:0.85rem;">← Volver a noticias</a>
+  </p>
+</article>
