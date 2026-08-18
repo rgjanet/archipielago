@@ -1,31 +1,108 @@
 <div class="tls-twocol">
-  {% assign work = site.works | where: "slug", include.twocol_work | first %}
-  {% unless work %}{% assign work = site.works | first %}{% endunless %}
-  {% if work %}
-  <div>
-    {% if work.cover and work.cover != blank %}
-    <div class="art-block coral small" style="background:none;padding:0;"><img src="{{ work.cover | relative_url }}" alt="{{ work.title }}" style="width:100%;height:100%;object-fit:cover;border-radius:3px;" onerror="this.parentElement.outerHTML='&lt;div class=&quot;art-block coral small&quot;&gt;&lt;span class=&quot;art-label&quot;&gt;Obra&lt;/span&gt;&lt;/div&gt;'"></div>
-    {% else %}
-    <div class="art-block coral small"><span class="art-label">Obra</span></div>
+  {% assign twocol_items = include.items %}
+  {% if twocol_items and twocol_items.size > 0 %}
+    {% for item in twocol_items %}
+      {% assign tc_type = item.tipo | default: "Obra" %}
+      {% assign tc_item = nil %}
+      {% assign tc_eyebrow_group = "Obras" %}
+      {% assign tc_eyebrow_type = "Obra" %}
+      {% assign tc_photo = "" %}
+      {% assign tc_art_class = "art-block coral small" %}
+
+      {% if tc_type == "Autor" %}
+        {% assign tc_item = site.authors | where: "slug", item.slug | first %}
+        {% unless tc_item %}{% assign tc_item = site.authors | first %}{% endunless %}
+        {% assign tc_eyebrow_group = "Autores" %}
+        {% assign tc_eyebrow_type = "Perfil" %}
+        {% assign tc_photo = tc_item.photo %}
+        {% assign tc_art_class = "art-block small" %}
+      {% elsif tc_type == "Lugar" %}
+        {% assign tc_item = site.map_locations | where: "slug", item.slug | first %}
+        {% unless tc_item %}{% assign tc_item = site.map_locations | first %}{% endunless %}
+        {% assign tc_eyebrow_group = "Lugares" %}
+        {% assign tc_eyebrow_type = tc_item.type %}
+        {% assign tc_photo = tc_item.photo %}
+        {% assign tc_art_class = "art-block small" %}
+      {% elsif tc_type == "Entrada de blog" %}
+        {% assign tc_item = site.blog | where: "slug", item.slug | first %}
+        {% unless tc_item %}
+          {% assign tc_blog_sorted = site.blog | sort: "date" | reverse %}
+          {% assign tc_item = tc_blog_sorted | first %}
+        {% endunless %}
+        {% assign tc_eyebrow_group = "Blog" %}
+        {% assign tc_eyebrow_type = "Entrada" %}
+        {% assign tc_photo = tc_item.photo %}
+        {% assign tc_art_class = "art-block coral small" %}
+      {% elsif tc_type == "Noticia" %}
+        {% assign tc_item = site.noticias | where: "slug", item.slug | first %}
+        {% unless tc_item %}
+          {% assign tc_noticias_sorted = site.noticias | sort: "date" | reverse %}
+          {% assign tc_item = tc_noticias_sorted | first %}
+        {% endunless %}
+        {% assign tc_eyebrow_group = "Noticias" %}
+        {% assign tc_eyebrow_type = "Noticia" %}
+        {% assign tc_photo = tc_item.photo %}
+        {% assign tc_art_class = "art-block small" %}
+      {% else %}
+        {% assign tc_item = site.works | where: "slug", item.slug | first %}
+        {% unless tc_item %}{% assign tc_item = site.works | first %}{% endunless %}
+        {% assign tc_eyebrow_group = "Obras" %}
+        {% assign tc_eyebrow_type = "Obra" %}
+        {% assign tc_photo = tc_item.cover %}
+        {% assign tc_art_class = "art-block coral small" %}
+      {% endif %}
+
+      {% if tc_item %}
+      <div>
+        {% assign tc_photo_clean = tc_photo | replace: " ", "" | strip %}
+        {% if tc_photo_clean != blank and tc_photo_clean != empty %}
+        <div class="{{ tc_art_class }}" style="background:none;padding:0;"><img src="{{ tc_photo | relative_url }}" alt="{{ tc_item.title | default: tc_item.name }}" style="width:100%;height:100%;object-fit:cover;border-radius:3px;" onerror="this.parentElement.outerHTML='&lt;div class=&quot;{{ tc_art_class }}&quot;&gt;&lt;span class=&quot;art-label&quot;&gt;{{ tc_eyebrow_type }}&lt;/span&gt;&lt;/div&gt;'"></div>
+        {% else %}
+        <div class="{{ tc_art_class }}"><span class="art-label">{{ tc_eyebrow_type }}</span></div>
+        {% endif %}
+        <span class="kicker-tag">{{ tc_eyebrow_group }}<span class="sep">|</span><span class="type">{{ tc_eyebrow_type }}</span></span>
+        {% assign tc_sede_clean = tc_item.sede | replace: " ", "" | strip %}
+        <h2><a href="{{ tc_item.url | relative_url }}" style="text-decoration:none;color:inherit;">{{ tc_item.title | default: tc_item.name }}{% if tc_sede_clean != blank and tc_sede_clean != empty %} — {{ tc_sede_clean }}{% endif %}</a></h2>
+        <p class="dek">
+          {% if tc_type == "Autor" %}{{ tc_item.excerpt | strip_html | truncate: 100 }}
+          {% elsif tc_type == "Lugar" %}{{ tc_item.description | truncate: 100 }}
+          {% elsif tc_type == "Entrada de blog" %}{{ tc_item.description | default: tc_item.excerpt | strip_html | truncate: 100 }}
+          {% elsif tc_type == "Noticia" %}{{ tc_item.description | truncate: 100 }}
+          {% else %}{{ tc_item.description | default: tc_item.author }}
+          {% endif %}
+        </p>
+      </div>
+      {% endif %}
+    {% endfor %}
+  {% else %}
+    {% assign work = site.works | first %}
+    {% if work %}
+    <div>
+      {% assign work_cover_clean = work.cover | replace: " ", "" | strip %}
+      {% if work_cover_clean != blank and work_cover_clean != empty %}
+      <div class="art-block coral small" style="background:none;padding:0;"><img src="{{ work.cover | relative_url }}" alt="{{ work.title }}" style="width:100%;height:100%;object-fit:cover;border-radius:3px;" onerror="this.parentElement.outerHTML='&lt;div class=&quot;art-block coral small&quot;&gt;&lt;span class=&quot;art-label&quot;&gt;Obra&lt;/span&gt;&lt;/div&gt;'"></div>
+      {% else %}
+      <div class="art-block coral small"><span class="art-label">Obra</span></div>
+      {% endif %}
+      <span class="kicker-tag">Obras<span class="sep">|</span><span class="type">Obra</span></span>
+      <h2><a href="{{ work.url | relative_url }}" style="text-decoration:none;color:inherit;">{{ work.title }}</a></h2>
+      <p class="dek">{{ work.description | default: work.author }}</p>
+    </div>
     {% endif %}
-    <span class="kicker-tag">Obras<span class="sep">|</span><span class="type">Obra</span></span>
-    <h2><a href="{{ work.url | relative_url }}" style="text-decoration:none;color:inherit;">{{ work.title }}</a></h2>
-    <p class="dek">{{ work.description | default: work.author }}</p>
-  </div>
-  {% endif %}
-  {% assign place = site.map_locations | where: "slug", include.twocol_place | first %}
-  {% unless place %}{% assign place = site.map_locations | first %}{% endunless %}
-  {% if place %}
-  <div>
-    {% if place.photo and place.photo != blank %}
-    <div class="art-block small" style="background:none;padding:0;"><img src="{{ place.photo | relative_url }}" alt="{{ place.name }}" style="width:100%;height:100%;object-fit:cover;border-radius:3px;" onerror="this.parentElement.outerHTML='&lt;div class=&quot;art-block small&quot;&gt;&lt;span class=&quot;art-label&quot;&gt;Lugar&lt;/span&gt;&lt;/div&gt;'"></div>
-    {% else %}
-    <div class="art-block small"><span class="art-label">Lugar</span></div>
+    {% assign place = site.map_locations | first %}
+    {% if place %}
+    <div>
+      {% assign place_photo_clean = place.photo | replace: " ", "" | strip %}
+      {% if place_photo_clean != blank and place_photo_clean != empty %}
+      <div class="art-block small" style="background:none;padding:0;"><img src="{{ place.photo | relative_url }}" alt="{{ place.name }}" style="width:100%;height:100%;object-fit:cover;border-radius:3px;" onerror="this.parentElement.outerHTML='&lt;div class=&quot;art-block small&quot;&gt;&lt;span class=&quot;art-label&quot;&gt;Lugar&lt;/span&gt;&lt;/div&gt;'"></div>
+      {% else %}
+      <div class="art-block small"><span class="art-label">Lugar</span></div>
+      {% endif %}
+      <span class="kicker-tag">Lugares<span class="sep">|</span><span class="type">{{ place.type }}</span></span>
+      {% assign place_sede_clean = place.sede | replace: " ", "" | strip %}
+      <h2><a href="{{ place.url | relative_url }}" style="text-decoration:none;color:inherit;">{{ place.name }}{% if place_sede_clean != blank and place_sede_clean != empty %} — {{ place_sede_clean }}{% endif %}</a></h2>
+      <p class="dek">{{ place.description | truncate: 100 }}</p>
+    </div>
     {% endif %}
-    <span class="kicker-tag">Lugares<span class="sep">|</span><span class="type">{{ place.type }}</span></span>
-    {% assign place_sede_clean = place.sede | replace: " ", "" | strip %}
-    <h2><a href="{{ place.url | relative_url }}" style="text-decoration:none;color:inherit;">{{ place.name }}{% if place_sede_clean != blank and place_sede_clean != empty %} — {{ place_sede_clean }}{% endif %}</a></h2>
-    <p class="dek">{{ place.description | truncate: 100 }}</p>
-  </div>
   {% endif %}
 </div>
