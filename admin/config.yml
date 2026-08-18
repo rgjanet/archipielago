@@ -272,12 +272,19 @@ collections:
                 widget: "object"
                 fields:
                   - { label: "Título (opcional)", name: "heading", widget: "string", required: false, hint: "Vacío = 'Explora el archipiélago en el mapa'" }
-              - label: "Obra + Lugar destacados (dos columnas)"
+              - label: "Dos columnas destacadas"
                 name: "twocol"
                 widget: "object"
                 fields:
-                  - { label: "Obra destacada — slug exacto", name: "twocol_work", widget: "string", required: false, hint: "Vacío = se usa la más reciente" }
-                  - { label: "Lugar destacado — slug exacto", name: "twocol_place", widget: "string", required: false, hint: "Vacío = se usa el más reciente" }
+                  - label: "Contenido (hasta 2)"
+                    name: "items"
+                    widget: "list"
+                    required: false
+                    max: 2
+                    hint: "Cada columna puede ser un tipo distinto — Obra, Autor, Lugar, Entrada de blog o Noticia"
+                    fields:
+                      - { label: "Tipo", name: "tipo", widget: "select", options: ["Obra", "Autor", "Lugar", "Entrada de blog", "Noticia"], default: "Obra" }
+                      - { label: "Slug exacto", name: "slug", widget: "string", required: false, hint: "Vacío = se usa el más reciente de ese tipo" }
               - label: "Reseñas en video (carrusel)"
                 name: "videocarousel"
                 widget: "object"
