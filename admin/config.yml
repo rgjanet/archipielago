@@ -143,6 +143,21 @@ collections:
       - { label: "Código de embed", name: "embed_code", widget: "text", required: false, hint: "Pega aquí el <iframe> de YouTube, Spotify, etc. Aparece después del audio/video." }
       - { label: "Contenido", name: "body", widget: "markdown" }
 
+  - name: "noticias"
+    label: "Noticias literarias"
+    folder: "_noticias"
+    create: true
+    slug: "{{slug}}"
+    identifier_field: title
+    fields:
+      - { label: "Título", name: "title", widget: "string" }
+      - { label: "Fecha", name: "date", widget: "datetime" }
+      - { label: "Extracto", name: "description", widget: "text", hint: "Una o dos oraciones que resumen la noticia — aparece en el listado" }
+      - { label: "Fuente (opcional)", name: "fuente", widget: "string", required: false, hint: "Solo si citas o haces referencia a otra publicación" }
+      - { label: "Enlace de referencia (opcional)", name: "enlace", widget: "string", required: false, hint: "Solo si quieres enlazar a otro artículo relacionado" }
+      - { label: "Imagen (opcional)", name: "photo", widget: "image", required: false }
+      - { label: "Contenido", name: "body", widget: "markdown", required: false, hint: "El texto completo de la noticia" }
+
   - name: "revista"
     label: "Revista"
     folder: "_revista"
