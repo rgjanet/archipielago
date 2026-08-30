@@ -10,6 +10,8 @@ audio_url: ''
 video_url: https://archive.org/download/leo-leo-1080-2/Leo%20Leo%201080%202.mov
 embed_code: ''
 ---
+https://archive.org/download/leo-leo-1080-2/Leo%20Leo%201080%202.mov
+
 Hay quienes piensan que Mel Solórzano viajó a Corea del Sur para encontrarse. La periodista y librera puertorriqueña, sin embargo, halló en ese país la oportunidad de enamorarse de la educación. A su regreso a Puerto Rico, se certificó como guía Montessori, permitiéndole combinar lo aprendido en el periodismo con su nueva pasión.
 
 “Yo creo que también, además de comunicadora, siempre me gustó como periodista ser investigadora, así que siempre sentía ese reto con la niñez, de estar investigando cómo hacerlo mejor. Y precisamente ahí es que me engancho con la lectura porque me empiezo a dar cuenta que la lectura necesita atenderse para que el currículo pueda seguir adelantando. Muchos de los rezagos que tienen los niños yo creo que es porque, precisamente, no tienen las herramientas para decodificar”, contó Solórzano a Vivir del Cuento.
