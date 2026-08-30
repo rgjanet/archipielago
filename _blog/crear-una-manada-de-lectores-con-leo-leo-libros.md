@@ -7,7 +7,7 @@ photo: /assets/img/uploads/leoleolibros.png
 related_author: ''
 related_place: leo-leo-libros
 audio_url: ''
-video_url: ''
+video_url: https://archive.org/download/leo-leo-1080-2/Leo%20Leo%201080%202.mov
 embed_code: ''
 ---
 Hay quienes piensan que Mel Solórzano viajó a Corea del Sur para encontrarse. La periodista y librera puertorriqueña, sin embargo, halló en ese país la oportunidad de enamorarse de la educación. A su regreso a Puerto Rico, se certificó como guía Montessori, permitiéndole combinar lo aprendido en el periodismo con su nueva pasión.
