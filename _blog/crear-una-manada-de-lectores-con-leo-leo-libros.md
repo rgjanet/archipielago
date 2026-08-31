@@ -7,7 +7,7 @@ photo: /assets/img/uploads/leoleolibros.png
 related_author: ''
 related_place: leo-leo-libros
 audio_url: ''
-video_url: https://archive.org/download/leo-leo-1080-2/Leo%20Leo%201080%202.mov
+video_url: ''
 embed_code: ''
 ---
 {% include video-embed.html url="https://archive.org/download/leo-leo-1080-2/Leo Leo 1080 2.mov" %}
