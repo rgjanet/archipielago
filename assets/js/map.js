@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   var map = L.map('lit-map', { zoomControl: true }).setView([18.2208, -66.5901], 9);
 
-  L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png?key=cb1_2lnx_1_846758cd7a97a2d335b6d9b0', {
     attribution: '&copy; OpenStreetMap &copy; CARTO',
     maxZoom: 19
   }).addTo(map);
@@ -17,8 +17,8 @@ document.addEventListener('DOMContentLoaded', function () {
     return L.divIcon({
       className: '',
       html: '<svg width="26" height="34" viewBox="0 0 26 34" xmlns="http://www.w3.org/2000/svg">' +
-        '<path d="M13 0C5.8 0 0 5.8 0 13c0 9.7 13 21 13 21s13-11.3 13-21C26 5.8 20.2 0 13 0z" fill="#0F3D3E" stroke="#E8603F" stroke-width="1.5"/>' +
-        '<circle cx="13" cy="13" r="5.5" fill="#E8603F"/></svg>',
+        '<path d="M13 0C5.8 0 0 5.8 0 13c0 9.7 13 21 13 21s13-11.3 13-21C26 5.8 20.2 0 13 0z" fill="#2A3B4C" stroke="#C62A29" stroke-width="1.5"/>' +
+        '<circle cx="13" cy="13" r="5.5" fill="#C62A29"/></svg>',
       iconSize: [26, 34],
       iconAnchor: [13, 34],
       popupAnchor: [0, -30]
