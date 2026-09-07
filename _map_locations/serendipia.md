@@ -13,5 +13,7 @@ photo: ''
 redes:
   - label: Instagram
     url: https://www.instagram.com/serendipia_bysia
+  - label: Facebook
+    url: https://www.facebook.com/serendipiabySia/
 ---
 
