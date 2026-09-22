@@ -11,7 +11,7 @@ title: Mapa
   }
   #map-sidebar {
     background: var(--mar-profundo);
-    color: var(--papel);
+    color: var(--tinta);
     display: flex;
     flex-direction: column;
     overflow: hidden;
@@ -19,12 +19,12 @@ title: Mapa
   }
   #map-header {
     padding: 20px 20px 14px;
-    border-bottom: 1px solid rgba(242,236,220,0.18);
+    border-bottom: 1px solid rgba(42,59,76,0.18);
   }
   #map-header .back {
     font-family: var(--font-mono);
     font-size: 0.72rem;
-    color: rgba(242,236,220,0.7);
+    color: rgba(42,59,76,0.7);
     text-decoration: none;
     display: inline-block;
     margin-bottom: 10px;
@@ -32,12 +32,12 @@ title: Mapa
   #map-header .back:hover { color: var(--coral); }
   #map-header h1 {
     font-size: 1.5rem;
-    color: var(--papel-alto);
+    color: var(--tinta);
     margin: 0 0 6px;
   }
   #map-header p {
     font-size: 0.82rem;
-    color: rgba(242,236,220,0.75);
+    color: rgba(42,59,76,0.75);
     margin: 0;
     line-height: 1.5;
   }
@@ -46,44 +46,60 @@ title: Mapa
     flex-wrap: wrap;
     gap: 0.4rem;
     padding: 14px 20px;
-    border-bottom: 1px solid rgba(242,236,220,0.18);
+    border-bottom: 1px solid rgba(42,59,76,0.18);
   }
+  #map-search-wrap {
+    padding: 14px 20px 0;
+  }
+  #map-search {
+    width: 100%;
+    box-sizing: border-box;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    background: var(--papel-alto);
+    border: 1px solid rgba(42,59,76,0.3);
+    color: var(--tinta);
+    border-radius: 999px;
+    padding: 0.5rem 0.9rem;
+  }
+  #map-search::placeholder { color: rgba(42,59,76,0.5); }
+  #map-search:focus { outline: none; border-color: var(--coral); }
   #map-filter button {
     font-family: var(--font-mono);
     font-size: 0.68rem;
     letter-spacing: 0.03em;
     background: none;
-    border: 1px solid rgba(242,236,220,0.4);
-    color: var(--papel);
+    border: 1px solid rgba(42,59,76,0.4);
+    color: var(--tinta);
     border-radius: 999px;
     padding: 0.3rem 0.7rem;
     cursor: pointer;
   }
-  #map-filter button.active { background: var(--coral); border-color: var(--coral); }
+  #map-filter button.active { background: var(--coral); border-color: var(--coral); color: var(--papel-alto); }
   #map-list-wrap { flex: 1; overflow-y: auto; }
   .place-card {
     padding: 14px 20px;
-    border-bottom: 1px solid rgba(242,236,220,0.14);
+    border-bottom: 1px solid rgba(42,59,76,0.14);
     cursor: pointer;
     transition: background 0.15s ease;
   }
-  .place-card:hover, .place-card.active { background: rgba(232,96,63,0.18); }
-  .place-card .name { font-family: var(--font-display); font-size: 1rem; margin: 0 0 3px; color: var(--papel-alto); }
-  .place-card .type { font-family: var(--font-mono); font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.06em; color: rgba(242,236,220,0.65); margin: 0 0 5px; }
-  .place-card .desc { font-size: 0.82rem; color: rgba(242,236,220,0.85); margin: 0; line-height: 1.4; }
+  .place-card:hover, .place-card.active { background: rgba(198,42,41,0.12); }
+  .place-card .name { font-family: var(--font-display); font-size: 1rem; margin: 0 0 3px; color: var(--tinta); }
+  .place-card .type { font-family: var(--font-mono); font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.06em; color: rgba(42,59,76,0.65); margin: 0 0 5px; }
+  .place-card .desc { font-size: 0.82rem; color: rgba(42,59,76,0.85); margin: 0; line-height: 1.4; }
   #map-count {
     padding: 10px 20px;
     font-family: var(--font-mono);
     font-size: 0.68rem;
     letter-spacing: 0.06em;
     text-transform: uppercase;
-    color: rgba(242,236,220,0.55);
-    border-top: 1px solid rgba(242,236,220,0.18);
+    color: rgba(42,59,76,0.55);
+    border-top: 1px solid rgba(42,59,76,0.18);
   }
   #lit-map { width: 100%; height: 100%; }
   .leaflet-popup-content-wrapper { background: var(--papel-alto); color: var(--tinta); border-radius: 3px; }
   .leaflet-popup-tip { background: var(--papel-alto); }
-  .pin-popup .name { font-family: var(--font-display); font-weight: 600; color: var(--mar-profundo); font-size: 1rem; margin: 0 0 4px; }
+  .pin-popup .name { font-family: var(--font-display); font-weight: 600; color: var(--tinta); font-size: 1rem; margin: 0 0 4px; }
   .pin-popup .type { font-family: var(--font-mono); font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--oro-viejo); margin: 0 0 6px; }
   .pin-popup .desc { font-size: 0.85rem; line-height: 1.5; margin: 0 0 8px; }
   .pin-popup .detail { font-size: 0.78rem; color: var(--tinta-suave); margin: 0 0 3px; }
@@ -101,6 +117,9 @@ title: Mapa
       <a class="back" href="{{ '/' | relative_url }}">← Archipiélago</a>
       <h1>El mapa literario</h1>
       <p>Librerías, editoriales, tertulias y espacios de la isla.</p>
+    </div>
+    <div id="map-search-wrap">
+      <input type="text" id="map-search" placeholder="Buscar por nombre o ciudad..." autocomplete="off">
     </div>
     <div id="map-filter"></div>
     <div id="map-list-wrap"><div id="map-list"></div></div>
