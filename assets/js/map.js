@@ -108,14 +108,32 @@ document.addEventListener('DOMContentLoaded', function () {
     return groups;
   }
 
-  function renderList(filterType) {
+  var currentType = 'all';
+  var currentQuery = '';
+
+  function normalize(s) {
+    return (s || '')
+      .toString()
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '');
+  }
+
+  function matchesQuery(loc, query) {
+    if (!query) return true;
+    var haystack = normalize(loc.name) + ' ' + normalize(loc.sede) + ' ' + normalize(loc.address);
+    return haystack.indexOf(query) !== -1;
+  }
+
+  function renderList() {
     var list = document.getElementById('map-list');
     if (!list) return;
+    var normalizedQuery = normalize(currentQuery);
     var filtered = locations.filter(function (l) {
-      return filterType === 'all' || l.type === filterType;
+      return (currentType === 'all' || l.type === currentType) && matchesQuery(l, normalizedQuery);
     });
     if (filtered.length === 0) {
-      list.innerHTML = '<div style="padding:20px;font-size:0.82rem;color:rgba(242,236,220,0.6);">Sin resultados para este filtro.</div>';
+      list.innerHTML = '<div style="padding:20px;font-size:0.82rem;color:rgba(242,236,220,0.6);">Sin resultados para esta búsqueda.</div>';
       renderCount(0);
       return;
     }
@@ -159,9 +177,19 @@ document.addEventListener('DOMContentLoaded', function () {
       btn.addEventListener('click', function () {
         bar.querySelectorAll('button').forEach(function (b) { b.classList.remove('active'); });
         btn.classList.add('active');
-        renderList(type);
+        currentType = type;
+        renderList();
       });
       bar.appendChild(btn);
+    });
+  }
+
+  function setupSearch() {
+    var input = document.getElementById('map-search');
+    if (!input) return;
+    input.addEventListener('input', function () {
+      currentQuery = input.value;
+      renderList();
     });
   }
 
@@ -169,5 +197,6 @@ document.addEventListener('DOMContentLoaded', function () {
   if (bounds.length > 1) map.fitBounds(bounds, { padding: [30, 30] });
 
   renderFilters();
-  renderList('all');
+  setupSearch();
+  renderList();
 });
