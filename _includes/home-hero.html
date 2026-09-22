@@ -36,7 +36,7 @@
 
     {% if lead %}
     <span class="kicker-tag">{{ lead.region | default: "Puerto Rico" }}<span class="sep">|</span><span class="type">{{ hero_eyebrow }}</span></span>
-    <h1><a href="{{ lead.url | relative_url }}" style="text-decoration:none;color:var(--mar-profundo);">{{ lead.title | default: lead.name }}</a></h1>
+    <h1><a href="{{ lead.url | relative_url }}" style="text-decoration:none;color:var(--tinta);">{{ lead.title | default: lead.name }}</a></h1>
     <p class="dek">
       {% if hero_type == "Obra" %}{{ lead.description | default: lead.synopsis | truncate: 200 }}
       {% elsif hero_type == "Lugar" %}{{ lead.description | truncate: 200 }}

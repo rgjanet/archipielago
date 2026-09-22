@@ -32,8 +32,8 @@ title: Inicio
     text-transform: uppercase;
   }
   .art-block.small { aspect-ratio: 4/3; }
-  .art-block.coral { background: linear-gradient(135deg, var(--coral), #c4482e); }
-  .art-block.gold { background: linear-gradient(135deg, var(--oro-viejo), #8a6a35); }
+  .art-block.coral { background: linear-gradient(135deg, var(--coral), #9E2321); }
+  .art-block.gold { background: linear-gradient(135deg, var(--oro-viejo), #8C6A24); }
 
   .kicker-tag {
     font-family: var(--font-mono);
@@ -64,7 +64,7 @@ title: Inicio
   .sidebar-card a.cta { font-family: var(--font-mono); font-size: 0.78rem; color: var(--coral); text-decoration: none; }
 
   .map-banner {
-    background: var(--mar-profundo);
+    background: linear-gradient(135deg, var(--mar-profundo), var(--mar-medio));
     padding: 2.6rem 2rem;
   }
   .map-banner-inner {
@@ -76,8 +76,8 @@ title: Inicio
     gap: 2rem;
     flex-wrap: wrap;
   }
-  .map-banner-inner h2 { color: var(--papel-alto); font-size: 1.6rem; margin: 0 0 0.5rem; }
-  .map-banner-inner .dek { color: rgba(242,236,220,0.8); max-width: 46ch; margin: 0 0 0.8rem; }
+  .map-banner-inner h2 { color: var(--tinta); font-size: 1.6rem; margin: 0 0 0.5rem; }
+  .map-banner-inner .dek { color: var(--tinta-suave); max-width: 46ch; margin: 0 0 0.8rem; }
   .map-banner-inner a.cta { font-family: var(--font-mono); font-size: 0.82rem; color: var(--coral); text-decoration: none; }
   .map-banner-dots { flex-shrink: 0; }
   @media (max-width: 640px) { .map-banner-dots { display: none; } }
@@ -136,11 +136,11 @@ title: Inicio
 
   .explore-section { padding: 3rem 2rem; }
   .explore-section > .explore-heading { text-align: center; margin-bottom: 2.4rem; }
-  .explore-section > .explore-heading h2 { font-style: italic; font-weight: 400; font-size: 2rem; margin: 0; }
+  .explore-section > .explore-heading h2 { font-style: italic; font-weight: 400; font-size: 2rem; margin: 0; color: var(--coral); }
   .explore-section > .explore-heading p { font-family: var(--font-mono); font-size: 0.8rem; color: var(--tinta-suave); margin-top: 0.3rem; }
 
-  .video-carousel-section { padding: 2.6rem 2rem; background: #f4ded6; }
-  .video-carousel-section .vc-heading h2 { color: var(--mar-profundo); }
+  .video-carousel-section { padding: 2.6rem 2rem; background: var(--mar-medio); }
+  .video-carousel-section .vc-heading h2 { color: var(--tinta); }
   .video-carousel-section .vc-heading { max-width: 1140px; margin: 0 auto 1.4rem; display: flex; justify-content: space-between; align-items: baseline; }
   .video-carousel-section .vc-heading h2 { font-size: 1.4rem; margin: 0; }
   .video-carousel {
@@ -201,7 +201,7 @@ title: Inicio
     width: 100%;
     aspect-ratio: 1/1;
     border-radius: 6px;
-    background: linear-gradient(135deg, var(--oro-viejo), #8a6a35);
+    background: linear-gradient(135deg, var(--oro-viejo), #8C6A24);
     overflow: hidden;
     margin-bottom: 0.6rem;
   }
@@ -230,7 +230,7 @@ title: Inicio
 
   .site-footer-dark {
     background: var(--mar-profundo);
-    color: var(--papel);
+    color: var(--tinta);
     padding: 2.4rem 2rem;
   }
   .site-footer-dark .footer-inner { max-width: 1140px; margin: 0 auto; }
@@ -238,7 +238,8 @@ title: Inicio
     font-family: var(--font-display);
     font-size: 1.6rem;
     font-style: italic;
-    border-bottom: 1px solid rgba(242,236,220,0.25);
+    font-weight: 400;
+    border-bottom: 1px solid rgba(42,59,76,0.25);
     padding-bottom: 1.2rem;
     margin: 0 0 1.6rem;
   }
@@ -249,10 +250,10 @@ title: Inicio
     font-size: 0.68rem;
     text-transform: uppercase;
     letter-spacing: 0.08em;
-    color: var(--oro-viejo);
+    color: var(--coral);
     margin: 0 0 0.7rem;
   }
-  .footer-cols a { display: block; color: rgba(242,236,220,0.85); text-decoration: none; font-size: 0.85rem; margin-bottom: 0.5rem; }
+  .footer-cols a { display: block; color: var(--tinta); text-decoration: none; font-size: 0.85rem; margin-bottom: 0.5rem; }
   .footer-cols a:hover { color: var(--coral); }
 </style>
 

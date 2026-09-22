@@ -13,7 +13,7 @@ layout: default
   {% if page.categories and page.categories.size > 0 %}
   <p style="margin-top:0.4rem;">
     {% for cat in page.categories %}
-    <span style="display:inline-block;font-family:var(--font-mono);font-size:0.7rem;text-transform:uppercase;letter-spacing:0.04em;color:var(--mar-profundo);border:1px solid var(--mar-profundo);border-radius:999px;padding:0.2rem 0.6rem;margin:0 0.3rem 0.3rem 0;">{{ cat }}</span>
+    <span style="display:inline-block;font-family:var(--font-mono);font-size:0.7rem;text-transform:uppercase;letter-spacing:0.04em;color:var(--tinta);border:1px solid var(--tinta);border-radius:999px;padding:0.2rem 0.6rem;margin:0 0.3rem 0.3rem 0;">{{ cat }}</span>
     {% endfor %}
   </p>
   {% endif %}
@@ -54,7 +54,7 @@ layout: default
         {% endif %}
         <span>
           <span style="display:block;font-family:var(--font-mono);font-size:0.68rem;text-transform:uppercase;letter-spacing:0.05em;color:var(--oro-viejo);">Sobre la autora / el autor</span>
-          <span style="display:block;font-family:var(--font-display);font-size:1.05rem;color:var(--mar-profundo);margin:0.15rem 0 0.15rem;">{{ author_page.title }}</span>
+          <span style="display:block;font-family:var(--font-display);font-size:1.05rem;color:var(--tinta);margin:0.15rem 0 0.15rem;">{{ author_page.title }}</span>
           {% if author_page.excerpt %}<span style="display:block;font-size:0.85rem;color:var(--tinta-suave);">{{ author_page.excerpt | strip_html | truncate: 90 }}</span>{% endif %}
         </span>
       </a>
